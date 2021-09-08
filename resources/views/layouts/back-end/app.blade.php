@@ -58,13 +58,13 @@
 <!-- ========== END MAIN CONTENT ========== -->
 
 <!-- ========== END SECONDARY CONTENTS ========== -->
+<script src="{{asset('public/assets/back-end')}}/js/vendor.min.js"></script>
 <script src="{{asset('public/assets/back-end')}}/js/custom.js"></script>
 <!-- JS Implementing Plugins -->
 
 @stack('script')
 
 <!-- JS Front -->
-<script src="{{asset('public/assets/back-end')}}/js/vendor.min.js"></script>
 <script src="{{asset('public/assets/back-end')}}/js/theme.min.js"></script>
 <script src="{{asset('public/assets/back-end')}}/js/sweet_alert.js"></script>
 <script src="{{asset('public/assets/back-end')}}/js/toastr.js"></script>

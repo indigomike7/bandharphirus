@@ -9,6 +9,7 @@ class Category extends Model
     protected $casts = [
         'parent_id'  => 'integer',
         'position'   => 'integer',
+        'top_categories'   => 'integer',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];

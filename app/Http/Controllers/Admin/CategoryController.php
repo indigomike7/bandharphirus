@@ -29,6 +29,7 @@ class CategoryController extends Controller
 
         $category = new Category;
         $category->name = $request->name;
+        $category->top_categories = $request->top_categories;
         $category->slug = Str::slug($request->name);
         $category->icon = ImageManager::upload('category/', 'png', $request->file('image'));
         $category->parent_id = 0;
@@ -55,6 +56,7 @@ class CategoryController extends Controller
             $category->icon = ImageManager::update('category/', $category->icon, 'png', $request->file('image'));
         }
         $category->parent_id = 0;
+        $category->top_categories = $request->top_categories;
         $category->position = 0;
         $category->save();
         // return response()->json();

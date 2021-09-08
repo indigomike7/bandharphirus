@@ -20,6 +20,7 @@ class SubCategoryController extends Controller
         $category = new Category;
         $category->name = $request->name;
         $category->slug = Str::slug($request->name);
+        $category->top_categories = $request->top_categories;
 //        $category->icon = $request->name;
         $category->parent_id = $request->parent_id;
         $category->position = 1;
@@ -40,6 +41,7 @@ class SubCategoryController extends Controller
         $category->name = $request->name;
         $category->slug = Str::slug($request->name);
         $category->parent_id = $request->parent_id;
+        $category->top_categories = $request->top_categories;
         $category->position = 1;
         $category->save();
         return response()->json();

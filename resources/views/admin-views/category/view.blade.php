@@ -57,6 +57,13 @@
                                             placeholder="Enter Category Name" required>
                                 </div>  
                                 <div class="form-group">
+                                    <label for="top_categories">Top Categories?</label>
+                                    <select name="top_categories" class="form-control" id="top_categories" required>
+									<option value="1" @if(old('top_categories')==1) echo "selected='selected'"; @endif>Yes</option>
+									<option value="0" @if(old('top_categories')==0) echo "selected='selected'"; @endif>No</option>
+									</select>
+                                </div>  
+                                <div class="form-group">
                                     <label>{{ trans('messages.icon')}}</label><br>
                                     <div class="custom-file">
                                         <input type="file" name="image" id="FileUploader" class="custom-file-input"
@@ -313,6 +320,7 @@
                 success: function (data) {
                     $('#id').val(data.id);
                     $('#name').val(data.name);
+                    $('#top_categories').val(data.top_categories);
                     $('#Imageviewer').attr('src', "{{asset('storage/app/public/category')}}/"+data.icon);
                     $('#cate-table').hide();
                     $('#add').html("{{ trans('messages.update')}}");

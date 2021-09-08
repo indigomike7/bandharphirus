@@ -41,6 +41,13 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                <div class="form-group">
+                                    <label for="top_categories">Top Categories?</label>
+                                    <select name="top_categories" class="form-control" id="top_categories" required>
+									<option value="1" @if(old('top_categories')==1) echo "selected='selected'"; @endif>Yes</option>
+									<option value="0" @if(old('top_categories')==0) echo "selected='selected'"; @endif>No</option>
+									</select>
+                                </div>  
                                 <div class="col-md-6">
                                     <label for="name">{{ trans('messages.select_sub_category_name')}}</label>
                                     <select name="parent_id" id="parent_id" class="form-control">
@@ -189,6 +196,7 @@
             $('#add').attr("disabled", true);
             var name = $('#name').val();
             var parent_id = $('#parent_id').val();
+            var top_categories = $('#top_categories').val();
             if (name == "" || parent_id == null) {
                 toastr.error('Category Name Is Requeired.');
                 return false;
@@ -203,6 +211,7 @@
                 method: 'POST',
                 data: {
                     name: name,
+                    top_categories: top_categories,
                     parent_id: parent_id
                 },
                 success: function (data) {
@@ -220,6 +229,7 @@
             var id = $('#id').val();
             var name = $('#name').val();
             var parent_id = $('#parent_id').val();
+            var top_categories = $('#top_categories').val();
             if (name == "" || parent_id == null) {
                 alert('All input field is required');
                 return false;
@@ -235,6 +245,7 @@
                 data: {
                     id: id,
                     name: name,
+                    top_categories: top_categories,
                     parent_id: parent_id,
                 },
                 success: function (data) {
@@ -295,6 +306,7 @@
                 success: function (data) {
                     $('#id').val(data.id);
                     $('#name').val(data.name);
+                    $('#top_categories').val(data.top_categories);
                     $('#cate-table').hide();
                     fetch_cat_id(data.parent_id);
                 }
