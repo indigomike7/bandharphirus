@@ -100,7 +100,64 @@
                         </li>
                         <!-- End Pages -->
 
+                        <!-- Pages -->
+                        <li class="navbar-vertical-aside-has-menu {{Request::is('seller/orders*')?'active':''}}">
+                            <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle" href="javascript:"
+                               title="Pages">
+                                <i class="tio-premium-outlined  nav-icon"></i>
+                                <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">
+                                    {{trans('messages.contest')}}
+                                </span>
+                            </a>
+                            <ul class="js-navbar-vertical-aside-submenu nav nav-sub"
+                                style="display: {{Request::is('seller/order*')?'block':'none'}}">
 
+                                <li class="nav-item {{Request::is('seller/contest/list/all')?'active':''}}">
+                                    <a class="nav-link " href="{{route('seller.contest.list',['all'])}}" title="">
+                                        <span class="tio-circle nav-indicator-icon"></span>
+                                        <span class="text-truncate">My Contest</span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item {{Request::is('seller/contest/list/all')?'active':''}}">
+                                    <a class="nav-link " href="{{route('seller.contest.listjoin',['all'])}}" title="">
+                                        <span class="tio-circle nav-indicator-icon"></span>
+                                        <span class="text-truncate">Join Contest</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- End Pages -->
+
+                        <!-- Pages -->
+                        <li class="navbar-vertical-aside-has-menu {{Request::is('seller/orders*')?'active':''}}">
+                            <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle" href="javascript:"
+                               title="Pages">
+                                <i class="tio-premium-outlined  nav-icon"></i>
+                                <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">
+                                    {{trans('messages.barter')}}
+                                </span>
+                            </a>
+                            <ul class="js-navbar-vertical-aside-submenu nav nav-sub"
+                                style="display: {{Request::is('seller/order*')?'block':'none'}}">
+
+                                <li class="nav-item {{Request::is('seller/contest/list/all')?'active':''}}">
+                                    <a class="nav-link " href="{{route('seller.contest.list',['all'])}}" title="">
+                                        <span class="tio-circle nav-indicator-icon"></span>
+                                        <span class="text-truncate">My Barter</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item {{Request::is('seller/contest/list/all')?'active':''}}">
+                                    <a class="nav-link " href="{{route('seller.contest.list',['all'])}}" title="">
+                                        <span class="tio-circle nav-indicator-icon"></span>
+                                        <span class="text-truncate">Requested Barter</span>
+                                    </a>
+                                </li>
+
+
+                            </ul>
+                        </li>
+                        <!-- End Pages -->
                         <li class="nav-item">
                             <small class="nav-subtitle" title="Pages">{{trans('messages.product_management')}}</small>
                             <small class="tio-more-horizontal nav-subtitle-replacer"></small>

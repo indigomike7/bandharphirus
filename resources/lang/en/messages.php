@@ -600,6 +600,8 @@
     'Approved' => 'Approved',
     'bank_info' => 'Bank Info',
     'choose' => 'Choose',
-    'file' => 'File'
+    'file' => 'File',
+	'contest' =>'Contest',
+	'barter' => 'Barter'
 
 ];
