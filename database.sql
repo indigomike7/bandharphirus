@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.7
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Aug 09, 2021 at 03:23 AM
--- Server version: 10.3.30-MariaDB-cll-lve
--- PHP Version: 7.3.28
+-- Host: 127.0.0.1
+-- Generation Time: Sep 10, 2021 at 10:04 AM
+-- Server version: 10.4.20-MariaDB
+-- PHP Version: 8.0.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `bandbkmp_bandharphi`
+-- Database: `bandharphirus`
 --
 
 -- --------------------------------------------------------
@@ -94,7 +93,7 @@ CREATE TABLE `admin_wallets` (
 --
 
 INSERT INTO `admin_wallets` (`id`, `admin_id`, `balance`, `withdrawn`, `created_at`, `updated_at`) VALUES
-(1, 1, 999999.99, 0.00, NULL, NULL);
+(1, 1, '999999.99', '0.00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -132,7 +131,63 @@ CREATE TABLE `attributes` (
 
 INSERT INTO `attributes` (`id`, `name`, `created_at`, `updated_at`) VALUES
 (1, 'Size', '2021-08-02 20:39:04', '2021-08-02 20:39:04'),
-(2, 'Colour', '2021-08-02 20:39:10', '2021-08-02 20:39:10');
+(2, 'Colour', '2021-08-02 20:39:10', '2021-08-02 20:39:10'),
+(3, 'dsds', '2021-09-10 06:25:07', '2021-09-10 06:25:07'),
+(4, 'dsds', '2021-09-10 06:25:07', '2021-09-10 06:25:07'),
+(5, 'dsdsdsds', '2021-09-10 06:25:34', '2021-09-10 06:25:34'),
+(6, 'dsdsdsds', '2021-09-10 06:25:34', '2021-09-10 06:25:34'),
+(7, 'fdsfsfs', '2021-09-10 06:25:41', '2021-09-10 06:25:41'),
+(8, 'fdsfsfs', '2021-09-10 06:25:41', '2021-09-10 06:25:41'),
+(9, 'xxxxx', '2021-09-10 06:25:52', '2021-09-10 06:25:52'),
+(10, 'xxxxx', '2021-09-10 06:25:52', '2021-09-10 06:25:52'),
+(11, 'server', '2021-09-10 06:26:15', '2021-09-10 06:26:15'),
+(12, 'server', '2021-09-10 06:26:15', '2021-09-10 06:26:15'),
+(13, 'ggggg', '2021-09-10 06:26:41', '2021-09-10 06:26:41'),
+(14, 'ggggg', '2021-09-10 06:26:41', '2021-09-10 06:26:41'),
+(15, 'ssss', '2021-09-10 06:26:50', '2021-09-10 06:26:50'),
+(16, 'ssss', '2021-09-10 06:26:50', '2021-09-10 06:26:50'),
+(17, 'xxxx', '2021-09-10 06:26:56', '2021-09-10 06:26:56'),
+(18, 'xxxx', '2021-09-10 06:26:56', '2021-09-10 06:26:56'),
+(19, 'you', '2021-09-10 06:27:01', '2021-09-10 06:27:01'),
+(20, 'you', '2021-09-10 06:27:01', '2021-09-10 06:27:01'),
+(21, 'hyhy', '2021-09-10 06:27:05', '2021-09-10 06:27:05'),
+(22, 'hyhy', '2021-09-10 06:27:05', '2021-09-10 06:27:05'),
+(23, 'gggg', '2021-09-10 06:27:10', '2021-09-10 06:27:10'),
+(24, 'gggg', '2021-09-10 06:27:10', '2021-09-10 06:27:10'),
+(25, 'dksgkhdgsd', '2021-09-10 06:27:31', '2021-09-10 06:27:31'),
+(26, 'dksgkhdgsd', '2021-09-10 06:27:31', '2021-09-10 06:27:31'),
+(27, 'dsjgkdhgsd', '2021-09-10 06:27:36', '2021-09-10 06:27:36'),
+(28, 'dsjgkdhgsd', '2021-09-10 06:27:36', '2021-09-10 06:27:36'),
+(29, 'kkkk', '2021-09-10 06:27:48', '2021-09-10 06:27:48'),
+(30, 'kkkk', '2021-09-10 06:27:48', '2021-09-10 06:27:48'),
+(31, 'llll', '2021-09-10 06:27:52', '2021-09-10 06:27:52'),
+(32, 'llll', '2021-09-10 06:27:52', '2021-09-10 06:27:52'),
+(33, 'jdjskhdks', '2021-09-10 06:27:57', '2021-09-10 06:27:57'),
+(34, 'jdjskhdks', '2021-09-10 06:27:57', '2021-09-10 06:27:57'),
+(35, 'jjjjj', '2021-09-10 06:28:06', '2021-09-10 06:28:06'),
+(36, 'jjjjj', '2021-09-10 06:28:06', '2021-09-10 06:28:06'),
+(37, 'tyarsytarsa', '2021-09-10 06:28:11', '2021-09-10 06:28:11'),
+(38, 'tyarsytarsa', '2021-09-10 06:28:11', '2021-09-10 06:28:11'),
+(39, 'dskgdksgds', '2021-09-10 06:28:15', '2021-09-10 06:28:15'),
+(40, 'dskgdksgds', '2021-09-10 06:28:15', '2021-09-10 06:28:15'),
+(41, 'hjhjh', '2021-09-10 06:28:46', '2021-09-10 06:28:46'),
+(42, 'hjhjh', '2021-09-10 06:28:46', '2021-09-10 06:28:46'),
+(43, 'dsdskgds', '2021-09-10 06:28:49', '2021-09-10 06:28:49'),
+(44, 'dsdskgds', '2021-09-10 06:28:49', '2021-09-10 06:28:49'),
+(45, 'dsjhdjlss', '2021-09-10 06:28:54', '2021-09-10 06:28:54'),
+(46, 'dsjhdjlss', '2021-09-10 06:28:54', '2021-09-10 06:28:54'),
+(47, 'dsjgdjsgds', '2021-09-10 06:28:58', '2021-09-10 06:28:58'),
+(48, 'dsjgdjsgds', '2021-09-10 06:28:58', '2021-09-10 06:28:58'),
+(49, 'dkshgdkhsg', '2021-09-10 06:29:02', '2021-09-10 06:29:02'),
+(50, 'dkshgdkhsg', '2021-09-10 06:29:02', '2021-09-10 06:29:02'),
+(51, 'djsgdlusyd', '2021-09-10 06:29:06', '2021-09-10 06:29:06'),
+(52, 'djsgdlusyd', '2021-09-10 06:29:06', '2021-09-10 06:29:06'),
+(53, 'dkhsgkhdgs', '2021-09-10 06:29:10', '2021-09-10 06:29:10'),
+(54, 'dkhsgkhdgs', '2021-09-10 06:29:10', '2021-09-10 06:29:10'),
+(55, 'dsljhdlisyd', '2021-09-10 06:29:13', '2021-09-10 06:29:13'),
+(56, 'dsljhdlisyd', '2021-09-10 06:29:13', '2021-09-10 06:29:13'),
+(57, 'dskgdksgdlks', '2021-09-10 06:29:17', '2021-09-10 06:29:17'),
+(58, 'dskgdksgdlks', '2021-09-10 06:29:17', '2021-09-10 06:29:17');
 
 -- --------------------------------------------------------
 
@@ -259,17 +314,27 @@ CREATE TABLE `categories` (
   `parent_id` int(11) NOT NULL,
   `position` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `top_categories` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`id`, `name`, `slug`, `icon`, `parent_id`, `position`, `created_at`, `updated_at`) VALUES
-(1, 'Men\'s Fashion', 'mens-fashion', '2021-08-02-6107ccdd2806d.png', 0, 0, '2021-08-02 20:45:49', '2021-08-02 20:45:49'),
-(2, 'Phones & Telecom', 'phones-telecom', '2021-08-02-6107cd05bf715.png', 0, 0, '2021-08-02 20:46:29', '2021-08-02 20:46:29'),
-(3, 'Jewelry', 'jewelry', '2021-08-02-6107ce10928b4.png', 0, 0, '2021-08-02 20:50:56', '2021-08-02 20:50:56');
+INSERT INTO `categories` (`id`, `name`, `slug`, `icon`, `parent_id`, `position`, `created_at`, `updated_at`, `top_categories`) VALUES
+(1, 'Men\'s Fashion', 'mens-fashion', '2021-08-02-6107ccdd2806d.png', 0, 0, '2021-08-02 20:45:49', '2021-08-02 20:45:49', 0),
+(2, 'Phones & Telecom', 'phones-telecom', '2021-08-02-6107cd05bf715.png', 0, 0, '2021-08-02 20:46:29', '2021-08-02 20:46:29', 0),
+(3, 'Jewelry', 'jewelry', '2021-08-02-6107ce10928b4.png', 0, 0, '2021-08-02 20:50:56', '2021-09-08 06:58:38', 1),
+(4, 'testing', 'testing', NULL, 1, 1, '2021-09-08 06:12:38', '2021-09-08 06:12:38', 0),
+(5, 'testes', 'testes', NULL, 1, 1, '2021-09-08 06:13:43', '2021-09-08 07:13:30', 0),
+(6, 'Lahan /Sawah', 'lahan-sawah', '2021-09-08-61386e51b8aa4.png', 0, 0, '2021-09-08 07:03:29', '2021-09-08 07:03:48', 0),
+(7, 'Ngontrak', 'ngontrak', NULL, 6, 1, '2021-09-08 07:08:35', '2021-09-08 07:08:35', 1),
+(8, 'Ngontrak', 'ngontrak', NULL, 6, 1, '2021-09-08 07:08:35', '2021-09-08 07:08:35', 1),
+(9, 'Watch', 'watch', NULL, 1, 1, '2021-09-08 07:09:45', '2021-09-08 07:09:45', 1),
+(10, 'Watch', 'watch', NULL, 1, 1, '2021-09-08 07:09:45', '2021-09-08 07:09:45', 1),
+(11, 'Oww yeagh', 'oww-yeagh', NULL, 5, 2, '2021-09-08 07:17:48', '2021-09-08 07:17:48', 0),
+(12, 'Oww yeagh', 'oww-yeagh', NULL, 5, 2, '2021-09-08 07:17:48', '2021-09-08 07:18:08', 1);
 
 -- --------------------------------------------------------
 
@@ -473,6 +538,106 @@ CREATE TABLE `contacts` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contest`
+--
+
+CREATE TABLE `contest` (
+  `id` int(11) NOT NULL,
+  `seller_id` int(11) NOT NULL,
+  `name` text NOT NULL,
+  `description` text NOT NULL,
+  `start_date` datetime NOT NULL,
+  `end_date` datetime NOT NULL,
+  `result` text NOT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `picture` text NOT NULL,
+  `created_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `contest`
+--
+
+INSERT INTO `contest` (`id`, `seller_id`, `name`, `description`, `start_date`, `end_date`, `result`, `updated_at`, `picture`, `created_at`) VALUES
+(3, 1, 'Kontes Beringin', 'Jakarta - Vaksinasi COVID-19 CT Corp kini menyediakan vaksin Pfizer. Kamu bisa mendapatkannya di Menara Bank Mega, Jl Tendean, Jakarta Selatan.\r\nKamu hanya perlu mendaftar lewat detik.com/vaksinctcorp. Vaksin Pfizer ini akan disuntikkan mulai 11 September 2021 hingga 1 Desember 2021, dengan kuota 1.000 orang per hari.\r\n\r\nSelain di Menara Bank Mega Jakarta Selatan, vaksin Pfizer secara bertahap nantinya juga akan hadir di beberapa lokasi berikut:', '2021-09-10 00:00:00', '2021-09-18 00:00:00', 'Pemenangnya Michael Owen', '2021-09-10 03:45:51', '[\"2021-09-09-6139cc8479599.png\",\"2021-09-09-6139cc84810aa.png\"]', '2021-09-09 12:46:43'),
+(6, 2, 'Kontes Anak Anak I', 'Ini Kontes anak anak 1', '2021-09-10 00:00:00', '2021-09-13 00:00:00', '', '2021-09-09 09:25:48', '[\"2021-09-09-6139e12c70670.png\",\"2021-09-09-6139e12c8c124.png\"]', '2021-09-09 16:25:48'),
+(7, 2, 'Kontes Anak Anak IV', 'Testing is testing', '2021-09-10 00:00:00', '2021-09-25 00:00:00', '', '2021-09-09 09:28:01', '[\"2021-09-09-6139e1b154461.png\",\"2021-09-09-6139e1b159f48.png\"]', '2021-09-09 16:28:01'),
+(8, 2, 'Kontes Anak Anak V', 'Testing is testing', '2021-09-10 00:00:00', '2021-09-25 00:00:00', '', '2021-09-09 09:29:08', '[\"2021-09-09-6139e1f408b35.png\",\"2021-09-09-6139e1f415382.png\"]', '2021-09-09 16:29:08'),
+(9, 2, 'Kontes Anak Anak XV', 'Testing', '2021-09-10 00:00:00', '2021-09-18 00:00:00', '', '2021-09-10 07:54:22', '[\"2021-09-09-6139e25aedb34.png\",\"2021-09-09-6139e25af343c.png\"]', '2021-09-09 16:30:51'),
+(10, 2, 'Kontes Ultah Abri', 'Testing', '2021-09-10 00:00:00', '2021-09-17 00:00:00', '', '2021-09-09 09:35:28', '[\"2021-09-09-6139e3706bc84.png\",\"2021-09-09-6139e3706fe26.png\"]', '2021-09-09 16:35:28'),
+(11, 0, 'Testing Kontest dari Admin', 'Testing Kontest dari admin', '2021-09-10 00:00:00', '2021-09-12 00:00:00', '', '2021-09-10 07:54:22', '[\"2021-09-10-613ae97b4c351.png\",\"2021-09-10-613ae97b9987f.png\"]', '2021-09-10 11:13:31'),
+(12, 0, 'Testing Kontest dari Admin', 'Testing Kontest dari admin', '2021-09-10 00:00:00', '2021-09-12 00:00:00', '', '2021-09-10 07:54:22', '[\"2021-09-10-613ae97b4c387.png\",\"2021-09-10-613ae97b9987f.png\"]', '2021-09-10 11:13:31'),
+(13, 0, 'Kontest dari admin lagi', 'Kontest dari admin lagi', '2021-09-10 00:00:00', '2021-09-12 00:00:00', '', '2021-09-10 07:54:22', '[\"2021-09-10-613aea335225d.png\"]', '2021-09-10 11:16:35'),
+(14, 0, 'Kontest dari admin lagi', 'Kontest dari admin lagi', '2021-09-10 00:00:00', '2021-09-12 00:00:00', '', '2021-09-10 07:54:22', '[\"2021-09-10-613aea3363a12.png\"]', '2021-09-10 11:16:35'),
+(15, 0, '1111111', '11111', '2021-09-10 00:00:00', '2021-09-13 00:00:00', '', '2021-09-10 07:54:22', '', '2021-09-10 11:19:45'),
+(16, 0, '1111111', '11111', '2021-09-10 00:00:00', '2021-09-13 00:00:00', '', '2021-09-10 07:54:22', '', '2021-09-10 11:19:45'),
+(17, 0, 'mmmm', ',,,,,,,', '2021-09-10 00:00:00', '2021-09-13 00:00:00', '', '2021-09-10 07:54:22', '[\"2021-09-10-613aeb87bb1f0.png\"]', '2021-09-10 11:22:15'),
+(18, 0, 'mmmm', ',,,,,,,', '2021-09-10 00:00:00', '2021-09-13 00:00:00', '', '2021-09-10 07:54:22', '[\"2021-09-10-613aeb87c35f2.png\"]', '2021-09-10 11:22:15'),
+(19, 0, 'jgfjgfdjgf', 'khgkhgkjg', '2021-09-10 00:00:00', '2021-09-17 00:00:00', '', '2021-09-10 07:54:22', '', '2021-09-10 11:22:52'),
+(20, 0, 'jgfjgfdjgf', 'khgkhgkjg', '2021-09-10 00:00:00', '2021-09-17 00:00:00', '', '2021-09-10 07:54:22', '', '2021-09-10 11:22:52'),
+(21, 0, 'gfhjfjh', 'kgkgkgkjg', '2021-09-10 00:00:00', '2021-09-18 00:00:00', '', '2021-09-10 07:54:22', '', '2021-09-10 11:25:25'),
+(22, 0, 'gfhjfjh', 'kgkgkgkjg', '2021-09-10 00:00:00', '2021-09-18 00:00:00', '', '2021-09-10 07:54:22', '', '2021-09-10 11:25:25'),
+(23, 0, 'Jewelry', 'fdsfsdfdsf', '2021-09-10 00:00:00', '2021-09-18 00:00:00', '', '2021-09-10 07:54:22', '', '2021-09-10 11:55:19'),
+(24, 0, 'Jewelry', 'fdsfsdfdsf', '2021-09-10 00:00:00', '2021-09-18 00:00:00', '', '2021-09-10 07:54:22', '', '2021-09-10 11:55:19'),
+(25, 0, 'COntest 1x', 'xxxx', '2021-09-10 00:00:00', '2021-09-18 00:00:00', '', '2021-09-10 07:54:22', '[\"2021-09-10-613af5e2f3a0d.png\"]', '2021-09-10 11:57:34'),
+(26, 0, 'COntest 1x', 'xxxx', '2021-09-10 00:00:00', '2021-09-18 00:00:00', '', '2021-09-10 07:54:22', '', '2021-09-10 11:57:34'),
+(27, 0, 'blablabla', 'sfdfdsfds', '2021-09-10 00:00:00', '2021-09-18 00:00:00', '', '2021-09-10 07:54:22', '[\"2021-09-10-613af60bd5627.png\"]', '2021-09-10 12:07:07'),
+(28, 0, 'blablabla', 'sfdfdsfds', '2021-09-10 00:00:00', '2021-09-18 00:00:00', '', '2021-09-10 07:54:22', '[\"2021-09-10-613af60bd811b.png\"]', '2021-09-10 12:07:07'),
+(29, 0, 'duee', 'duex', '2021-09-10 00:00:00', '2021-09-18 00:00:00', '', '2021-09-10 07:54:22', '', '2021-09-10 12:10:40'),
+(30, 0, 'duee', 'duex', '2021-09-10 00:00:00', '2021-09-18 00:00:00', '', '2021-09-10 07:54:22', '', '2021-09-10 12:10:40'),
+(31, 0, 'duee', 'duex', '2021-09-10 00:00:00', '2021-09-18 00:00:00', '', '2021-09-10 07:54:22', '', '2021-09-10 12:13:15'),
+(32, 0, 'duee', 'duex', '2021-09-10 00:00:00', '2021-09-18 00:00:00', '', '2021-09-10 07:54:22', '', '2021-09-10 12:13:15'),
+(33, 0, 'sssss', 'sssss', '2021-09-10 00:00:00', '2021-09-11 00:00:00', '', '2021-09-10 07:54:22', '[\"2021-09-10-613af82256d70.png\"]', '2021-09-10 12:16:02'),
+(34, 0, 'sssss', 'sssss', '2021-09-10 00:00:00', '2021-09-11 00:00:00', '', '2021-09-10 07:54:22', '[\"2021-09-10-613af8225bc40.png\"]', '2021-09-10 12:16:02'),
+(35, 0, 'rrrrr', 'rrrr', '2021-09-10 00:00:00', '2021-09-25 00:00:00', '', '2021-09-10 07:54:22', '[\"2021-09-10-613af9a1e58be.png\"]', '2021-09-10 12:22:25'),
+(36, 0, 'paha', 'paha', '2021-09-10 00:00:00', '2021-09-25 00:00:00', '', '2021-09-10 07:54:22', '', '2021-09-10 12:26:45'),
+(37, 0, 'paha', 'paha', '2021-09-10 00:00:00', '2021-09-25 00:00:00', '', '2021-09-10 07:54:22', '', '2021-09-10 12:26:45'),
+(38, 0, 'paha2', 'paha2', '2021-09-10 00:00:00', '2021-09-25 00:00:00', '', '2021-09-10 07:54:22', '', '2021-09-10 12:27:30'),
+(39, 0, 'paha2', 'paha2', '2021-09-10 00:00:00', '2021-09-25 00:00:00', '', '2021-09-10 07:54:22', '', '2021-09-10 12:27:30'),
+(40, 0, 'test', 'test', '2021-09-10 00:00:00', '2021-09-25 00:00:00', '', '2021-09-10 07:54:22', '', '2021-09-10 12:36:00'),
+(41, 0, 'test', 'test', '2021-09-10 00:00:00', '2021-09-25 00:00:00', '', '2021-09-10 07:54:22', '', '2021-09-10 12:36:00'),
+(42, 0, 'test', 'test', '2021-09-10 00:00:00', '2021-09-25 00:00:00', '', '2021-09-10 07:54:22', '', '2021-09-10 12:36:01'),
+(43, 0, 'xssxs', 'xsxsxs', '2021-09-10 00:00:00', '2021-09-18 00:00:00', '', '2021-09-10 07:54:22', '', '2021-09-10 12:37:23'),
+(44, 0, 'xssxs', 'xsxsxs', '2021-09-10 00:00:00', '2021-09-18 00:00:00', '', '2021-09-10 07:54:22', '', '2021-09-10 12:37:23'),
+(45, 0, 'xxxx', 'xxxxx', '2021-09-10 00:00:00', '2021-09-18 00:00:00', '', '2021-09-10 07:54:22', '', '2021-09-10 12:38:34'),
+(46, 0, 'xxxx', 'xxxxx', '2021-09-10 00:00:00', '2021-09-18 00:00:00', '', '2021-09-10 07:54:22', '', '2021-09-10 12:38:34'),
+(47, 0, 'ghghg', 'gfhghgh', '2021-09-10 00:00:00', '2021-09-11 00:00:00', '', '2021-09-10 07:54:22', '', '2021-09-10 12:42:07'),
+(48, 0, 'ghghg', 'gfhghgh', '2021-09-10 00:00:00', '2021-09-11 00:00:00', '', '2021-09-10 07:54:22', '', '2021-09-10 12:42:07'),
+(49, 0, 'gsgs', 'gsgs', '2021-09-10 00:00:00', '2021-09-25 00:00:00', '', '2021-09-10 07:54:22', '', '2021-09-10 12:49:21'),
+(50, 0, 'gsgs', 'gsgs', '2021-09-10 00:00:00', '2021-09-25 00:00:00', '', '2021-09-10 07:54:22', '', '2021-09-10 12:49:21'),
+(51, 0, 'xxxx', 'xxxx', '2021-09-10 00:00:00', '2021-09-25 00:00:00', '', '2021-09-10 07:54:22', '', '2021-09-10 12:54:07'),
+(52, 0, 'xxxx', 'xxxx', '2021-09-10 00:00:00', '2021-09-25 00:00:00', '', '2021-09-10 07:54:22', '', '2021-09-10 12:54:07'),
+(54, 0, 'hayw', 'hayw', '2021-09-10 00:00:00', '2021-09-11 00:00:00', '', '2021-09-10 07:54:22', '', '2021-09-10 12:57:43'),
+(56, 0, 'okx', 'okx', '2021-09-10 00:00:00', '2021-09-11 00:00:00', '', '2021-09-10 07:54:22', '', '2021-09-10 13:03:41');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contest_user`
+--
+
+CREATE TABLE `contest_user` (
+  `id` int(11) NOT NULL,
+  `contest_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `seller_id` int(11) DEFAULT NULL,
+  `answer` text NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `contest_user`
+--
+
+INSERT INTO `contest_user` (`id`, `contest_id`, `user_id`, `seller_id`, `answer`, `created_at`, `updated_at`) VALUES
+(1, 3, NULL, 2, 'test', '2021-09-09 08:58:28', '2021-09-09 08:58:28'),
+(2, 10, NULL, 1, 'Ya', '2021-09-09 09:36:36', '2021-09-09 09:36:36'),
+(3, 9, NULL, 1, 'Tidak', '2021-09-09 09:36:49', '2021-09-09 09:36:49');
 
 -- --------------------------------------------------------
 
@@ -902,10 +1067,10 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `customer_id`, `customer_type`, `payment_status`, `order_status`, `payment_method`, `transaction_ref`, `order_amount`, `shipping_address`, `created_at`, `updated_at`, `discount_amount`, `discount_type`) VALUES
-(100001, '1', 'customer', 'unpaid', 'pending', 'Maybank Virtual Account', NULL, 5400.00, '2', '2021-08-04 13:29:16', '2021-08-04 13:29:16', 0.00, NULL),
-(100002, '1', 'customer', 'unpaid', 'pending', 'cash_on_delivery', NULL, 905000.00, '2', '2021-08-04 18:24:46', '2021-08-04 18:24:46', 0.00, NULL),
-(100003, '1', 'customer', 'unpaid', 'pending', 'tripay', NULL, 905000.00, '2', '2021-08-04 18:29:28', '2021-08-04 18:29:28', 0.00, NULL),
-(100004, '1', 'customer', 'unpaid', 'pending', 'tripay', NULL, 999999.99, '2', '2021-08-04 18:58:37', '2021-08-04 18:58:37', 0.00, NULL);
+(100001, '1', 'customer', 'unpaid', 'pending', 'Maybank Virtual Account', NULL, '5400.00', '2', '2021-08-04 13:29:16', '2021-08-04 13:29:16', '0.00', NULL),
+(100002, '1', 'customer', 'unpaid', 'pending', 'cash_on_delivery', NULL, '905000.00', '2', '2021-08-04 18:24:46', '2021-08-04 18:24:46', '0.00', NULL),
+(100003, '1', 'customer', 'unpaid', 'pending', 'tripay', NULL, '905000.00', '2', '2021-08-04 18:29:28', '2021-08-04 18:29:28', '0.00', NULL),
+(100004, '1', 'customer', 'unpaid', 'pending', 'tripay', NULL, '999999.99', '2', '2021-08-04 18:58:37', '2021-08-04 18:58:37', '0.00', NULL);
 
 -- --------------------------------------------------------
 
@@ -939,10 +1104,10 @@ CREATE TABLE `order_details` (
 --
 
 INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `seller_id`, `product_details`, `qty`, `price`, `tax`, `discount`, `delivery_status`, `payment_status`, `created_at`, `updated_at`, `shipping_method_id`, `variant`, `variation`, `discount_type`, `is_stock_decreased`) VALUES
-(1, 100001, 3, 0, '{\"id\":3,\"added_by\":\"admin\",\"user_id\":1,\"name\":\"Batu bacan\",\"slug\":\"batu-bacan-cFNuZk\",\"category_ids\":\"[{\\\"id\\\":\\\"3\\\",\\\"position\\\":1}]\",\"brand_id\":1,\"unit\":\"pc\",\"min_qty\":1,\"refundable\":1,\"images\":\"[\\\"2021-08-02-6107cf8ea4332.png\\\",\\\"2021-08-02-6107cf8ea4784.png\\\"]\",\"thumbnail\":\"2021-08-02-6107cf8ea48f6.png\",\"featured\":null,\"flash_deal\":null,\"video_provider\":null,\"video_url\":null,\"colors\":\"[\\\"#00FFFF\\\"]\",\"variant_product\":\"0\",\"attributes\":\"null\",\"choice_options\":\"[]\",\"variation\":\"[{\\\"type\\\":\\\"Aqua\\\",\\\"price\\\":400,\\\"sku\\\":\\\"Bb-Aqua\\\",\\\"qty\\\":\\\"1\\\"}]\",\"published\":0,\"unit_price\":400,\"purchase_price\":800000,\"tax\":0,\"tax_type\":\"percent\",\"discount\":0,\"discount_type\":\"flat\",\"current_stock\":1,\"details\":\"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<\\/p>\",\"free_shipping\":0,\"attachment\":null,\"created_at\":\"2021-08-02 16:57:18\",\"updated_at\":\"2021-08-02 16:57:18\",\"status\":1,\"featured_status\":1}', 1, 400.00, 0.00, 0.00, 'pending', 'unpaid', '2021-08-04 13:29:16', '2021-08-04 13:29:16', 1, 'Aqua', '{\"color\":\"Aqua\"}', 'discount_on_product', 1),
-(2, 100002, 5, 0, '{\"id\":5,\"added_by\":\"admin\",\"user_id\":1,\"name\":\"Permata Kijang\",\"slug\":\"permata-kijang-wN8YXV\",\"category_ids\":\"[{\\\"id\\\":\\\"3\\\",\\\"position\\\":1}]\",\"brand_id\":1,\"unit\":\"pc\",\"min_qty\":1,\"refundable\":1,\"images\":\"[\\\"2021-08-04-610a176b7cf88.png\\\",\\\"2021-08-04-610a176b81d58.png\\\"]\",\"thumbnail\":\"2021-08-04-610a176b81e0a.png\",\"featured\":null,\"flash_deal\":null,\"video_provider\":null,\"video_url\":null,\"colors\":\"[]\",\"variant_product\":\"0\",\"attributes\":\"null\",\"choice_options\":\"[]\",\"variation\":\"[]\",\"published\":0,\"unit_price\":900000,\"purchase_price\":900000,\"tax\":5,\"tax_type\":\"percent\",\"discount\":5,\"discount_type\":\"percent\",\"current_stock\":90000,\"details\":\"<p>Permata Kijang<\\/p>\",\"free_shipping\":0,\"attachment\":null,\"created_at\":\"2021-08-04 10:28:27\",\"updated_at\":\"2021-08-04 10:28:27\",\"status\":1,\"featured_status\":1}', 1, 900000.00, 45000.00, 45000.00, 'pending', 'unpaid', '2021-08-04 18:24:46', '2021-08-04 18:24:46', 1, '', '[]', 'discount_on_product', 1),
-(3, 100003, 5, 0, '{\"id\":5,\"added_by\":\"admin\",\"user_id\":1,\"name\":\"Permata Kijang\",\"slug\":\"permata-kijang-wN8YXV\",\"category_ids\":\"[{\\\"id\\\":\\\"3\\\",\\\"position\\\":1}]\",\"brand_id\":1,\"unit\":\"pc\",\"min_qty\":1,\"refundable\":1,\"images\":\"[\\\"2021-08-04-610a176b7cf88.png\\\",\\\"2021-08-04-610a176b81d58.png\\\"]\",\"thumbnail\":\"2021-08-04-610a176b81e0a.png\",\"featured\":null,\"flash_deal\":null,\"video_provider\":null,\"video_url\":null,\"colors\":\"[]\",\"variant_product\":\"0\",\"attributes\":\"null\",\"choice_options\":\"[]\",\"variation\":\"[]\",\"published\":0,\"unit_price\":900000,\"purchase_price\":900000,\"tax\":5,\"tax_type\":\"percent\",\"discount\":5,\"discount_type\":\"percent\",\"current_stock\":89999,\"details\":\"<p>Permata Kijang<\\/p>\",\"free_shipping\":0,\"attachment\":null,\"created_at\":\"2021-08-04 10:28:27\",\"updated_at\":\"2021-08-04 14:24:46\",\"status\":1,\"featured_status\":1}', 1, 900000.00, 45000.00, 45000.00, 'pending', 'unpaid', '2021-08-04 18:29:28', '2021-08-04 18:29:28', 1, '', '[]', 'discount_on_product', 1),
-(4, 100004, 5, 0, '{\"id\":5,\"added_by\":\"admin\",\"user_id\":1,\"name\":\"Permata Kijang\",\"slug\":\"permata-kijang-wN8YXV\",\"category_ids\":\"[{\\\"id\\\":\\\"3\\\",\\\"position\\\":1}]\",\"brand_id\":1,\"unit\":\"pc\",\"min_qty\":1,\"refundable\":1,\"images\":\"[\\\"2021-08-04-610a176b7cf88.png\\\",\\\"2021-08-04-610a176b81d58.png\\\"]\",\"thumbnail\":\"2021-08-04-610a176b81e0a.png\",\"featured\":null,\"flash_deal\":null,\"video_provider\":null,\"video_url\":null,\"colors\":\"[]\",\"variant_product\":\"0\",\"attributes\":\"null\",\"choice_options\":\"[]\",\"variation\":\"[]\",\"published\":0,\"unit_price\":900000,\"purchase_price\":900000,\"tax\":5,\"tax_type\":\"percent\",\"discount\":5,\"discount_type\":\"percent\",\"current_stock\":89998,\"details\":\"<p>Permata Kijang<\\/p>\",\"free_shipping\":0,\"attachment\":null,\"created_at\":\"2021-08-04 10:28:27\",\"updated_at\":\"2021-08-04 14:29:28\",\"status\":1,\"featured_status\":1}', 2, 900000.00, 90000.00, 90000.00, 'pending', 'unpaid', '2021-08-04 18:58:37', '2021-08-04 18:58:37', 1, '', '[]', 'discount_on_product', 1);
+(1, 100001, 3, 0, '{\"id\":3,\"added_by\":\"admin\",\"user_id\":1,\"name\":\"Batu bacan\",\"slug\":\"batu-bacan-cFNuZk\",\"category_ids\":\"[{\\\"id\\\":\\\"3\\\",\\\"position\\\":1}]\",\"brand_id\":1,\"unit\":\"pc\",\"min_qty\":1,\"refundable\":1,\"images\":\"[\\\"2021-08-02-6107cf8ea4332.png\\\",\\\"2021-08-02-6107cf8ea4784.png\\\"]\",\"thumbnail\":\"2021-08-02-6107cf8ea48f6.png\",\"featured\":null,\"flash_deal\":null,\"video_provider\":null,\"video_url\":null,\"colors\":\"[\\\"#00FFFF\\\"]\",\"variant_product\":\"0\",\"attributes\":\"null\",\"choice_options\":\"[]\",\"variation\":\"[{\\\"type\\\":\\\"Aqua\\\",\\\"price\\\":400,\\\"sku\\\":\\\"Bb-Aqua\\\",\\\"qty\\\":\\\"1\\\"}]\",\"published\":0,\"unit_price\":400,\"purchase_price\":800000,\"tax\":0,\"tax_type\":\"percent\",\"discount\":0,\"discount_type\":\"flat\",\"current_stock\":1,\"details\":\"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<\\/p>\",\"free_shipping\":0,\"attachment\":null,\"created_at\":\"2021-08-02 16:57:18\",\"updated_at\":\"2021-08-02 16:57:18\",\"status\":1,\"featured_status\":1}', 1, '400.00', '0.00', '0.00', 'pending', 'unpaid', '2021-08-04 13:29:16', '2021-08-04 13:29:16', 1, 'Aqua', '{\"color\":\"Aqua\"}', 'discount_on_product', 1),
+(2, 100002, 5, 0, '{\"id\":5,\"added_by\":\"admin\",\"user_id\":1,\"name\":\"Permata Kijang\",\"slug\":\"permata-kijang-wN8YXV\",\"category_ids\":\"[{\\\"id\\\":\\\"3\\\",\\\"position\\\":1}]\",\"brand_id\":1,\"unit\":\"pc\",\"min_qty\":1,\"refundable\":1,\"images\":\"[\\\"2021-08-04-610a176b7cf88.png\\\",\\\"2021-08-04-610a176b81d58.png\\\"]\",\"thumbnail\":\"2021-08-04-610a176b81e0a.png\",\"featured\":null,\"flash_deal\":null,\"video_provider\":null,\"video_url\":null,\"colors\":\"[]\",\"variant_product\":\"0\",\"attributes\":\"null\",\"choice_options\":\"[]\",\"variation\":\"[]\",\"published\":0,\"unit_price\":900000,\"purchase_price\":900000,\"tax\":5,\"tax_type\":\"percent\",\"discount\":5,\"discount_type\":\"percent\",\"current_stock\":90000,\"details\":\"<p>Permata Kijang<\\/p>\",\"free_shipping\":0,\"attachment\":null,\"created_at\":\"2021-08-04 10:28:27\",\"updated_at\":\"2021-08-04 10:28:27\",\"status\":1,\"featured_status\":1}', 1, '900000.00', '45000.00', '45000.00', 'pending', 'unpaid', '2021-08-04 18:24:46', '2021-08-04 18:24:46', 1, '', '[]', 'discount_on_product', 1),
+(3, 100003, 5, 0, '{\"id\":5,\"added_by\":\"admin\",\"user_id\":1,\"name\":\"Permata Kijang\",\"slug\":\"permata-kijang-wN8YXV\",\"category_ids\":\"[{\\\"id\\\":\\\"3\\\",\\\"position\\\":1}]\",\"brand_id\":1,\"unit\":\"pc\",\"min_qty\":1,\"refundable\":1,\"images\":\"[\\\"2021-08-04-610a176b7cf88.png\\\",\\\"2021-08-04-610a176b81d58.png\\\"]\",\"thumbnail\":\"2021-08-04-610a176b81e0a.png\",\"featured\":null,\"flash_deal\":null,\"video_provider\":null,\"video_url\":null,\"colors\":\"[]\",\"variant_product\":\"0\",\"attributes\":\"null\",\"choice_options\":\"[]\",\"variation\":\"[]\",\"published\":0,\"unit_price\":900000,\"purchase_price\":900000,\"tax\":5,\"tax_type\":\"percent\",\"discount\":5,\"discount_type\":\"percent\",\"current_stock\":89999,\"details\":\"<p>Permata Kijang<\\/p>\",\"free_shipping\":0,\"attachment\":null,\"created_at\":\"2021-08-04 10:28:27\",\"updated_at\":\"2021-08-04 14:24:46\",\"status\":1,\"featured_status\":1}', 1, '900000.00', '45000.00', '45000.00', 'pending', 'unpaid', '2021-08-04 18:29:28', '2021-08-04 18:29:28', 1, '', '[]', 'discount_on_product', 1),
+(4, 100004, 5, 0, '{\"id\":5,\"added_by\":\"admin\",\"user_id\":1,\"name\":\"Permata Kijang\",\"slug\":\"permata-kijang-wN8YXV\",\"category_ids\":\"[{\\\"id\\\":\\\"3\\\",\\\"position\\\":1}]\",\"brand_id\":1,\"unit\":\"pc\",\"min_qty\":1,\"refundable\":1,\"images\":\"[\\\"2021-08-04-610a176b7cf88.png\\\",\\\"2021-08-04-610a176b81d58.png\\\"]\",\"thumbnail\":\"2021-08-04-610a176b81e0a.png\",\"featured\":null,\"flash_deal\":null,\"video_provider\":null,\"video_url\":null,\"colors\":\"[]\",\"variant_product\":\"0\",\"attributes\":\"null\",\"choice_options\":\"[]\",\"variation\":\"[]\",\"published\":0,\"unit_price\":900000,\"purchase_price\":900000,\"tax\":5,\"tax_type\":\"percent\",\"discount\":5,\"discount_type\":\"percent\",\"current_stock\":89998,\"details\":\"<p>Permata Kijang<\\/p>\",\"free_shipping\":0,\"attachment\":null,\"created_at\":\"2021-08-04 10:28:27\",\"updated_at\":\"2021-08-04 14:29:28\",\"status\":1,\"featured_status\":1}', 2, '900000.00', '90000.00', '90000.00', 'pending', 'unpaid', '2021-08-04 18:58:37', '2021-08-04 18:58:37', 1, '', '[]', 'discount_on_product', 1);
 
 -- --------------------------------------------------------
 
@@ -1006,8 +1171,8 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `added_by`, `user_id`, `name`, `slug`, `category_ids`, `brand_id`, `unit`, `min_qty`, `refundable`, `images`, `thumbnail`, `featured`, `flash_deal`, `video_provider`, `video_url`, `colors`, `variant_product`, `attributes`, `choice_options`, `variation`, `published`, `unit_price`, `purchase_price`, `tax`, `tax_type`, `discount`, `discount_type`, `current_stock`, `details`, `free_shipping`, `attachment`, `created_at`, `updated_at`, `status`, `featured_status`) VALUES
-(3, 'admin', 1, 'Batu bacan', 'batu-bacan-cFNuZk', '[{\"id\":\"3\",\"position\":1}]', 1, 'pc', 1, 1, '[\"2021-08-02-6107cf8ea4332.png\",\"2021-08-02-6107cf8ea4784.png\"]', '2021-08-02-6107cf8ea48f6.png', NULL, NULL, NULL, NULL, '[\"#00FFFF\"]', 0, 'null', '[]', '[{\"type\":\"Aqua\",\"price\":400,\"sku\":\"Bb-Aqua\",\"qty\":0}]', 0, 400.00, 800000.00, '0', 'percent', '0', 'flat', 0, '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', 0, NULL, '2021-08-02 20:57:18', '2021-08-04 13:29:16', 1, 1),
-(5, 'admin', 1, 'Permata Kijang', 'permata-kijang-wN8YXV', '[{\"id\":\"3\",\"position\":1}]', 1, 'pc', 1, 1, '[\"2021-08-04-610a176b7cf88.png\",\"2021-08-04-610a176b81d58.png\"]', '2021-08-04-610a176b81e0a.png', NULL, NULL, NULL, NULL, '[]', 0, 'null', '[]', '[]', 0, 900000.00, 900000.00, '5', 'percent', '5', 'percent', 89996, '<p>Permata Kijang</p>', 0, NULL, '2021-08-04 14:28:27', '2021-08-04 18:58:37', 1, 1);
+(3, 'admin', 1, 'Batu bacan', 'batu-bacan-cFNuZk', '[{\"id\":\"3\",\"position\":1}]', 1, 'pc', 1, 1, '[\"2021-08-02-6107cf8ea4332.png\",\"2021-08-02-6107cf8ea4784.png\"]', '2021-08-02-6107cf8ea48f6.png', NULL, NULL, NULL, NULL, '[\"#00FFFF\"]', 0, 'null', '[]', '[{\"type\":\"Aqua\",\"price\":400,\"sku\":\"Bb-Aqua\",\"qty\":0}]', 0, '400.00', '800000.00', '0', 'percent', '0', 'flat', 0, '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', 0, NULL, '2021-08-02 20:57:18', '2021-08-04 13:29:16', 1, 1),
+(5, 'admin', 1, 'Permata Kijang', 'permata-kijang-wN8YXV', '[{\"id\":\"3\",\"position\":1}]', 1, 'pc', 1, 1, '[\"2021-08-04-610a176b7cf88.png\",\"2021-08-04-610a176b81d58.png\"]', '2021-08-04-610a176b81e0a.png', NULL, NULL, NULL, NULL, '[]', 0, 'null', '[]', '[]', 0, '900000.00', '900000.00', '5', 'percent', '5', 'percent', 89996, '<p>Permata Kijang</p>', 0, NULL, '2021-08-04 14:28:27', '2021-08-04 18:58:37', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -1123,6 +1288,46 @@ CREATE TABLE `sellers` (
   `auth_token` text COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `sellers`
+--
+
+INSERT INTO `sellers` (`id`, `f_name`, `l_name`, `phone`, `image`, `email`, `password`, `status`, `remember_token`, `created_at`, `updated_at`, `bank_name`, `branch`, `account_no`, `holder_name`, `auth_token`) VALUES
+(1, 'Michael', 'Butar butar', '+6281218445901', '2021-09-09-61398590e9c8d.png', 'indigomikezone@gmail.com', '$2y$10$UDw5b2UHciDLGwzJ8yBdRuqn7GBak1Hn3AwqCMhattJjKmmKF/K26', 'approved', '2RrsNRWK35rKxJP0p0QyFjr7XCXEYQvJ3Sjm5y0xpMqEVXHFWNozltOgxwtI', '2021-09-09 02:54:57', '2021-09-09 02:55:35', NULL, NULL, NULL, NULL, NULL),
+(2, 'Michael', 'Owen', '+6281218445901', '2021-09-09-6139c8b5e9d2c.png', 'samsonnite39@gmail.com', '$2y$10$DdZisykoES/nkurCGSV/JeBR8LPs2DdLU4F4JvhlOukzO/C.RIpoO', 'approved', 'yRHN5Hp7DPeRyYVa91XcWKAdlmarf6R2UQrU0WaCr8DqVotnDKvsPeRfWrJf', '2021-09-09 07:41:26', '2021-09-09 07:41:49', NULL, NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `seller_barter`
+--
+
+CREATE TABLE `seller_barter` (
+  `id` int(11) NOT NULL,
+  `seller_id` int(11) NOT NULL,
+  `barter_date` datetime NOT NULL,
+  `addition` decimal(18,2) NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  `user_barter_id` int(11) DEFAULT NULL,
+  `seller_barter_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `seller_barter_each`
+--
+
+CREATE TABLE `seller_barter_each` (
+  `id` int(11) NOT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `name` text DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `seller_barter_id` int(11) NOT NULL,
+  `price` decimal(18,2) NOT NULL,
+  `picture` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 -- --------------------------------------------------------
 
 --
@@ -1137,6 +1342,14 @@ CREATE TABLE `seller_wallets` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `seller_wallets`
+--
+
+INSERT INTO `seller_wallets` (`id`, `seller_id`, `balance`, `withdrawn`, `created_at`, `updated_at`) VALUES
+(1, 1, '0', '0', '2021-09-09 02:55:44', '2021-09-09 02:55:44'),
+(2, 2, '0', '0', '2021-09-09 07:42:05', '2021-09-09 07:42:05');
 
 -- --------------------------------------------------------
 
@@ -1208,7 +1421,7 @@ CREATE TABLE `shipping_methods` (
 --
 
 INSERT INTO `shipping_methods` (`id`, `creator_id`, `creator_type`, `title`, `cost`, `duration`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, 'admin', 'JNE Tiki', 5000.00, '6', 1, '2021-08-03 18:24:10', '2021-08-03 18:24:10');
+(1, 1, 'admin', 'JNE Tiki', '5000.00', '6', 1, '2021-08-03 18:24:10', '2021-08-03 18:24:10');
 
 -- --------------------------------------------------------
 
@@ -1226,6 +1439,14 @@ CREATE TABLE `shops` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `shops`
+--
+
+INSERT INTO `shops` (`id`, `seller_id`, `name`, `address`, `contact`, `image`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Michael Web Design', 'Taman Meruya Ilir Blok D6/37', '+6281218445901', '2021-09-09-613985913060e.png', '2021-09-09 02:54:57', '2021-09-09 02:54:57'),
+(2, 2, 'Michael Online Store', 'Taman Online Store', '+6281218445901', '2021-09-09-6139c8b625a93.png', '2021-09-09 07:41:26', '2021-09-09 07:41:26');
 
 -- --------------------------------------------------------
 
@@ -1354,6 +1575,38 @@ INSERT INTO `users` (`id`, `name`, `f_name`, `l_name`, `phone`, `image`, `email`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `user_barter`
+--
+
+CREATE TABLE `user_barter` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `barter_date` datetime NOT NULL,
+  `addition` decimal(18,2) NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  `user_barter_id` int(11) DEFAULT NULL,
+  `seller_barter_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_barter_each`
+--
+
+CREATE TABLE `user_barter_each` (
+  `id` int(11) NOT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `name` text DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `user_barter_id` int(11) NOT NULL,
+  `price` decimal(18,2) NOT NULL,
+  `picture` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `wishlists`
 --
 
@@ -1457,6 +1710,18 @@ ALTER TABLE `colors`
 -- Indexes for table `contacts`
 --
 ALTER TABLE `contacts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `contest`
+--
+ALTER TABLE `contest`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `contest_user`
+--
+ALTER TABLE `contest_user`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1615,6 +1880,18 @@ ALTER TABLE `sellers`
   ADD UNIQUE KEY `sellers_email_unique` (`email`);
 
 --
+-- Indexes for table `seller_barter`
+--
+ALTER TABLE `seller_barter`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `seller_barter_each`
+--
+ALTER TABLE `seller_barter_each`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `seller_wallets`
 --
 ALTER TABLE `seller_wallets`
@@ -1676,6 +1953,18 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
+-- Indexes for table `user_barter`
+--
+ALTER TABLE `user_barter`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user_barter_each`
+--
+ALTER TABLE `user_barter_each`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `wishlists`
 --
 ALTER TABLE `wishlists`
@@ -1719,7 +2008,7 @@ ALTER TABLE `admin_wallet_histories`
 -- AUTO_INCREMENT for table `attributes`
 --
 ALTER TABLE `attributes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `banners`
@@ -1743,7 +2032,7 @@ ALTER TABLE `business_settings`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `chattings`
@@ -1762,6 +2051,18 @@ ALTER TABLE `colors`
 --
 ALTER TABLE `contacts`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `contest`
+--
+ALTER TABLE `contest`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+
+--
+-- AUTO_INCREMENT for table `contest_user`
+--
+ALTER TABLE `contest_user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `coupons`
@@ -1887,13 +2188,25 @@ ALTER TABLE `search_functions`
 -- AUTO_INCREMENT for table `sellers`
 --
 ALTER TABLE `sellers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `seller_barter`
+--
+ALTER TABLE `seller_barter`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `seller_barter_each`
+--
+ALTER TABLE `seller_barter_each`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `seller_wallets`
 --
 ALTER TABLE `seller_wallets`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `seller_wallet_histories`
@@ -1917,7 +2230,7 @@ ALTER TABLE `shipping_methods`
 -- AUTO_INCREMENT for table `shops`
 --
 ALTER TABLE `shops`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `social_medias`
@@ -1942,6 +2255,18 @@ ALTER TABLE `support_ticket_convs`
 --
 ALTER TABLE `users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `user_barter`
+--
+ALTER TABLE `user_barter`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `user_barter_each`
+--
+ALTER TABLE `user_barter_each`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `wishlists`
