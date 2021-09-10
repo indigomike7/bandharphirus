@@ -819,7 +819,7 @@
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="vendor-dokan-store.html">Contest</a>
+                                        <a href="{{route('contest3.listjoin')}}">Contest</a><!--
                                         <ul>
                                             <li><a href="contest-kingman-open.html">Kingman Open</a></li>
                                             <li><a href="contest-damele-open.html">Damele Open</a></li>
@@ -834,7 +834,7 @@
                                             <li><a href="contest-blue-turquoise-chinese.html">Blue Turquoise Chinese</a></li>
                                             <li><a href="contest-multicolor-persian.html">Multicolour Persian</a></li>
                                             <li><a href="contest-multicolour-chinese.html">Multicolour Chinese</a></li>    
-                                        </ul>
+                                        </ul>-->
                                     </li>
                                     <li>
                                         <a href="exchange.html">exchange</a>
