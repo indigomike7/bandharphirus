@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Seller;
+namespace App\Http\Controllers\Admin;
 
 use App\CPU\BackEndHelper;
 use App\CPU\Convert;
@@ -21,17 +21,17 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 
-class ContestController extends Controller
+class Contest2Controller extends Controller
 {
     function list() {
-            $contest = Contest::where(['seller_id' => auth('seller')->id()])->orderBy('created_at', 'desc')->get();
+            $contest = Contest::where(['seller_id' => 0])->orderBy('created_at', 'desc')->get();
 
-        return view('seller-views.contest.list', compact('contest'));
+        return view('admin-views.contest.list', compact('contest'));
     }
     public function edit($id)
     {
         $contest = Contest::find($id);
-        return view('seller-views.contest.edit', compact('contest'));
+        return view('admin-views.contest.edit', compact('contest'));
 
     }
 
@@ -41,12 +41,13 @@ class ContestController extends Controller
         $user = new User();
         $seller = new Seller();
 		$contestuser = new ContestUser();
-        return view('seller-views.contest.view', compact('contest','user','seller','contestuser'));
+        return view('admin-views.contest.view', compact('contest','user','seller','contestuser'));
 
     }
  
     function add() {
-        return view('seller-views.contest.add');
+//		die("add");
+        return view('admin-views.contest.add');
     }
 
     public function remove_image(Request $request)
@@ -71,10 +72,10 @@ class ContestController extends Controller
     }
     public function listjoin()
     {
-            $contest = Contest::where('seller_id',"!=", auth('seller')->id())->where("start_date","<=",date("Y-m-d H:i:s"))->orderBy('created_at', 'desc')->get();
+            $contest = Contest::where('seller_id',"!=", auth('seller')->id())->orderBy('created_at', 'desc')->get();
 			$contestuser = new ContestUser();
 
-        return view('seller-views.contest.listjoin', compact('contest','contestuser'));
+        return view('admin-views.contest.listjoin', compact('contest','contestuser'));
     }
     public function delete($id)
     {
@@ -101,7 +102,7 @@ class ContestController extends Controller
 		return $response;
 
 	}
-    function addnew(Request $request) {
+    function addnew2(Request $request) {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'description' => 'required',
@@ -115,7 +116,7 @@ class ContestController extends Controller
         ]);
 
         $contest = new Contest();
-        $contest->seller_id = auth('seller')->id();
+        $contest->seller_id = 0;
         $contest->name = $request->name;
         $contest->description = $request->description;
         $contest->start_date = $request->start_date;
@@ -183,7 +184,7 @@ class ContestController extends Controller
             'id.required' => 'ID is required! You got error in your posting. Please refresh!!'
         ]);
 
-        $contest = Contest::where("seller_id","=",auth('seller')->id())->where("id","=",$request->id)->first();
+        $contest = Contest::where("seller_id","=",0)->where("id","=",$request->id)->first();
 		if(!empty($contest))
 		{
 			$contest->result = $request->result;
@@ -215,7 +216,7 @@ class ContestController extends Controller
         ]);
 
         $contest = Contest::find($request->id);
-        $contest->seller_id = auth('seller')->id();
+        $contest->seller_id = 0;
         $contest->name = $request->name;
         $contest->description = $request->description;
         $contest->start_date = $request->start_date;

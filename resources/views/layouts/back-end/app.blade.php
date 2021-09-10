@@ -277,7 +277,7 @@
 {{--ck editor--}}
 
 <script>
-    initSample();
+  //  initSample();
 </script>
 </body>
 </html>

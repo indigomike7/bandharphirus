@@ -175,6 +175,21 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
             Route::post('status', 'NotificationController@status')->name('status');
             Route::post('delete', 'NotificationController@delete')->name('delete');
         });
+        Route::group(['prefix' => 'contest2', 'as' => 'contest2.'], function () {
+            Route::get('listmanage/{id}', 'Contest2Controller@listmanage')->name('listmanage');
+            Route::get('list', 'Contest2Controller@list')->name('list');
+            Route::get('listjoin', 'Contest2Controller@listjoin')->name('listjoin');
+            Route::get('adminadd', 'Contest2Controller@add')->name('adminadd');
+            Route::post('addnew2', 'Contest2Controller@addnew2')->name('addnew2');
+            Route::post('update', 'Contest2Controller@update')->name('update');
+            Route::get('remove_image/{id}', 'Contest2Controller@remove_image')->name('remove_image');
+            Route::get('detail/{id}', 'Contest2Controller@detail')->name('detail');
+            Route::get('edit/{id}', 'Contest2Controller@edit')->name('edit');
+            Route::get('delete/{id}', 'Contest2Controller@delete')->name('delete');
+			Route::post('join', 'Contest2Controller@join')->name('join');
+			Route::post('updatemanage', 'Contest2Controller@updatemanage')->name('updatemanage');
+        });
+
         Route::group(['prefix' => 'reviews', 'as' => 'reviews.'], function () {
             Route::get('list', 'ReviewsController@list')->name('list');
         });

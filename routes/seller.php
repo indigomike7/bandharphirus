@@ -58,6 +58,7 @@ Route::group(['namespace' => 'Seller', 'prefix' => 'seller', 'as' => 'seller.'],
         });
 
         Route::group(['prefix' => 'contest', 'as' => 'contest.'], function () {
+            Route::get('listmanage/{id}', 'ContestController@listmanage')->name('listmanage');
             Route::get('list', 'ContestController@list')->name('list');
             Route::get('listjoin', 'ContestController@listjoin')->name('listjoin');
             Route::get('add', 'ContestController@add')->name('add');
@@ -68,6 +69,7 @@ Route::group(['namespace' => 'Seller', 'prefix' => 'seller', 'as' => 'seller.'],
             Route::get('edit/{id}', 'ContestController@edit')->name('edit');
             Route::get('delete/{id}', 'ContestController@delete')->name('delete');
 			Route::post('join', 'ContestController@join')->name('join');
+			Route::post('updatemanage', 'ContestController@updatemanage')->name('updatemanage');
         });
         // Messaging
         Route::group(['prefix' => 'messages', 'as' => 'messages.'], function () {

@@ -1,4 +1,4 @@
-@extends('layouts.back-end.app-seller')
+@extends('layouts.back-end.app')
 @section('title','Join List')
 
 @push('css_or_js')
@@ -64,7 +64,7 @@
 										Tanggal Kontes Selesai :{{ $detail->end_date }}<br/><br/>
 										@if($detail['picture']!=null)
 										@foreach (json_decode($detail['picture']) as $image) 
-											<img src="{{asset('storage/app/public/contest/'.$image)}}" alt="Contest image"  class="img-fluid"><br/>
+											<img src="{{asset('storage/app/public/contest/'.$image)}}" alt="Contest image" style="width:70%">
 										@endforeach
 										@endif
 										<div style="text-align:justify;">
@@ -82,13 +82,7 @@
 									@if(!empty($contestuser2))
 									{{$contestuser2->answer}}
 									@endif
-								</textarea><br/>
-									@if(!empty($detail->result))
-									<img src="{{asset('public/assets/images')}}/congratulation.jpg"  class="img-fluid">
-								<h5>Result : </h5><br/>
-									{{$detail->result}}
-									@endif
-
+								</textarea>
                             </div>
                             <div class="form-group">
                                 <div class="row">
