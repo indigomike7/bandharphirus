@@ -73,7 +73,7 @@ class Contest3Controller extends Controller
 	*/
 	public function listjoin()
     {
-            $contest = Contest::orderBy('created_at', 'desc')->get();
+            $contest = Contest::orderBy('created_at', 'desc')->where("start_date","<=",date("Y-m-d H:i:s"))->where("end_date",">=",date("Y-m-d H:i:s"))->get();
 			$contestuser = new ContestUser();
 
         return view('web-views.contest.listjoin', compact('contest','contestuser'));

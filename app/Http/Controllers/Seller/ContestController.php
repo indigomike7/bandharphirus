@@ -71,7 +71,7 @@ class ContestController extends Controller
     }
     public function listjoin()
     {
-            $contest = Contest::where('seller_id',"!=", auth('seller')->id())->where("start_date","<=",date("Y-m-d H:i:s"))->orderBy('created_at', 'desc')->get();
+            $contest = Contest::where('seller_id',"!=", auth('seller')->id())->where("start_date","<=",date("Y-m-d H:i:s"))->where("end_date",">=",date("Y-m-d H:i:s"))->orderBy('created_at', 'desc')->get();
 			$contestuser = new ContestUser();
 
         return view('seller-views.contest.listjoin', compact('contest','contestuser'));
