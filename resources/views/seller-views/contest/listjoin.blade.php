@@ -78,7 +78,7 @@
                             <div class="form-group">
                                 <label for="name">Jawaban</label>
 								<input type="hidden" name="id" value="{{$detail->id}}">
-                                <textarea name="answer" value="{{old('answer')}}" class="form-control" id="answer" style="width:50%;">
+                                <textarea name="answer-{{$detail->id}}" value="{{old('answer-$detail->id')}}" class="form-control" id="answer-{{$detail->id}}" style="width:50%;">
 									@if(!empty($contestuser2))
 									{{$contestuser2->answer}}
 									@endif

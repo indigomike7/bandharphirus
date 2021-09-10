@@ -144,22 +144,22 @@ class ContestController extends Controller
 
     function join(Request $request) {
         $validator = Validator::make($request->all(), [
-            'answer' => 'required'
+            'answer-'.$request->id => 'required'
         ], [
-            'answer.required' => 'Answer is required!'
+            'answer-'.$request->id.'.required' => 'Answer is required!'
         ]);
 
         $contestuser = ContestUser::where("seller_id","=",auth('seller')->id())->where("contest_id","=",$request->id)->first();
 		if(!empty($contestuser))
 		{
-			$contestuser->answer = $request->answer;
+			$contestuser->answer = $request['answer-'.$request->id];
 		}
 		else
 		{
 			$contestuser=new ContestUser();
 			$contestuser->seller_id = auth('seller')->id();
 			$contestuser->contest_id = $request->id;
-			$contestuser->answer = $request->answer;
+			$contestuser->answer = $request['answer-'.$request->id];
 		}
  
 
