@@ -7,7 +7,8 @@ use App\Model\BusinessSetting;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-
+use Illuminate\Cache\NullStore;
+use Cache;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -29,7 +30,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         try {
-            $web = BusinessSetting::all();
+Cache::extend( 'none', function( $app ) {
+            return Cache::repository( new NullStore );
+        } );
+		$web = BusinessSetting::all();
             $settings = Helpers::get_settings($web, 'colors');
             $data = json_decode($settings['value'], true);
 

@@ -73,6 +73,11 @@ class Contest3Controller extends Controller
 	*/
 	public function listjoin()
     {
+//		die(auth('customer')->id());
+		if(auth('customer')->id()== null)
+		{
+			return redirect()->route('customer.auth.login');
+		}
             $contest = Contest::orderBy('created_at', 'desc')->where("start_date","<=",date("Y-m-d H:i:s"))->where("end_date",">=",date("Y-m-d H:i:s"))->get();
 			$contestuser = new ContestUser();
 
@@ -145,6 +150,10 @@ class Contest3Controller extends Controller
     }
 */
     function join(Request $request) {
+		if(!auth('customer')->id())
+		{
+			return redirect()->route('customer.auth.login');
+		}
         $validator = Validator::make($request->all(), [
             'answer-'.$request->id => 'required'
         ], [
