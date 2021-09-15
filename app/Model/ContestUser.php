@@ -13,12 +13,10 @@ class ContestUser extends Model
         'contest_id' => 'integer',
         'user_id' => 'integer',
         'seller_id' => 'integer',
-        'answer' => 'text'
+        'answer' => 'text',
+		'picture'=>'text'
+
     ];
 
-    public function contest()
-    {
-        return $this->belongsTo(Contest::class)->where('contest_id');
-    }
-
+protected $fillable = ['picture'];
 }

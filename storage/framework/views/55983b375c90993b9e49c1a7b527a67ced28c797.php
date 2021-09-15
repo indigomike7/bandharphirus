@@ -1,24 +1,23 @@
-@extends('layouts.back-end.app-seller')
-@section('title','Join List')
+<?php $__env->startSection('title','Join List'); ?>
 
-@push('css_or_js')
+<?php $__env->startPush('css_or_js'); ?>
     <!-- Custom styles for this page -->
-    <link href="{{asset('public/assets/back-end')}}/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <link href="{{asset('public/assets/back-end/css/croppie.css')}}" rel="stylesheet">
-    <link href="{{asset('public/assets/back-end/css/tags-input.min.css')}}" rel="stylesheet">
-    <link href="{{ asset('public/assets/select2/css/select2.min.css')}}" rel="stylesheet">
-    <link href="{{ asset('public/assets/back-end/css/custom.css')}}" rel="stylesheet">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-<script src="{{asset('public/assets/back-end')}}/js/vendor.min.js"></script>
-@endpush
+    <link href="<?php echo e(asset('public/assets/back-end')); ?>/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="<?php echo e(asset('public/assets/back-end/css/croppie.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('public/assets/back-end/css/tags-input.min.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('public/assets/select2/css/select2.min.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('public/assets/back-end/css/custom.css')); ?>" rel="stylesheet">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
+<script src="<?php echo e(asset('public/assets/back-end')); ?>/js/vendor.min.js"></script>
+<?php $__env->stopPush(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
     <!-- Page Heading -->
     <div class="content container-fluid">
         <div class="row align-items-center mb-3">
             <div class="col-sm">
-                <h1 class="page-header-title">{{trans('messages.contest')}} <span
-                        class="badge badge-soft-dark ml-2">{{$contest->count()}}</span>
+                <h1 class="page-header-title"><?php echo e(trans('messages.contest')); ?> <span
+                        class="badge badge-soft-dark ml-2"><?php echo e($contest->count()); ?></span>
                 </h1>
 
             </div>
@@ -29,7 +28,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h5>My Contest Lists</h5>
-						<p style="text-align:right;"><a href="{{route('seller.contest.add')}}">Let's Join Luck in Contest</a></p>
+						<p style="text-align:right;"><a href="<?php echo e(route('seller.contest.add')); ?>">Let's Join Luck in Contest</a></p>
                     </div>
                     <div class="card-body" style="padding: 0">
                         <div class="table-responsive">
@@ -43,72 +42,76 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($contest as $k=>$detail)
-								@php(
+                                <?php $__currentLoopData = $contest; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $k=>$detail): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+								<?php (
 								        $contestuser2 = $contestuser->where("seller_id","=",auth('seller')->id())->where("contest_id","=",$detail->id)->first()
 
-								)
+								); ?>
                                     <tr>
                                         <td valign="top">
-                                            {{$k+1}}
+                                            <?php echo e($k+1); ?>
+
                                         </td>
                                         <td>
 										
-										@if(!empty($contestuser2))
+										<?php if(!empty($contestuser2)): ?>
 											<h4><font color='blue'>Sudah Ikut Serta</font></h4>
-										@endif
-                                        ID : {{$detail->id}}<br/>
-										Name : {{ $detail->name }}<br/>
-										Tanggal Dibuat :{{ $detail->created_at }}<br/>
-										Tanggal Kontes Dimulai : {{ $detail->start_date }}<br/>
-										Tanggal Kontes Selesai :{{ $detail->end_date }}<br/><br/>
-										@if($detail['picture']!=null)
-										@foreach (json_decode($detail['picture']) as $image) 
-											<img src="{{asset('storage/app/public/contest/'.$image)}}" alt="Contest image"  class="img-fluid"><br/>
-										@endforeach
-										@endif
+										<?php endif; ?>
+                                        ID : <?php echo e($detail->id); ?><br/>
+										Name : <?php echo e($detail->name); ?><br/>
+										Tanggal Dibuat :<?php echo e($detail->created_at); ?><br/>
+										Tanggal Kontes Dimulai : <?php echo e($detail->start_date); ?><br/>
+										Tanggal Kontes Selesai :<?php echo e($detail->end_date); ?><br/><br/>
+										<?php if($detail['picture']!=null): ?>
+										<?php $__currentLoopData = json_decode($detail['picture']); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
+											<img src="<?php echo e(asset('storage/app/public/contest/'.$image)); ?>" alt="Contest image"  class="img-fluid"><br/>
+										<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+										<?php endif; ?>
 										<div style="text-align:justify;">
-										{{ $detail->description }}
+										<?php echo e($detail->description); ?>
+
 										</div>
-										@if(!empty($contestuser2))
+										<?php if(!empty($contestuser2)): ?>
 											<h4><font color='blue'>Sudah Ikut Serta</font></h4>
-										@endif
-										<form class="product-form-{{$detail->id}}" action="{{route('seller.contest.join')}}" method="post" enctype="multipart/form-data"
-											  id="product-form-{{$detail->id}}">@csrf
+										<?php endif; ?>
+										<form class="product-form-<?php echo e($detail->id); ?>" action="<?php echo e(route('seller.contest.join')); ?>" method="post" enctype="multipart/form-data"
+											  id="product-form-<?php echo e($detail->id); ?>"><?php echo csrf_field(); ?>
                             <div class="form-group">
                                 <label for="name">Jawaban</label>
-								<input type="hidden" name="id" value="{{$detail->id}}">
-                                <textarea name="answer-{{$detail->id}}" value="{{old('answer-$detail->id')}}" class="form-control" id="answer-{{$detail->id}}" style="width:50%;">
-									@if(!empty($contestuser2))
-									{{$contestuser2->answer}}
-									@endif
+								<input type="hidden" name="id" value="<?php echo e($detail->id); ?>">
+                                <textarea name="answer-<?php echo e($detail->id); ?>" value="<?php echo e(old('answer-$detail->id')); ?>" class="form-control" id="answer-<?php echo e($detail->id); ?>" style="width:50%;">
+									<?php if(!empty($contestuser2)): ?>
+									<?php echo e($contestuser2->answer); ?>
+
+									<?php endif; ?>
 								</textarea><br/>
-									@if(!empty($detail->result))
-									<img src="{{asset('public/assets/images')}}/congratulation.jpg"  class="img-fluid">
+									<?php if(!empty($detail->result)): ?>
+									<img src="<?php echo e(asset('public/assets/images')); ?>/congratulation.jpg"  class="img-fluid">
 								<h5>Result : </h5><br/>
-									{{$detail->result}}
-									@endif
+									<?php echo e($detail->result); ?>
+
+									<?php endif; ?>
 
                             </div>
                                 <div class="p-2 border border-dashed"  style="max-width:430px;">
-                                    <div class="row" id="coba-{{$detail->id}}">
-									@if(!empty($contestuser2))
-									@if($contestuser2->picture!=null)
-                                    @foreach (json_decode($contestuser2->picture) as $key => $photo)
+                                    <div class="row" id="coba-<?php echo e($detail->id); ?>">
+									<?php if(!empty($contestuser2)): ?>
+									<?php if($contestuser2->picture!=null): ?>
+                                    <?php $__currentLoopData = json_decode($contestuser2->picture); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $photo): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <div class="col-6">
                                                 <div class="card">
                                                     <div class="card-body">
                                                         <img style="width: 100%" height="auto"
                                                             onerror=""
-                                                            src="{{asset('storage/app/public/contest/'.$photo)}}" alt="Product image">
-                                                        <a href="{{route('seller.contest.remove_image_user',['id'=>$detail->id,'image'=>$photo])}}"
+                                                            src="<?php echo e(asset('storage/app/public/contest/'.$photo)); ?>" alt="Product image">
+                                                        <a href="<?php echo e(route('seller.contest.remove_image_user',['id'=>$detail->id,'image'=>$photo])); ?>"
                                                         class="btn btn-danger btn-block">Remove</a>
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endforeach
-									@endif
-									@endif
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+									<?php endif; ?>
+									<?php endif; ?>
                                     </div>
                                 </div>
                             <div class="form-group">
@@ -120,7 +123,7 @@
                             </div>
 										</form>
     <script>
-        $('#product-form-{{$detail->id}}').submit(function (e) {
+        $('#product-form-<?php echo e($detail->id); ?>').submit(function (e) {
             e.preventDefault();
             for ( instance in CKEDITOR.instances ) {
                 CKEDITOR.instances[instance].updateElement();
@@ -132,7 +135,7 @@
                 }
             });
             $.post({
-                url: '{{route("seller.contest.join")}}',
+                url: '<?php echo e(route("seller.contest.join")); ?>',
                 data: formData,
                 contentType: false,
                 processData: false,
@@ -150,7 +153,7 @@
                             ProgressBar: true
                         });
                         setInterval(function () {
-                            location.href = '{{route('seller.contest.listjoin')}}';
+                            location.href = '<?php echo e(route('seller.contest.listjoin')); ?>';
                         }, 2000);
                     }
                 }
@@ -159,14 +162,14 @@
     </script>
     <script>
         $(function () {
-            $("#coba-{{$detail->id}}").spartanMultiImagePicker({
-                fieldName: 'images-{{$detail->id}}[]',
+            $("#coba-<?php echo e($detail->id); ?>").spartanMultiImagePicker({
+                fieldName: 'images-<?php echo e($detail->id); ?>[]',
                 maxCount: 4,
                 rowHeight: 'auto',
                 groupClassName: 'col-6',
                 maxFileSize: '',
                 placeholderImage: {
-                    image: '{{asset('public/assets/back-end/img/400x400/img2.jpg')}}',
+                    image: '<?php echo e(asset('public/assets/back-end/img/400x400/img2.jpg')); ?>',
                     width: '100%',
                 },
                 dropFileLabel: "Drop Here",
@@ -193,14 +196,14 @@
                 }
             });
 
-            $("#thumbnail-{{$detail->id}}").spartanMultiImagePicker({
-                fieldName: 'image-{{$detail->id}}',
+            $("#thumbnail-<?php echo e($detail->id); ?>").spartanMultiImagePicker({
+                fieldName: 'image-<?php echo e($detail->id); ?>',
                 maxCount: 1,
                 rowHeight: 'auto',
                 groupClassName: 'col-12',
                 maxFileSize: '',
                 placeholderImage: {
-                    image: '{{asset('public/assets/back-end/img/400x400/img2.jpg')}}',
+                    image: '<?php echo e(asset('public/assets/back-end/img/400x400/img2.jpg')); ?>',
                     width: '100%',
                 },
                 dropFileLabel: "Drop Here",
@@ -238,7 +241,7 @@
     </script>
 										</td>
                                     </tr>
-                                @endforeach
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
                             </table>
                         </div>
@@ -247,15 +250,15 @@
             </div>
         </div>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('script')
+<?php $__env->startPush('script'); ?>
     <!-- Page level plugins -->
-    <script src="{{asset('public/assets/back-end')}}/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="{{asset('public/assets/back-end')}}/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-    <script src="{{asset('public/assets/back-end')}}/js/tags-input.min.js"></script>
-    <script src="{{ asset('public/assets/select2/js/select2.min.js')}}"></script>
-    <script src="{{asset('public/assets/back-end/js/spartan-multi-image-picker.js')}}"></script>
+    <script src="<?php echo e(asset('public/assets/back-end')); ?>/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?php echo e(asset('public/assets/back-end')); ?>/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="<?php echo e(asset('public/assets/back-end')); ?>/js/tags-input.min.js"></script>
+    <script src="<?php echo e(asset('public/assets/select2/js/select2.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('public/assets/back-end/js/spartan-multi-image-picker.js')); ?>"></script>
 
     <!-- Page level custom scripts -->
     <script>
@@ -264,4 +267,6 @@
             $('#dataTable').DataTable();
         });
     </script>
-	@endpush
+	<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('layouts.back-end.app-seller', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\xampp-php-8.0.8\htdocs\bandharphirus.com-newdesign-2021-08-06\resources\views/seller-views/contest/listjoin.blade.php ENDPATH**/ ?>

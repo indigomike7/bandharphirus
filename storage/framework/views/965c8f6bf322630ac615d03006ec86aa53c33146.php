@@ -1,11 +1,9 @@
-@extends('layouts.back-end.app')
-
-@push('css_or_js')
-    <link href="{{asset('public/assets/back-end/css/croppie.css')}}" rel="stylesheet">
-    <link href="{{asset('public/assets/back-end/css/tags-input.min.css')}}" rel="stylesheet">
-    <link href="{{ asset('public/assets/select2/css/select2.min.css')}}" rel="stylesheet">
-    <link href="{{ asset('public/assets/back-end/css/custom.css')}}" rel="stylesheet">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+<?php $__env->startPush('css_or_js'); ?>
+    <link href="<?php echo e(asset('public/assets/back-end/css/croppie.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('public/assets/back-end/css/tags-input.min.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('public/assets/select2/css/select2.min.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('public/assets/back-end/css/custom.css')); ?>" rel="stylesheet">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
     <style>
         .switch {
             position: relative;
@@ -113,108 +111,108 @@
        }
    }
     </style>
-@endpush
+<?php $__env->stopPush(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
     <div class="content container-fluid">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('seller.dashboard')}}">Dashboard</a></li>
-                <li class="breadcrumb-item" aria-current="page"><a href="{{route('seller.contest.list')}}">Contest</a></li>
+                <li class="breadcrumb-item"><a href="<?php echo e(route('seller.dashboard')); ?>">Dashboard</a></li>
+                <li class="breadcrumb-item" aria-current="page"><a href="<?php echo e(route('seller.contest.list')); ?>">Contest</a></li>
                 <li class="breadcrumb-item">Edit</li>
             </ol>
         </nav>
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
-            <h1 class="h3 mb-0 text-black-50">{{trans('messages.contest')}}</h1>
+            <h1 class="h3 mb-0 text-black-50"><?php echo e(trans('messages.contest')); ?></h1>
         </div>
 
         <!-- Content Row -->
         <div class="row">
             <div class="col-md-12">
 
-                <form class="product-form" action="{{route('admin.contest2.update')}}" method="post" enctype="multipart/form-data"
+                <form class="product-form" action="<?php echo e(route('seller.contest.update')); ?>" method="post" enctype="multipart/form-data"
                       id="product_form">
-                    @csrf
+                    <?php echo csrf_field(); ?>
                     <div class="card">
                         <div class="card-header">
                             <h4>Edit Contest</h4>
                         </div>
-@if ($errors->any())
+<?php if($errors->any()): ?>
     <div class="alert alert-danger">
         <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
+            <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <li><?php echo e($error); ?></li>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </ul>
     </div>
-@endif                        <div class="card-body">
+<?php endif; ?>                        <div class="card-body">
                             <div class="form-group">
-								<input type="hidden" name="id" value="{{$contest->id}}">
+								<input type="hidden" name="id" value="<?php echo e($contest->id); ?>">
                                 <label for="name">Contest Name</label>
-                                <input type="text" name="name" value="{{$contest->name}}" class="form-control" id="name" placeholder="Ex : Kontes untuk memperingati HUT RI">
+                                <input type="text" name="name" value="<?php echo e($contest->name); ?>" class="form-control" id="name" placeholder="Ex : Kontes untuk memperingati HUT RI">
                             </div>
 
                             <div class="form-group">
                                 <label for="name">Description</label>
-                                <textarea name="description" class="form-control" id="description" >{{$contest->description}}
+                                <textarea name="description" class="form-control" id="description" ><?php echo e($contest->description); ?>
+
 								</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="fund">Fund</label>
-                                <input type="number" name="fund" value="{{$contest->fund}}" class="form-control" id="fund" placeholder="20000">
+                                <input type="number" name="fund" value="<?php echo e($contest->fund); ?>" class="form-control" id="fund" placeholder="20000">
                             </div>
                             <div class="form-group">
                                 <label for="name">Start Date (Masukkan jika hanya untuk 1 bulan)</label>
-                                <input type="date" name="start_date" value="{{$contest->start_date!==null ? $contest->start_date->format('Y-m-d') : ''}}" class="form-control" id="start_date" >
+                                <input type="date" name="start_date" value="<?php echo e($contest->start_date!==null ? $contest->start_date->format('Y-m-d') : ''); ?>" class="form-control" id="start_date" >
                             </div>
                             <div class="form-group">
                                 <label for="name">End Date (Masukkan jika hanya untuk 1 bulan)</label>
-                                <input type="date" name="end_date" value="{{$contest->end_date!==null ? $contest->end_date->format('Y-m-d') : ''}}" class="form-control" id="end_date" >
+                                <input type="date" name="end_date" value="<?php echo e($contest->end_date!==null ? $contest->end_date->format('Y-m-d') : ''); ?>" class="form-control" id="end_date" >
                             </div>
                             <div class="form-group">
                                 <label for="name">Start Date 1 (Jika Periodic, misal mulai tanggal 1 tiap bulan, kosongkan jika tidak periodic)</label>
-                                <input type="number" name="start_date_1" value="{{$contest->start_date_1}}" class="form-control" id="start_date_1" >
+                                <input type="number" name="start_date_1" value="<?php echo e($contest->start_date_1); ?>" class="form-control" id="start_date_1" >
                             </div>
                             <div class="form-group">
                                 <label for="name">End Date 1 (Jika Periodic, misal berakhir tanggal 3 tiap bulan kosongkan jika tidak periodic)</label>
-                                <input type="number" name="end_date_1" value="{{$contest->end_date_1}}" class="form-control" id="end_date_1" >
+                                <input type="number" name="end_date_1" value="<?php echo e($contest->end_date_1); ?>" class="form-control" id="end_date_1" >
                             </div>
                             <div class="form-group">
                                 <label for="name">Start Date 2 (Jika Periodic, misal mulai tanggal 14 tiap bulan, kosongkan jika tidak periodic)</label>
-                                <input type="number" name="start_date_2" value="{{$contest->start_date_2}}" class="form-control" id="start_date_2" >
+                                <input type="number" name="start_date_2" value="<?php echo e($contest->start_date_2); ?>" class="form-control" id="start_date_2" >
                             </div>
                             <div class="form-group">
                                 <label for="name">End Date 2 (Jika Periodic, misal berakhir tanggal 17 tiap bulan, kosongkan jika tidak periodic)</label>
-                                <input type="number" name="end_date_2" value="{{$contest->end_date_2}}" class="form-control" id="end_date_2" >
+                                <input type="number" name="end_date_2" value="<?php echo e($contest->end_date_2); ?>" class="form-control" id="end_date_2" >
                             </div>
                             <div class="form-group">
                                 <label for="name">Start Date 3 (Jika Periodic, misal mulai tanggal 27 tiap bulan, kosongkan jika tidak periodic)</label>
-                                <input type="number" name="start_date_3" value="{{$contest->start_date_3}}" class="form-control" id="start_date_3" >
+                                <input type="number" name="start_date_3" value="<?php echo e($contest->start_date_3); ?>" class="form-control" id="start_date_3" >
                             </div>
                             <div class="form-group">
                                 <label for="name">End Date 3 (Jika Periodic, misal berakhir tanggal 30 tiap bulan, kosongkan jika tidak periodic)</label>
-                                <input type="number" name="end_date_3" value="{{$contest->end_date_3}}" class="form-control" id="end_date_3" >
+                                <input type="number" name="end_date_3" value="<?php echo e($contest->end_date_3); ?>" class="form-control" id="end_date_3" >
                             </div>
-
                                 <div class="p-2 border border-dashed"  style="max-width:430px;">
                                     <div class="row" id="coba">
-									@if($contest->picture!=null)
-                                    @foreach (json_decode($contest->picture) as $key => $photo)
+									<?php if($contest->picture!=null): ?>
+                                    <?php $__currentLoopData = json_decode($contest->picture); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $photo): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <div class="col-6">
                                                 <div class="card">
                                                     <div class="card-body">
                                                         <img style="width: 100%" height="auto"
                                                             onerror=""
-                                                            src="{{asset('storage/app/public/contest/'.$photo)}}" alt="Product image">
-                                                        <a href="{{route('seller.contest.remove_image',['id'=>$contest['id'],'image'=>$photo])}}"
+                                                            src="<?php echo e(asset('storage/app/public/contest/'.$photo)); ?>" alt="Product image">
+                                                        <a href="<?php echo e(route('seller.contest.remove_image',['id'=>$contest['id'],'image'=>$photo])); ?>"
                                                         class="btn btn-danger btn-block">Remove</a>
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endforeach
-									@endif
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+									<?php endif; ?>
                                     </div>
                                 </div>
 
@@ -236,12 +234,12 @@
             </div>
         </div>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('script')
-    <script src="{{asset('public/assets/back-end')}}/js/tags-input.min.js"></script>
-    <script src="{{ asset('public/assets/select2/js/select2.min.js')}}"></script>
-    <script src="{{asset('public/assets/back-end/js/spartan-multi-image-picker.js')}}"></script>
+<?php $__env->startPush('script'); ?>
+    <script src="<?php echo e(asset('public/assets/back-end')); ?>/js/tags-input.min.js"></script>
+    <script src="<?php echo e(asset('public/assets/select2/js/select2.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('public/assets/back-end/js/spartan-multi-image-picker.js')); ?>"></script>
     <script>
         $(function () {
             $("#coba").spartanMultiImagePicker({
@@ -251,7 +249,7 @@
                 groupClassName: 'col-6',
                 maxFileSize: '',
                 placeholderImage: {
-                    image: '{{asset('public/assets/back-end/img/400x400/img2.jpg')}}',
+                    image: '<?php echo e(asset('public/assets/back-end/img/400x400/img2.jpg')); ?>',
                     width: '100%',
                 },
                 dropFileLabel: "Drop Here",
@@ -285,7 +283,7 @@
                 groupClassName: 'col-12',
                 maxFileSize: '',
                 placeholderImage: {
-                    image: '{{asset('public/assets/back-end/img/400x400/img2.jpg')}}',
+                    image: '<?php echo e(asset('public/assets/back-end/img/400x400/img2.jpg')); ?>',
                     width: '100%',
                 },
                 dropFileLabel: "Drop Here",
@@ -353,7 +351,7 @@
 
         function add_more_customer_choice_option(i, name) {
             let n = name.split(' ').join('');
-            $('#customer_choice_options').append('<div class="row"><div class="col-md-3"><input type="hidden" name="choice_no[]" value="' + i + '"><input type="text" class="form-control" name="choice[]" value="' + n + '" placeholder="{{trans('Choice Title') }}" readonly></div><div class="col-lg-9"><input type="text" class="form-control" name="choice_options_' + i + '[]" placeholder="{{trans('Enter choice values') }}" data-role="tagsinput" onchange="update_sku()"></div></div>');
+            $('#customer_choice_options').append('<div class="row"><div class="col-md-3"><input type="hidden" name="choice_no[]" value="' + i + '"><input type="text" class="form-control" name="choice[]" value="' + n + '" placeholder="<?php echo e(trans('Choice Title')); ?>" readonly></div><div class="col-lg-9"><input type="text" class="form-control" name="choice_options_' + i + '[]" placeholder="<?php echo e(trans('Enter choice values')); ?>" data-role="tagsinput" onchange="update_sku()"></div></div>');
 
             $("input[data-role=tagsinput], select[multiple][data-role=tagsinput]").tagsinput();
         }
@@ -375,7 +373,7 @@
 
             $.ajax({
                 type: "POST",
-                url: '{{route('seller.product.sku-combination')}}',
+                url: '<?php echo e(route('seller.product.sku-combination')); ?>',
                 data: $('#product_form').serialize(),
                 success: function (data) {
                     $('#sku_combination').html(data.view);
@@ -416,11 +414,11 @@
             var formData = new FormData(this);
             $.ajaxSetup({
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
             $.post({
-                url: '{{route('admin.contest2.update')}}',
+                url: '<?php echo e(route('seller.contest.update')); ?>',
                 data: formData,
                 contentType: false,
                 processData: false,
@@ -438,11 +436,12 @@
                             ProgressBar: true
                         });
                         setInterval(function () {
-                            location.href = '{{route('admin.contest2.list')}}';
+                            location.href = '<?php echo e(route('seller.contest.list')); ?>';
                         }, 2000);
                     }
                 }
             });
         });
     </script>
-@endpush
+<?php $__env->stopPush(); ?>
+<?php echo $__env->make('layouts.back-end.app-seller', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\xampp-php-8.0.8\htdocs\bandharphirus.com-newdesign-2021-08-06\resources\views/seller-views/contest/edit.blade.php ENDPATH**/ ?>

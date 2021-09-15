@@ -152,9 +152,16 @@
 @endif                        <div class="card-body">
                             <div class="form-group">
 							<h4>{{$contest->name}}</h4>
-							{{$contest->description}}
-							{{$contest->start_date->format('Y-m-d')}}
-							{{$contest->end_date->format('Y-m-d')}}
+							{{$contest->description}}<br/>
+							Biaya : {{$contest->fund}}<br/>
+							Dimulai tanggal {{$contest->start_date!==null ? $contest->start_date->format('Y-m-d') : 'N/A'}}<br/>
+							Berakhir tanggal {{$contest->end_date!==null ? $contest->end_date->format('Y-m-d') : 'N/A'}}<br/>
+							Dimulai tanggal {{$contest->start_date_1!==null ? $contest->start_date_1 : 'N/A'}} Tiap Bulan<br/>
+							Berakhir tanggal {{$contest->end_date_1!==null ? $contest->end_date_1 : 'N/A'}} Tiap Bulan<br/>
+							Dimulai tanggal {{$contest->start_date_2!==null ? $contest->start_date_2 : 'N/A'}} Tiap Bulan<br/>
+							Berakhir tanggal {{$contest->end_date_2!==null ? $contest->end_date_2 : 'N/A'}} Tiap Bulan<br/>
+							Dimulai tanggal {{$contest->start_date_3!==null ? $contest->start_date_3 : 'N/A'}} Tiap Bulan<br/>
+							Berakhir tanggal {{$contest->end_date_3!==null ? $contest->start_date_3 : 'N/A'}} Tiap Bulan<br/>
 									@if($contest->picture!=null)
                                     @foreach (json_decode($contest->picture) as $key => $photo)
                                             <div class="col-6">

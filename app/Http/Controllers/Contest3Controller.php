@@ -78,7 +78,10 @@ class Contest3Controller extends Controller
 		{
 			return redirect()->route('customer.auth.login');
 		}
-            $contest = Contest::orderBy('created_at', 'desc')->where("start_date","<=",date("Y-m-d H:i:s"))->where("end_date",">=",date("Y-m-d H:i:s"))->get();
+            $contest1 = Contest::where("start_date","<=",date("Y-m-d H:i:s"))->where("end_date",">=",date("Y-m-d H:i:s"))->where("start_date","<>",null)->where("end_date","<>",null);
+			$contest2 = Contest::where("start_date_1","<=",date("d"))->where("end_date_1",">=",date("d"))->where("start_date_1","<>",null)->where("end_date_1","<>",null);
+			$contest3 = Contest::where("start_date_2","<=",date("d"))->where("end_date_2",">=",date("d"))->where("start_date_2","<>",null)->where("end_date_2","<>",null);
+			$contest = Contest::where("start_date_3","<=",date("d"))->where("end_date_3",">=",date("d"))->where("start_date_3","<>",null)->where("end_date_3","<>",null)->union($contest1)->union($contest2)->union($contest3)->orderBy('created_at', 'desc')->get();
 			$contestuser = new ContestUser();
 
         return view('web-views.contest.listjoin', compact('contest','contestuser'));

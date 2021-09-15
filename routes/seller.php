@@ -65,6 +65,7 @@ Route::group(['namespace' => 'Seller', 'prefix' => 'seller', 'as' => 'seller.'],
             Route::post('addnew', 'ContestController@addnew')->name('addnew');
             Route::post('update', 'ContestController@update')->name('update');
             Route::get('remove_image/{id}', 'ContestController@remove_image')->name('remove_image');
+            Route::get('remove_image_user/{id}', 'ContestController@remove_image_user')->name('remove_image_user');
             Route::get('detail/{id}', 'ContestController@detail')->name('detail');
             Route::get('edit/{id}', 'ContestController@edit')->name('edit');
             Route::get('delete/{id}', 'ContestController@delete')->name('delete');

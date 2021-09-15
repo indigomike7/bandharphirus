@@ -161,13 +161,42 @@
 								</textarea>
                             </div>
                             <div class="form-group">
-                                <label for="name">Start Date</label>
+                                <label for="fund">Fund</label>
+                                <input type="number" name="fund" value="{{old('fund')}}" class="form-control" id="fund" placeholder="20000">
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Start Date (Masukkan jika hanya untuk 1 bulan)</label>
                                 <input type="date" name="start_date" value="{{old('start_date')}}" class="form-control" id="start_date" >
                             </div>
                             <div class="form-group">
-                                <label for="name">End Date</label>
+                                <label for="name">End Date (Masukkan jika hanya untuk 1 bulan)</label>
                                 <input type="date" name="end_date" value="{{old('end_date')}}" class="form-control" id="end_date" >
                             </div>
+                            <div class="form-group">
+                                <label for="name">Start Date 1 (Jika Periodic, misal mulai tanggal 1 tiap bulan, kosongkan jika tidak periodic)</label>
+                                <input type="number" name="start_date_1" value="{{old('start_date_1')}}" class="form-control" id="start_date" >
+                            </div>
+                            <div class="form-group">
+                                <label for="name">End Date 1 (Jika Periodic, misal berakhir tanggal 3 tiap bulan kosongkan jika tidak periodic)</label>
+                                <input type="number" name="end_date_1" value="{{old('end_date_1')}}" class="form-control" id="end_date" >
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Start Date 2 (Jika Periodic, misal mulai tanggal 14 tiap bulan, kosongkan jika tidak periodic)</label>
+                                <input type="number" name="start_date_2" value="{{old('start_date_2')}}" class="form-control" id="start_date" >
+                            </div>
+                            <div class="form-group">
+                                <label for="name">End Date 2 (Jika Periodic, misal berakhir tanggal 17 tiap bulan, kosongkan jika tidak periodic)</label>
+                                <input type="number" name="end_date_2" value="{{old('end_date_2')}}" class="form-control" id="end_date" >
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Start Date 3 (Jika Periodic, misal mulai tanggal 27 tiap bulan, kosongkan jika tidak periodic)</label>
+                                <input type="number" name="start_date_3" value="{{old('start_date_3')}}" class="form-control" id="start_date" >
+                            </div>
+                            <div class="form-group">
+                                <label for="name">End Date 3 (Jika Periodic, misal berakhir tanggal 30 tiap bulan, kosongkan jika tidak periodic)</label>
+                                <input type="number" name="end_date_3" value="{{old('end_date_3')}}" class="form-control" id="end_date" >
+                            </div>
+
 
                     <div class="card mt-2">
                         <div class="card-body">

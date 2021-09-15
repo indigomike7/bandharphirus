@@ -59,11 +59,28 @@ class ContestController extends Controller
             return back();
         }
         foreach (json_decode($contest['picture']) as $image) {
-            if ($image != $request['name']) {
+            if ($image != $request['image']) {
                 array_push($array, $image);
             }
         }
-        Product::where('id', $request['id'])->update([
+        Contest::where('id', $request['id'])->update([
+            'picture' => json_encode($array),
+        ]);
+        Toastr::success('Product image removed successfully!');
+        return back();
+    }
+    public function remove_image_user(Request $request)
+    {
+        ImageManager::delete('contest/' . $request['image']);
+        $contest = ContestUser::where('contest_id', $request['id'])->where('seller_id', auth('seller')->id())->first();
+
+        $array = [];
+        foreach (json_decode($contest['picture']) as $image) {
+            if ($image != $request['image']) {
+                array_push($array, $image);
+            }
+        }
+        $contest->update([
             'picture' => json_encode($array),
         ]);
         Toastr::success('Product image removed successfully!');
@@ -71,7 +88,10 @@ class ContestController extends Controller
     }
     public function listjoin()
     {
-            $contest = Contest::where('seller_id',"!=", auth('seller')->id())->where("start_date","<=",date("Y-m-d H:i:s"))->where("end_date",">=",date("Y-m-d H:i:s"))->orderBy('created_at', 'desc')->get();
+            $contest1 = Contest::where('seller_id',"!=", auth('seller')->id())->where("start_date","<=",date("Y-m-d H:i:s"))->where("end_date",">=",date("Y-m-d H:i:s"))->where("start_date","<>",null)->where("end_date","<>",null);
+			$contest2 = Contest::where('seller_id',"!=", auth('seller')->id())->where("start_date_1","<=",date("d"))->where("end_date_1",">=",date("d"))->where("start_date_1","<>",null)->where("end_date_1","<>",null);
+			$contest3 = Contest::where('seller_id',"!=", auth('seller')->id())->where("start_date_2","<=",date("d"))->where("end_date_2",">=",date("d"))->where("start_date_2","<>",null)->where("end_date_2","<>",null);
+			$contest = Contest::where('seller_id',"!=", auth('seller')->id())->where("start_date_3","<=",date("d"))->where("end_date_3",">=",date("d"))->where("start_date_3","<>",null)->where("end_date_3","<>",null)->union($contest1)->union($contest2)->union($contest3)->orderBy('created_at', 'desc')->get();
 			$contestuser = new ContestUser();
 
         return view('seller-views.contest.listjoin', compact('contest','contestuser'));
@@ -105,21 +125,26 @@ class ContestController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'description' => 'required',
-            'start_date' => 'required',
-            'end_date' => 'required',
+            'fund' => 'required',
         ], [
             'name.required' => 'Contest name is required!',
             'description.required' => 'Description  is required!',
-            'start_date.required' => 'Start Date is required!',
-            'end_date.required' => 'End Date is required!',
+            'fund.required' => 'Fund  is required!',
         ]);
 
         $contest = new Contest();
         $contest->seller_id = auth('seller')->id();
         $contest->name = $request->name;
         $contest->description = $request->description;
+        $contest->fund = $request->fund;
         $contest->start_date = $request->start_date;
         $contest->end_date = $request->end_date;
+        $contest->start_date_1 = $request->start_date_1;
+        $contest->end_date_1 = $request->end_date_1;
+        $contest->start_date_2 = $request->start_date_2;
+        $contest->end_date_2 = $request->end_date_2;
+        $contest->start_date_3 = $request->start_date_3;
+        $contest->end_date_3 = $request->end_date_3;
 //        $contest->created_date = date("Y-m-d H:i:s");
 
  
@@ -130,6 +155,7 @@ class ContestController extends Controller
             $contest->picture = json_encode($product_images);
         }
 
+		
  
         if ($validator->errors()->count() > 0) {
             return response()->json(['errors' => Helpers::error_processor($validator)]);
@@ -161,6 +187,13 @@ class ContestController extends Controller
 			$contestuser->contest_id = $request->id;
 			$contestuser->answer = $request['answer-'.$request->id];
 		}
+		$product_images=json_decode($contestuser->picture);
+        if ($request->file('images-'.$request->id)) {
+            foreach ($request->file('images-'.$request->id) as $img) {
+                $product_images[] = ImageManager::upload('contest/', 'png', $img);
+            }
+            $contestuser->picture = json_encode($product_images);
+        }
  
 
  
@@ -205,31 +238,35 @@ class ContestController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'description' => 'required',
-            'start_date' => 'required',
-            'end_date' => 'required',
+            'fund' => 'required',
         ], [
             'name.required' => 'Contest name is required!',
             'description.required' => 'Description  is required!',
-            'start_date.required' => 'Start Date is required!',
-            'end_date.required' => 'End Date is required!',
+            'fund.required' => 'Fund  is required!',
         ]);
 
         $contest = Contest::find($request->id);
         $contest->seller_id = auth('seller')->id();
         $contest->name = $request->name;
         $contest->description = $request->description;
+        $contest->fund = $request->fund;
         $contest->start_date = $request->start_date;
         $contest->end_date = $request->end_date;
+        $contest->start_date_1 = $request->start_date_1;
+        $contest->end_date_1 = $request->end_date_1;
+        $contest->start_date_2 = $request->start_date_2;
+        $contest->end_date_2 = $request->end_date_2;
+        $contest->start_date_3 = $request->start_date_3;
+        $contest->end_date_3 = $request->end_date_3;
 //        $contest->created_date = date("Y-m-d H:i:s");
 
- 
+		$product_images=json_decode($contest->picture);
         if ($request->file('images')) {
             foreach ($request->file('images') as $img) {
                 $product_images[] = ImageManager::upload('contest/', 'png', $img);
             }
             $contest->picture = json_encode($product_images);
         }
-
  
         if ($validator->errors()->count() > 0) {
             return response()->json(['errors' => Helpers::error_processor($validator)]);
