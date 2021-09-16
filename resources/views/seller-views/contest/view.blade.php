@@ -219,6 +219,23 @@
 											)
 											Seller Name : {{$sellerobj->f_name}} {{$sellerobj->l_name}}<br/>
 											@endif
+												@if($detail->picture!=null)
+												@foreach (json_decode($detail->picture) as $key => $photo)
+														<div class="col-6">
+															<div class="card">
+																<div class="card-body">
+																<a href="{{asset('storage/app/public/contest/'.$photo)}}" target="_blank">
+																	<img class="img-fluid"
+																		onerror=""
+																		src="{{asset('storage/app/public/contest/'.$photo)}}" alt="User Contest Joiners image">
+																</a>
+																</div>
+															</div>
+														</div>
+													@endforeach
+												@endif
+												</div>
+											</div>
 											Answer<br/>{{$detail->answer}}
 
 												</div>

@@ -270,7 +270,7 @@
 <script>
     if (/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) document.write('<script src="<?php echo e(asset('public/assets/back-end')); ?>/vendor/babel-polyfill/polyfill.min.js"><\/script>');
 </script>
-<?php echo $__env->yieldPushContent('script'); ?>
+
 
 
 <script src="<?php echo e(asset('public/ckeditor/ckeditor.js')); ?>"></script>

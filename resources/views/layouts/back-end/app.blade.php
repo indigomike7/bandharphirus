@@ -269,7 +269,7 @@
 <script>
     if (/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) document.write('<script src="{{asset('public/assets/back-end')}}/vendor/babel-polyfill/polyfill.min.js"><\/script>');
 </script>
-@stack('script')
+
 
 {{--ck editor--}}
 <script src="{{ asset('public/ckeditor/ckeditor.js')}}"></script>

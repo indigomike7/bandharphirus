@@ -218,6 +218,23 @@
 											); ?>
 											Seller Name : <?php echo e($sellerobj->f_name); ?> <?php echo e($sellerobj->l_name); ?><br/>
 											<?php endif; ?>
+												<?php if($detail->picture!=null): ?>
+												<?php $__currentLoopData = json_decode($detail->picture); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $photo): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+														<div class="col-6">
+															<div class="card">
+																<div class="card-body">
+																<a href="<?php echo e(asset('storage/app/public/contest/'.$photo)); ?>" target="_blank">
+																	<img class="img-fluid"
+																		onerror=""
+																		src="<?php echo e(asset('storage/app/public/contest/'.$photo)); ?>" alt="User Contest Joiners image">
+																</a>
+																</div>
+															</div>
+														</div>
+													<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+												<?php endif; ?>
+												</div>
+											</div>
 											Answer<br/><?php echo e($detail->answer); ?>
 
 

@@ -71,6 +71,23 @@ class Contest3Controller extends Controller
         return back();
     }
 	*/
+    public function remove_image_user(Request $request)
+    {
+        ImageManager::delete('contest/' . $request['image']);
+        $contest = ContestUser::where('contest_id', $request['id'])->where('user_id', auth('customer')->id())->first();
+
+        $array = [];
+        foreach (json_decode($contest['picture']) as $image) {
+            if ($image != $request['image']) {
+                array_push($array, $image);
+            }
+        }
+        $contest->update([
+            'picture' => json_encode($array),
+        ]);
+        Toastr::success('Product image removed successfully!');
+        return back();
+    }
 	public function listjoin()
     {
 //		die(auth('customer')->id());
@@ -177,7 +194,15 @@ class Contest3Controller extends Controller
 		}
  
 
+ 		$product_images=json_decode($contestuser->picture);
+        if ($request->file('images-'.$request->id)) {
+            foreach ($request->file('images-'.$request->id) as $img) {
+                $product_images[] = ImageManager::upload('contest/', 'png', $img);
+            }
+            $contestuser->picture = json_encode($product_images);
+        }
  
+
         if ($validator->errors()->count() > 0) {
             return response()->json(['errors' => Helpers::error_processor($validator)]);
         }

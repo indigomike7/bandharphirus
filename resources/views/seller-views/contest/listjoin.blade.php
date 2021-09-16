@@ -29,7 +29,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h5>My Contest Lists</h5>
-						<p style="text-align:right;"><a href="{{route('seller.contest.add')}}">Let's Join Luck in Contest</a></p>
+						<p style="text-align:right;">Let's Join Luck in Contest</p>
                     </div>
                     <div class="card-body" style="padding: 0">
                         <div class="table-responsive">
