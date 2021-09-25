@@ -108,12 +108,21 @@
                                 </div>
 
                                 <div class="dropdown-divider"></div>
+								@if($seller->premium_until > date("Y-m-d"))
+                                <a class="dropdown-item"
+                                   href="{{route('seller.premium.premium')}}">
+                                    <span class="text-truncate pr-2" title="Settings">PREMIUM!!</span>
+                                </a>
+								@endif
+                                <a class="dropdown-item"
+                                   href="{{route('seller.premium.update')}}">
+                                    <span class="text-truncate pr-2" title="Settings">Become Premium</span>
+                                </a>
 
                                 <a class="dropdown-item"
                                    href="{{route('seller.profile.update',auth('seller')->user()->id)}}">
                                     <span class="text-truncate pr-2" title="Settings">Settings</span>
                                 </a>
-
                                 <div class="dropdown-divider"></div>
 
                                 <a class="dropdown-item" href="javascript:" onclick="Swal.fire({

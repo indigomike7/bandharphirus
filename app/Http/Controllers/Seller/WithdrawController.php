@@ -7,6 +7,7 @@ use App\CPU\Convert;
 use App\Http\Controllers\Controller;
 use App\Model\SellerWallet;
 use App\Model\WithdrawRequest;
+use App\Model\Seller;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

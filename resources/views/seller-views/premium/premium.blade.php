@@ -1,5 +1,5 @@
-@extends('layouts.back-end.app')
-@section('title','Join List')
+@extends('layouts.back-end.app-seller')
+@section('title','Check Premium')
 
 @push('css_or_js')
     <link href="{{asset('public/assets/back-end/css/croppie.css')}}" rel="stylesheet">
@@ -120,27 +120,24 @@
     <div class="content container-fluid">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('seller.dashboard')}}">Dashboard</a></li>
-                <li class="breadcrumb-item" aria-current="page"><a href="{{route('seller.product.list')}}">Contest</a></li>
-                <li class="breadcrumb-item">Add new</li>
+                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
+                <li class="breadcrumb-item" aria-current="page"><a href="{{route('seller.premium.premium')}}">Premium</a></li>
+                <li class="breadcrumb-item">Check</li>
             </ol>
         </nav>
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
-            <h1 class="h3 mb-0 text-black-50">{{trans('messages.contest')}}</h1>
+            <h1 class="h3 mb-0 text-black-50">Premium</h1>
         </div>
 
         <!-- Content Row -->
         <div class="row">
             <div class="col-md-12">
 
-                <form class="product-form" action="{{route('seller.contest.add')}}" method="post" enctype="multipart/form-data"
-                      id="product_form">
-                    @csrf
                     <div class="card">
                         <div class="card-header">
-                            <h4>Add New Contest</h4>
+                            <h4>Check Premium</h4>
                         </div>
 @if ($errors->any())
     <div class="alert alert-danger">
@@ -150,80 +147,16 @@
             @endforeach
         </ul>
     </div>
-@endif                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="name">Contest Name</label>
-                                <input type="text" name="name" value="{{old('name')}}" class="form-control" id="name" placeholder="Ex : Kontes untuk memperingati HUT RI">
+@endif                        <div class="card-body row">
+                            <div class="form-group col-md-2" style="border:1px solid black; margin:30px;">
+							@if($seller->premium_until > date("Y-m-d"))
+							PREMIUM !!<br/>
+							Sampai dengan {{date_format(date_create($seller->premium_until),"d M Y")}}
+							@endif
                             </div>
 
-                            <div class="form-group">
-                                <label for="name">Description</label>
-                                <textarea name="description" value="{{old('description')}}" class="form-control" id="description" >
-								</textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="fund">Fund</label>
-                                <input type="number" name="fund" value="{{old('fund')}}" class="form-control" id="fund" placeholder="20000">
-                            </div>
-                            <div class="form-group">
-                                <label for="name">Start Date (Masukkan jika hanya untuk 1 bulan)</label>
-                                <input type="date" name="start_date" value="{{old('start_date')}}" class="form-control" id="start_date" >
-                            </div>
-                            <div class="form-group">
-                                <label for="name">End Date (Masukkan jika hanya untuk 1 bulan)</label>
-                                <input type="date" name="end_date" value="{{old('end_date')}}" class="form-control" id="end_date" >
-                            </div>
-                            <div class="form-group">
-                                <label for="name">Start Date 1 (Jika Periodic, misal mulai tanggal 1 tiap bulan, kosongkan jika tidak periodic)</label>
-                                <input type="number" name="start_date_1" value="{{old('start_date_1')}}" class="form-control" id="start_date" >
-                            </div>
-                            <div class="form-group">
-                                <label for="name">End Date 1 (Jika Periodic, misal berakhir tanggal 3 tiap bulan kosongkan jika tidak periodic)</label>
-                                <input type="number" name="end_date_1" value="{{old('end_date_1')}}" class="form-control" id="end_date" >
-                            </div>
-                            <div class="form-group">
-                                <label for="name">Start Date 2 (Jika Periodic, misal mulai tanggal 14 tiap bulan, kosongkan jika tidak periodic)</label>
-                                <input type="number" name="start_date_2" value="{{old('start_date_2')}}" class="form-control" id="start_date" >
-                            </div>
-                            <div class="form-group">
-                                <label for="name">End Date 2 (Jika Periodic, misal berakhir tanggal 17 tiap bulan, kosongkan jika tidak periodic)</label>
-                                <input type="number" name="end_date_2" value="{{old('end_date_2')}}" class="form-control" id="end_date" >
-                            </div>
-                            <div class="form-group">
-                                <label for="name">Start Date 3 (Jika Periodic, misal mulai tanggal 27 tiap bulan, kosongkan jika tidak periodic)</label>
-                                <input type="number" name="start_date_3" value="{{old('start_date_3')}}" class="form-control" id="start_date" >
-                            </div>
-                            <div class="form-group">
-                                <label for="name">End Date 3 (Jika Periodic, misal berakhir tanggal 30 tiap bulan, kosongkan jika tidak periodic)</label>
-                                <input type="number" name="end_date_3" value="{{old('end_date_3')}}" class="form-control" id="end_date" >
-                            </div>
-
-
-                    <div class="card mt-2">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <div class="form-group">
-                                        <label>Upload Image</label><small
-                                            style="color: red">* </small>
-                                    </div>
-                                    <div  class="p-2 border border-dashed"  style="max-width:430px;">
-                                        <div class="row" id="coba1"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-12" style="padding-top: 20px">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
-
-                </form>
-
             </div>
         </div>
     </div>
@@ -412,7 +345,7 @@
                 }
             });
             $.post({
-                url: '{{route('admin.contest2.addnew2')}}',
+                url: '{{route('admin.premium2.settingsupdate')}}',
                 data: formData,
                 contentType: false,
                 processData: false,
@@ -425,12 +358,12 @@
                             });
                         }
                     } else {
-                        toastr.success('Contest added successfully!', {
+                        toastr.success('Premium updated successfully!', {
                             CloseButton: true,
                             ProgressBar: true
                         });
                         setInterval(function () {
-                            location.href = '{{route("admin.contest2.list")}}';
+                            location.href = '{{route("admin.premium2.settings")}}';
                         }, 2000);
                     }
                 }

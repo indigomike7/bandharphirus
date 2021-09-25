@@ -8,13 +8,16 @@ use App\Model\ShippingMethod;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Model\Product;
+use App\Model\Seller;
 
 class ShippingMethodController extends Controller
 {
     public function index()
     {
+			$seller = Seller::find(auth('seller')->id());
         $shipping_methods = ShippingMethod::where(['creator_id' => auth('seller')->id(), 'creator_type' => 'seller'])->get();
-        return view('seller-views.shipping-method.add-new', compact('shipping_methods'));
+        return view('seller-views.shipping-method.add-new', compact('shipping_methods','seller'));
     }
 
     public function store(Request $request)
@@ -52,8 +55,9 @@ class ShippingMethodController extends Controller
 
     public function edit($id)
     {
+			$seller = Seller::find(auth('seller')->id());
         $method = ShippingMethod::where(['id' => $id])->first();
-        return view('seller-views.shipping-method.edit', compact('method'));
+        return view('seller-views.shipping-method.edit', compact('method','seller'));
     }
 
     public function update(Request $request, $id)

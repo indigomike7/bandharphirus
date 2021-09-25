@@ -26,6 +26,8 @@ Route::group(['namespace' => 'Web'], function () {
     Route::get('checkout-payment', 'WebController@checkout_payment')->name('checkout-payment')->middleware('customer');
     Route::get('checkout-tripay', 'WebController@checkout_tripay')->name('checkout-tripay')->middleware('customer');
     Route::get('checkout-tripay-bayar', 'WebController@checkout_tripay_bayar')->name('checkout-tripay-bayar')->middleware('customer');
+    Route::get('checkout-tripay-premium', 'WebController@checkout_tripay_premium')->name('checkout-tripay-premium')->middleware('seller');
+    Route::get('checkout-tripay-bayar-2', 'WebController@checkout_tripay_bayar_2')->name('checkout-tripay-bayar-2')->middleware('seller');
     Route::get('checkout-review', 'WebController@checkout_review')->name('checkout-review')->middleware('customer');
     Route::get('checkout-complete', 'WebController@checkout_complete')->name('checkout-complete')->middleware('customer');
     Route::get('shop-cart', 'WebController@shop_cart')->name('shop-cart');
@@ -183,7 +185,6 @@ Route::group(['prefix' => 'contest3', 'as' => 'contest3.'], function () {
 	Route::post('addnew2', 'Contest3Controller@addnew2')->name('addnew2');
 	Route::post('update', 'Contest3Controller@update')->name('update');
 	Route::get('remove_image/{id}', 'Contest3Controller@remove_image')->name('remove_image');
-	Route::get('remove_image_user/{id}', 'Contest3Controller@remove_image_user')->name('remove_image_user');
 	Route::get('detail/{id}', 'Contest3Controller@detail')->name('detail');
 	Route::get('edit/{id}', 'Contest3Controller@edit')->name('edit');
 	Route::get('delete/{id}', 'Contest3Controller@delete')->name('delete');

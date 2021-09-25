@@ -1,4 +1,5 @@
 @extends('layouts.back-end.app-seller')
+@section('title','Join List')
 
 @push('css_or_js')
     <link href="{{asset('public/assets/back-end/css/croppie.css')}}" rel="stylesheet">

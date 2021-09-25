@@ -13,11 +13,13 @@ use App\Model\ShippingMethod;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Model\Seller;
 
 class OrderController extends Controller
 {
     function list($status) {
 
+			$seller = Seller::find(auth('seller')->id());
         if ($status != 'all') {
             $orders = OrderDetail::with('order.customer', 'order')->where(['seller_id' => auth('seller')->id(), 'delivery_status' => $status])->latest()->paginate(25);
 
@@ -29,7 +31,7 @@ class OrderController extends Controller
         }
 
         // $orders = OrderDetail::with('order.customer', 'order')->where(['seller_id' => auth('seller')->id()])->latest()->paginate(25);
-        return view('seller-views.order.list', compact('orders'));
+        return view('seller-views.order.list', compact('orders','seller'));
     }
 
     public function status(Request $request)

@@ -14,6 +14,7 @@ class ChattingController extends Controller
 {
     public function chat()
     {
+			$seller = Seller::find(auth('seller')->id());
         $shop_id = Shop::where('seller_id', auth('seller')->id())->first()->id;
 
         $last_chat = Chatting::where('shop_id', $shop_id)
@@ -38,7 +39,7 @@ class ChattingController extends Controller
             return view('seller-views.chatting.chat', compact('chattings', 'chattings_user', 'last_chat'));
         }
 
-        return view('seller-views.chatting.chat', compact('last_chat'));
+        return view('seller-views.chatting.chat', compact('last_chat','seller'));
     }
 
     public function message_by_user(Request $request)

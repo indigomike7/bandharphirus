@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Seller;
 use App\CPU\ImageManager;
 use App\Http\Controllers\Controller;
 use App\Model\Shop;
+use App\Model\Seller;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,6 +15,7 @@ class ShopController extends Controller
 {
     public function view()
     {
+			$seller = Seller::find(auth('seller')->id());
         $shop = Shop::where(['seller_id' => auth('seller')->id()])->first();
         if (isset($shop) == false) {
             DB::table('shops')->insert([
@@ -28,13 +30,14 @@ class ShopController extends Controller
             $shop = Shop::where(['seller_id' => auth('seller')->id()])->first();
         }
 
-        return view('seller-views.shop.shopInfo', compact('shop'));
+        return view('seller-views.shop.shopInfo', compact('shop','seller'));
     }
 
     public function edit($id)
     {
+			$seller = Seller::find(auth('seller')->id());
         $shop = Shop::where(['seller_id' =>  auth('seller')->id()])->first();
-        return view('seller-views.shop.edit', compact('shop'));
+        return view('seller-views.shop.edit', compact('shop','seller'));
     }
 
     public function update(Request $request, $id)

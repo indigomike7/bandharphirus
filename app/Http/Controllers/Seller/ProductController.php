@@ -13,6 +13,7 @@ use App\Model\Color;
 use App\Model\DealOfTheDay;
 use App\Model\FlashDealProduct;
 use App\Model\Product;
+use App\Model\Seller;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,9 +25,10 @@ class ProductController extends Controller
 {
     public function add_new()
     {
+			$seller = Seller::find(auth('seller')->id());
         $cat = Category::where(['parent_id' => 0])->get();
         $br = Brand::orderBY('name', 'ASC')->get();
-        return view('seller-views.product.add-new', compact('cat', 'br'));
+        return view('seller-views.product.add-new', compact('cat', 'br','seller'));
     }
 
     public function status_update(Request $request)
@@ -214,8 +216,9 @@ class ProductController extends Controller
 
     function list()
     {
+			$seller = Seller::find(auth('seller')->id());
         $products = Product::where(['added_by' => 'seller', 'user_id' => \auth('seller')->id()])->latest()->paginate(10);
-        return view('seller-views.product.list', compact('products'));
+        return view('seller-views.product.list', compact('products','seller'));
     }
 
     public function get_categories(Request $request)

@@ -190,7 +190,17 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
 			Route::post('updatemanage', 'Contest2Controller@updatemanage')->name('updatemanage');
         });
 
-        Route::group(['prefix' => 'reviews', 'as' => 'reviews.'], function () {
+        Route::group(['prefix' => 'premium2', 'as' => 'premium2.'], function () {
+            Route::get('settings', 'Premium2Controller@settings')->name('settings');
+            Route::post('settingsupdate', 'Premium2Controller@settingsupdate')->name('settingsupdate');
+        });
+
+        Route::group(['prefix' => 'saldopurchased', 'as' => 'saldopurchased.'], function () {
+            Route::get('settings', 'SaldoPurchasedController@settings')->name('settings');
+            Route::post('settingsupdate', 'SaldoPurchasedController@settingsupdate')->name('settingsupdate');
+        });
+
+		Route::group(['prefix' => 'reviews', 'as' => 'reviews.'], function () {
             Route::get('list', 'ReviewsController@list')->name('list');
         });
 

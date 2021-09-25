@@ -257,6 +257,72 @@ class WebController extends Controller
 
     }
 
+    public function checkout_tripay_premium(Request $request)
+    {
+		$response = null;
+		$config=\App\CPU\Helpers::get_business_settings('tripay');
+			$apiKey = $config["tripay_api"];
+
+			$privateKey = $config["tripay_private_key"];
+
+			$merchantCode = 'T5401';
+			$amount = intval($request->amount);
+			$order_id=10000330;
+			$merchantRef = $order_id;
+
+                $or_d[] = [
+                    'sku' => "PREM01",
+                    'name' => "PREMIUM",
+                    'quantity' => 1,
+                    'price' => $_GET['amount'] ,
+                ];
+			//$amount+=$c['shipping_cost'];
+			$order_items=$or_d;
+			//var_dump($order_items);
+			//var_dump($amount);
+
+			//echo $merchantCode.$merchantRef.$_GET['amount'}.$privateKey;
+			$data = [
+			  'method'            => $request->code,
+			  'merchant_ref'      => $order_id,
+			  'amount'            => $amount,
+			  'customer_name'     => $request->name,
+			  'customer_email'    => $request->email,
+			  'customer_phone'    => '',
+			  'order_items'       => $order_items,
+			  'callback_url'      => 'https://bandharphirus.com/callback',
+			  'return_url'        => 'https://bandharphirus.com/redirect',
+			  'expired_time'      => (time()+(24*60*60)), // 24 jam
+			  'signature'         => hash_hmac('sha256', $merchantCode.$merchantRef.$amount, $privateKey)
+			];
+			//var_dump($amount);
+
+			$curl = curl_init();
+
+			curl_setopt_array($curl, array(
+			  CURLOPT_FRESH_CONNECT     => true,
+			  CURLOPT_URL               => "https://tripay.co.id/api-sandbox/transaction/create",
+			  CURLOPT_RETURNTRANSFER    => true,
+			  CURLOPT_HEADER            => false,
+			  CURLOPT_HTTPHEADER        => array(
+				"Authorization: Bearer ".$apiKey
+			  ),
+			  CURLOPT_FAILONERROR       => false,
+			  CURLOPT_POST              => true,
+			  CURLOPT_POSTFIELDS        => http_build_query($data)
+			));
+
+			//$request->headers->set('Accept', 'application/json');
+			$response = curl_exec($curl);
+			$err = curl_error($curl);
+
+			curl_close($curl);
+
+			//echo !empty($err) ? $err : $response;
+        return $response;
+
+    }
+
     public function checkout_tripay_bayar()
     {
 		if (session()->has('shipping_method_id') == false) {
@@ -292,6 +358,36 @@ class WebController extends Controller
 
 	        return $response;
 		}
+
+    }
+    public function checkout_tripay_bayar_2()
+    {
+			$config=\App\CPU\Helpers::get_business_settings('tripay');
+			$apiKey = $config["tripay_api"];
+			$payload = [
+				'reference'	=> $_GET['reference']
+			];
+			$uuid = $_GET['reference'];
+
+			$curl = curl_init();
+
+			curl_setopt_array($curl, array(
+			  CURLOPT_FRESH_CONNECT     => true,
+			  CURLOPT_URL               => "https://tripay.co.id/api-sandbox/transaction/detail?".http_build_query($payload),
+			  CURLOPT_RETURNTRANSFER    => true,
+			  CURLOPT_HEADER            => false,
+			  CURLOPT_HTTPHEADER        => array(
+				"Authorization: Bearer ".$apiKey
+			  ),
+			  CURLOPT_FAILONERROR       => false,
+			));
+
+			$response = curl_exec($curl);
+			$err = curl_error($curl);
+
+			curl_close($curl);
+
+	        return $response;
 
     }
     public function checkout_review()

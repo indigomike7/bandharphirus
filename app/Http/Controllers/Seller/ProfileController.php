@@ -12,14 +12,16 @@ class ProfileController extends Controller
 {
     public function view()
     {
+			$seller = Seller::find(auth('seller')->id());
         $data = Seller::where('id', auth('seller')->id())->first();
-        return view('seller-views.profile.view', compact('data'));
+        return view('seller-views.profile.view', compact('data','seller'));
     }
 
     public function edit($id)
     {
+			$seller = Seller::find(auth('seller')->id());
         $data = Seller::where('id', $id)->first();
-        return view('seller-views.profile.edit', compact('data'));
+        return view('seller-views.profile.edit', compact('data','seller'));
     }
 
     public function update(Request $request, $id)
@@ -65,8 +67,9 @@ class ProfileController extends Controller
 
     public function bank_edit($id)
     {
+			$seller = Seller::find(auth('seller')->id());
         $data = Seller::where('id', $id)->first();
-        return view('seller-views.profile.bankEdit', compact('data'));
+        return view('seller-views.profile.bankEdit', compact('data','seller'));
     }
 
 }
