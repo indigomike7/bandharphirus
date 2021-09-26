@@ -23,7 +23,8 @@ class Contest extends Model
         'end_date_3' => 'integer',
         'created_date' => 'datetime',
         'result' => 'text',
-		'picture' =>'text'
+		'picture' =>'text',
+		'contestcat'=>'integer'
     ];
 
 }

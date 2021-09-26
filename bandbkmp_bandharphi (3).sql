@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 25, 2021 at 08:39 AM
+-- Generation Time: Sep 26, 2021 at 08:30 AM
 -- Server version: 10.3.31-MariaDB-cll-lve
 -- PHP Version: 7.3.28
 
@@ -514,69 +514,94 @@ CREATE TABLE `contest` (
   `start_date_3` int(11) DEFAULT NULL,
   `end_date_3` int(11) DEFAULT NULL,
   `start_date` datetime DEFAULT NULL,
-  `end_date` datetime DEFAULT NULL
+  `end_date` datetime DEFAULT NULL,
+  `contestcat` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `contest`
 --
 
-INSERT INTO `contest` (`id`, `seller_id`, `name`, `description`, `fund`, `result`, `updated_at`, `picture`, `created_at`, `start_date_1`, `end_date_1`, `start_date_2`, `end_date_2`, `start_date_3`, `end_date_3`, `start_date`, `end_date`) VALUES
-(3, 1, 'Kontes Beringin', 'Jakarta - Vaksinasi COVID-19 CT Corp kini menyediakan vaksin Pfizer. Kamu bisa mendapatkannya di Menara Bank Mega, Jl Tendean, Jakarta Selatan.\r\nKamu hanya perlu mendaftar lewat detik.com/vaksinctcorp. Vaksin Pfizer ini akan disuntikkan mulai 11 September 2021 hingga 1 Desember 2021, dengan kuota 1.000 orang per hari.\r\n\r\nSelain di Menara Bank Mega Jakarta Selatan, vaksin Pfizer secara bertahap nantinya juga akan hadir di beberapa lokasi berikut:', 20000.00, 'Pemenangnya Michael Owen', '2021-09-15 07:54:56', '[\"2021-09-09-6139cc8479599.png\",\"2021-09-09-6139cc84810aa.png\"]', '2021-09-09 12:46:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(6, 2, 'Kontes Anak Anak I', 'Ini Kontes anak anak 1', 0.00, '', '2021-09-09 09:25:48', '[\"2021-09-09-6139e12c70670.png\",\"2021-09-09-6139e12c8c124.png\"]', '2021-09-09 16:25:48', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(7, 2, 'Kontes Anak Anak IV', 'Testing is testing', 0.00, '', '2021-09-09 09:28:01', '[\"2021-09-09-6139e1b154461.png\",\"2021-09-09-6139e1b159f48.png\"]', '2021-09-09 16:28:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(8, 2, 'Kontes Anak Anak V', 'Testing is testing', 0.00, '', '2021-09-09 09:29:08', '[\"2021-09-09-6139e1f408b35.png\",\"2021-09-09-6139e1f415382.png\"]', '2021-09-09 16:29:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(9, 2, 'Kontes Anak Anak XV', 'Testing', 0.00, '', '2021-09-10 07:54:22', '[\"2021-09-09-6139e25aedb34.png\",\"2021-09-09-6139e25af343c.png\"]', '2021-09-09 16:30:51', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(10, 2, 'Kontes Ultah Abri', 'Testing', 0.00, '', '2021-09-09 09:35:28', '[\"2021-09-09-6139e3706bc84.png\",\"2021-09-09-6139e3706fe26.png\"]', '2021-09-09 16:35:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(11, 0, 'Testing Kontest dari Admin', 'Testing Kontest dari admin', 0.00, '', '2021-09-10 07:54:22', '[\"2021-09-10-613ae97b4c351.png\",\"2021-09-10-613ae97b9987f.png\"]', '2021-09-10 11:13:31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(12, 0, 'Testing Kontest dari Admin', 'Testing Kontest dari admin', 0.00, '', '2021-09-10 07:54:22', '[\"2021-09-10-613ae97b4c387.png\",\"2021-09-10-613ae97b9987f.png\"]', '2021-09-10 11:13:31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(13, 0, 'Kontest dari admin lagi', 'Kontest dari admin lagi', 0.00, '', '2021-09-10 07:54:22', '[\"2021-09-10-613aea335225d.png\"]', '2021-09-10 11:16:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(14, 0, 'Kontest dari admin lagi', 'Kontest dari admin lagi', 0.00, '', '2021-09-10 07:54:22', '[\"2021-09-10-613aea3363a12.png\"]', '2021-09-10 11:16:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(15, 0, '1111111', '11111', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 11:19:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(16, 0, '1111111', '11111', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 11:19:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(17, 0, 'mmmm', ',,,,,,,', 0.00, '', '2021-09-10 07:54:22', '[\"2021-09-10-613aeb87bb1f0.png\"]', '2021-09-10 11:22:15', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(18, 0, 'mmmm', ',,,,,,,', 0.00, '', '2021-09-10 07:54:22', '[\"2021-09-10-613aeb87c35f2.png\"]', '2021-09-10 11:22:15', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(19, 0, 'jgfjgfdjgf', 'khgkhgkjg', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 11:22:52', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(20, 0, 'jgfjgfdjgf', 'khgkhgkjg', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 11:22:52', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(21, 0, 'gfhjfjh', 'kgkgkgkjg', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 11:25:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(22, 0, 'gfhjfjh', 'kgkgkgkjg', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 11:25:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(23, 0, 'Jewelry', 'fdsfsdfdsf', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 11:55:19', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(24, 0, 'Jewelry', 'fdsfsdfdsf', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 11:55:19', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(25, 0, 'COntest 1x', 'xxxx', 0.00, '', '2021-09-10 07:54:22', '[\"2021-09-10-613af5e2f3a0d.png\"]', '2021-09-10 11:57:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(26, 0, 'COntest 1x', 'xxxx', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 11:57:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(27, 0, 'blablabla', 'sfdfdsfds', 0.00, '', '2021-09-10 07:54:22', '[\"2021-09-10-613af60bd5627.png\"]', '2021-09-10 12:07:07', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(28, 0, 'blablabla', 'sfdfdsfds', 0.00, '', '2021-09-10 07:54:22', '[\"2021-09-10-613af60bd811b.png\"]', '2021-09-10 12:07:07', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(29, 0, 'duee', 'duex', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:10:40', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(30, 0, 'duee', 'duex', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:10:40', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(31, 0, 'duee', 'duex', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:13:15', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(32, 0, 'duee', 'duex', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:13:15', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(33, 0, 'sssss', 'sssss', 0.00, '', '2021-09-10 07:54:22', '[\"2021-09-10-613af82256d70.png\"]', '2021-09-10 12:16:02', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(34, 0, 'sssss', 'sssss', 0.00, '', '2021-09-10 07:54:22', '[\"2021-09-10-613af8225bc40.png\"]', '2021-09-10 12:16:02', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(35, 0, 'rrrrr', 'rrrr', 0.00, '', '2021-09-10 07:54:22', '[\"2021-09-10-613af9a1e58be.png\"]', '2021-09-10 12:22:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(36, 0, 'paha', 'paha', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:26:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(37, 0, 'paha', 'paha', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:26:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(38, 0, 'paha2', 'paha2', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:27:30', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(39, 0, 'paha2', 'paha2', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:27:30', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(40, 0, 'test', 'test', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:36:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(41, 0, 'test', 'test', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:36:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(42, 0, 'test', 'test', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:36:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(43, 0, 'xssxs', 'xsxsxs', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:37:23', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(44, 0, 'xssxs', 'xsxsxs', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:37:23', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(45, 0, 'xxxx', 'xxxxx', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:38:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(46, 0, 'xxxx', 'xxxxx', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:38:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(47, 0, 'ghghg', 'gfhghgh', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:42:07', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(48, 0, 'ghghg', 'gfhghgh', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:42:07', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(49, 0, 'gsgs', 'gsgs', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:49:21', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(50, 0, 'gsgs', 'gsgs', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:49:21', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(51, 0, 'xxxx', 'xxxx', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:54:07', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(52, 0, 'xxxx', 'xxxx', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:54:07', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(54, 0, 'hayw', 'hayw', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:57:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(56, 0, 'okx', 'okx', 20000.00, '', '2021-09-15 07:48:09', '[\"2021-09-15-6141b34945373.png\"]', '2021-09-10 13:03:41', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(57, 0, 'Kontes Bandit Mafia', 'Mafia euyy', 200000.00, '', '2021-09-15 07:49:19', '[\"2021-09-15-6141b38fc61f1.png\"]', '2021-09-15 14:49:19', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(58, 1, 'Kontest Duit', 'Kontest Duit', 30000.00, '', '2021-09-15 07:56:44', '[\"2021-09-15-6141b54cbf610.png\"]', '2021-09-15 14:56:44', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(59, 0, 'Kontes Osong osong', 'Testing', 20000.00, '', '2021-09-15 08:39:25', '[\"2021-09-15-6141bf4d9937b.png\"]', '2021-09-15 15:39:25', 1, 6, 14, 17, 28, 30, NULL, NULL),
-(60, 0, 'Kontes Mafia', 'Kontes Mafia', 3000.00, '', '2021-09-15 08:40:41', '[\"2021-09-15-6141bf99b3c02.png\"]', '2021-09-15 15:40:41', 1, 5, NULL, NULL, NULL, NULL, NULL, NULL),
-(61, 1, 'Kontes HUT HUT', 'Kontes HUT HUT', 25000.00, '', '2021-09-15 08:59:45', '[\"2021-09-15-6141c3ddd7c79.png\"]', '2021-09-15 15:58:53', 1, 3, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `contest` (`id`, `seller_id`, `name`, `description`, `fund`, `result`, `updated_at`, `picture`, `created_at`, `start_date_1`, `end_date_1`, `start_date_2`, `end_date_2`, `start_date_3`, `end_date_3`, `start_date`, `end_date`, `contestcat`) VALUES
+(3, 1, 'Kontes Beringin', 'Jakarta - Vaksinasi COVID-19 CT Corp kini menyediakan vaksin Pfizer. Kamu bisa mendapatkannya di Menara Bank Mega, Jl Tendean, Jakarta Selatan.\r\nKamu hanya perlu mendaftar lewat detik.com/vaksinctcorp. Vaksin Pfizer ini akan disuntikkan mulai 11 September 2021 hingga 1 Desember 2021, dengan kuota 1.000 orang per hari.\r\n\r\nSelain di Menara Bank Mega Jakarta Selatan, vaksin Pfizer secara bertahap nantinya juga akan hadir di beberapa lokasi berikut:', 20000.00, 'Pemenangnya Michael Owen', '2021-09-15 07:54:56', '[\"2021-09-09-6139cc8479599.png\",\"2021-09-09-6139cc84810aa.png\"]', '2021-09-09 12:46:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(6, 2, 'Kontes Anak Anak I', 'Ini Kontes anak anak 1', 0.00, '', '2021-09-09 09:25:48', '[\"2021-09-09-6139e12c70670.png\",\"2021-09-09-6139e12c8c124.png\"]', '2021-09-09 16:25:48', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(7, 2, 'Kontes Anak Anak IV', 'Testing is testing', 0.00, '', '2021-09-09 09:28:01', '[\"2021-09-09-6139e1b154461.png\",\"2021-09-09-6139e1b159f48.png\"]', '2021-09-09 16:28:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(8, 2, 'Kontes Anak Anak V', 'Testing is testing', 0.00, '', '2021-09-09 09:29:08', '[\"2021-09-09-6139e1f408b35.png\",\"2021-09-09-6139e1f415382.png\"]', '2021-09-09 16:29:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(9, 2, 'Kontes Anak Anak XV', 'Testing', 0.00, '', '2021-09-10 07:54:22', '[\"2021-09-09-6139e25aedb34.png\",\"2021-09-09-6139e25af343c.png\"]', '2021-09-09 16:30:51', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(10, 2, 'Kontes Ultah Abri', 'Testing', 0.00, '', '2021-09-09 09:35:28', '[\"2021-09-09-6139e3706bc84.png\",\"2021-09-09-6139e3706fe26.png\"]', '2021-09-09 16:35:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(11, 0, 'Testing Kontest dari Admin', 'Testing Kontest dari admin', 0.00, '', '2021-09-10 07:54:22', '[\"2021-09-10-613ae97b4c351.png\",\"2021-09-10-613ae97b9987f.png\"]', '2021-09-10 11:13:31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(12, 0, 'Testing Kontest dari Admin', 'Testing Kontest dari admin', 0.00, '', '2021-09-10 07:54:22', '[\"2021-09-10-613ae97b4c387.png\",\"2021-09-10-613ae97b9987f.png\"]', '2021-09-10 11:13:31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(13, 0, 'Kontest dari admin lagi', 'Kontest dari admin lagi', 0.00, '', '2021-09-10 07:54:22', '[\"2021-09-10-613aea335225d.png\"]', '2021-09-10 11:16:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(14, 0, 'Kontest dari admin lagi', 'Kontest dari admin lagi', 0.00, '', '2021-09-10 07:54:22', '[\"2021-09-10-613aea3363a12.png\"]', '2021-09-10 11:16:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(15, 0, '1111111', '11111', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 11:19:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(16, 0, '1111111', '11111', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 11:19:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(17, 0, 'mmmm', ',,,,,,,', 0.00, '', '2021-09-10 07:54:22', '[\"2021-09-10-613aeb87bb1f0.png\"]', '2021-09-10 11:22:15', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(18, 0, 'mmmm', ',,,,,,,', 0.00, '', '2021-09-10 07:54:22', '[\"2021-09-10-613aeb87c35f2.png\"]', '2021-09-10 11:22:15', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(19, 0, 'jgfjgfdjgf', 'khgkhgkjg', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 11:22:52', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(20, 0, 'jgfjgfdjgf', 'khgkhgkjg', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 11:22:52', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(21, 0, 'gfhjfjh', 'kgkgkgkjg', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 11:25:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(22, 0, 'gfhjfjh', 'kgkgkgkjg', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 11:25:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(23, 0, 'Jewelry', 'fdsfsdfdsf', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 11:55:19', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(24, 0, 'Jewelry', 'fdsfsdfdsf', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 11:55:19', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(25, 0, 'COntest 1x', 'xxxx', 0.00, '', '2021-09-10 07:54:22', '[\"2021-09-10-613af5e2f3a0d.png\"]', '2021-09-10 11:57:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(26, 0, 'COntest 1x', 'xxxx', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 11:57:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(27, 0, 'blablabla', 'sfdfdsfds', 0.00, '', '2021-09-10 07:54:22', '[\"2021-09-10-613af60bd5627.png\"]', '2021-09-10 12:07:07', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(28, 0, 'blablabla', 'sfdfdsfds', 0.00, '', '2021-09-10 07:54:22', '[\"2021-09-10-613af60bd811b.png\"]', '2021-09-10 12:07:07', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(29, 0, 'duee', 'duex', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:10:40', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(30, 0, 'duee', 'duex', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:10:40', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(31, 0, 'duee', 'duex', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:13:15', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(32, 0, 'duee', 'duex', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:13:15', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(33, 0, 'sssss', 'sssss', 0.00, '', '2021-09-10 07:54:22', '[\"2021-09-10-613af82256d70.png\"]', '2021-09-10 12:16:02', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(34, 0, 'sssss', 'sssss', 0.00, '', '2021-09-10 07:54:22', '[\"2021-09-10-613af8225bc40.png\"]', '2021-09-10 12:16:02', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(35, 0, 'rrrrr', 'rrrr', 0.00, '', '2021-09-10 07:54:22', '[\"2021-09-10-613af9a1e58be.png\"]', '2021-09-10 12:22:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(36, 0, 'paha', 'paha', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:26:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(37, 0, 'paha', 'paha', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:26:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(38, 0, 'paha2', 'paha2', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:27:30', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(39, 0, 'paha2', 'paha2', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:27:30', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(40, 0, 'test', 'test', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:36:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(41, 0, 'test', 'test', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:36:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(42, 0, 'test', 'test', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:36:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(43, 0, 'xssxs', 'xsxsxs', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:37:23', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(44, 0, 'xssxs', 'xsxsxs', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:37:23', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(45, 0, 'xxxx', 'xxxxx', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:38:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(46, 0, 'xxxx', 'xxxxx', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:38:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(47, 0, 'ghghg', 'gfhghgh', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:42:07', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(48, 0, 'ghghg', 'gfhghgh', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:42:07', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(49, 0, 'gsgs', 'gsgs', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:49:21', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(50, 0, 'gsgs', 'gsgs', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:49:21', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(51, 0, 'xxxx', 'xxxx', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:54:07', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(52, 0, 'xxxx', 'xxxx', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:54:07', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(54, 0, 'hayw', 'hayw', 0.00, '', '2021-09-10 07:54:22', '', '2021-09-10 12:57:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(56, 0, 'okx', 'okx', 20000.00, '', '2021-09-15 07:48:09', '[\"2021-09-15-6141b34945373.png\"]', '2021-09-10 13:03:41', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(57, 0, 'Kontes Bandit Mafia', 'Mafia euyy', 200000.00, '', '2021-09-15 07:49:19', '[\"2021-09-15-6141b38fc61f1.png\"]', '2021-09-15 14:49:19', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(58, 1, 'Kontest Duit', 'Kontest Duit', 30000.00, '', '2021-09-15 07:56:44', '[\"2021-09-15-6141b54cbf610.png\"]', '2021-09-15 14:56:44', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(59, 0, 'Kontes Osong osong', 'Testing', 20000.00, '', '2021-09-15 08:39:25', '[\"2021-09-15-6141bf4d9937b.png\"]', '2021-09-15 15:39:25', 1, 6, 14, 17, 28, 30, NULL, NULL, 0),
+(61, 1, 'Kontes HUT HUT', 'Kontes HUT HUT', 25000.00, '', '2021-09-15 08:59:45', '[\"2021-09-15-6141c3ddd7c79.png\"]', '2021-09-15 15:58:53', 1, 3, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(62, 0, 'TESTING 123 YAA', 'TEsting 123', 20000.00, '', '2021-09-26 19:40:03', '[\"2021-09-26-61503f4073102.png\",\"2021-09-26-61503f408253e.png\"]', '2021-09-26 15:37:04', 25, 30, NULL, NULL, NULL, NULL, NULL, NULL, 3),
+(63, 5, 'Testing Poto', 'Testing', 20000.00, '', '2021-09-26 19:46:51', '[\"2021-09-26-6150416620a8d.png\"]', '2021-09-26 15:46:14', 25, 30, NULL, NULL, NULL, NULL, NULL, NULL, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contest_category`
+--
+
+CREATE TABLE `contest_category` (
+  `id` int(11) NOT NULL,
+  `category` text NOT NULL,
+  `description` text NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `contest_category`
+--
+
+INSERT INTO `contest_category` (`id`, `category`, `description`, `created_at`, `updated_at`) VALUES
+(1, 'Nambele yaa', 'Testing yaa', '2021-09-26 15:02:07', '2021-09-26 15:19:57'),
+(3, 'IRAN Version', 'IRAN Version', '2021-09-26 15:35:49', '2021-09-26 15:35:49'),
+(4, 'USA Version', 'USA Version Yaa', '2021-09-26 15:36:11', '2021-09-26 15:36:11');
 
 -- --------------------------------------------------------
 
@@ -592,17 +617,17 @@ CREATE TABLE `contest_user` (
   `answer` text NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `picture` text NOT NULL
+  `picture` text NOT NULL,
+  `picture2` text NOT NULL,
+  `picture3` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `contest_user`
 --
 
-INSERT INTO `contest_user` (`id`, `contest_id`, `user_id`, `seller_id`, `answer`, `created_at`, `updated_at`, `picture`) VALUES
-(1, 3, NULL, 2, 'test', '2021-09-09 08:58:28', '2021-09-09 08:58:28', ''),
-(2, 10, NULL, 1, 'Ya', '2021-09-09 09:36:36', '2021-09-09 09:36:36', ''),
-(3, 9, NULL, 1, 'Tidak', '2021-09-09 09:36:49', '2021-09-09 09:36:49', '');
+INSERT INTO `contest_user` (`id`, `contest_id`, `user_id`, `seller_id`, `answer`, `created_at`, `updated_at`, `picture`, `picture2`, `picture3`) VALUES
+(5, 62, NULL, 5, 'NO', '2021-09-26 22:10:32', '2021-09-26 22:28:13', '[\"2021-09-26-61506338016cd.png\"]', '[\"2021-09-26-6150633802ff5.png\"]', '[\"2021-09-26-6150633803063.png\"]');
 
 -- --------------------------------------------------------
 
@@ -1115,7 +1140,12 @@ INSERT INTO `premium_paid` (`id`, `seller_id`, `created_at`, `updated_at`, `days
 (7, 0, '2021-09-25 18:34:19', '2021-09-25 18:34:19', 365, 150000.00),
 (8, 2, '2021-09-25 18:36:27', '2021-09-25 18:36:27', 30, 10000.00),
 (9, 2, '2021-09-25 18:36:29', '2021-09-25 18:36:29', 30, 10000.00),
-(10, 2, '2021-09-25 18:37:54', '2021-09-25 18:37:54', 30, 10000.00);
+(10, 2, '2021-09-25 18:37:54', '2021-09-25 18:37:54', 30, 10000.00),
+(11, 3, '2021-09-25 22:08:04', '2021-09-25 22:08:04', 180, 60000.00),
+(12, 3, '2021-09-25 22:16:01', '2021-09-25 22:16:01', 365, 150000.00),
+(13, 3, '2021-09-25 22:17:22', '2021-09-25 22:17:22', 365, 150000.00),
+(14, 4, '2021-09-25 22:22:09', '2021-09-25 22:22:09', 180, 60000.00),
+(15, 5, '2021-09-25 22:30:46', '2021-09-25 22:30:46', 180, 60000.00);
 
 -- --------------------------------------------------------
 
@@ -1231,6 +1261,29 @@ CREATE TABLE `reviews` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `saldo`
+--
+
+CREATE TABLE `saldo` (
+  `id` int(11) NOT NULL,
+  `seller_id` int(11) NOT NULL,
+  `action` varchar(100) NOT NULL,
+  `amount` decimal(10,0) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `saldo`
+--
+
+INSERT INTO `saldo` (`id`, `seller_id`, `action`, `amount`, `created_at`, `updated_at`) VALUES
+(1, 5, 'Buy', 210000, '2021-09-26 12:15:38', '2021-09-26 12:15:38'),
+(2, 5, 'Buy', 1000000, '2021-09-26 12:38:59', '2021-09-26 12:38:59');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `saldo_purchased`
 --
 
@@ -1328,17 +1381,19 @@ CREATE TABLE `sellers` (
   `account_no` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `holder_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `auth_token` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `premium_until` datetime NOT NULL
+  `premium_until` datetime NOT NULL,
+  `saldo` decimal(18,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `sellers`
 --
 
-INSERT INTO `sellers` (`id`, `f_name`, `l_name`, `phone`, `image`, `email`, `password`, `status`, `remember_token`, `created_at`, `updated_at`, `bank_name`, `branch`, `account_no`, `holder_name`, `auth_token`, `premium_until`) VALUES
-(1, 'nyoba', 'nyoba', '0998888888', 'def.png', 'nyoba@gmail.com', '$2y$10$0YkFu8/lus0jDJLHZmsahOB84l1PHehFFFYfjsyyVIAUeVibteUb.', 'pending', NULL, '2021-09-11 17:35:41', '2021-09-11 17:35:41', NULL, NULL, NULL, NULL, NULL, '0000-00-00 00:00:00'),
-(2, 'Michael', 'Butar butar', '+6281218445901', '2021-09-15-6141d1ec67a6d.png', 'indigomikezone@gmail.com', '$2y$10$6qXizvRS/92dK0VIlFPiZ.B5vP0bVgAcR25/XiY4jmM2e/KOqmlfS', 'approved', 'mfzzvaBMXXjRnFgkTLpY67MXsG1wGsNUSJCcDTpYLzFjQmyhYWMPckj8zgxh', '2021-09-15 20:58:52', '2021-09-25 22:37:54', NULL, NULL, NULL, NULL, NULL, '2024-12-23 00:00:00'),
-(3, 'Michael', 'Butar butar', '+6281218445901', '2021-09-25-614ee6b8edc49.png', 'indigomikezone2@gmail.com', '$2y$10$/FKEpRg/dSScpyV6QQFSTOH4MP1.ckaADjI8iTr.NkebdM5GE25LC', 'approved', NULL, '2021-09-25 19:07:05', '2021-09-25 19:07:38', NULL, NULL, NULL, NULL, NULL, '0000-00-00 00:00:00');
+INSERT INTO `sellers` (`id`, `f_name`, `l_name`, `phone`, `image`, `email`, `password`, `status`, `remember_token`, `created_at`, `updated_at`, `bank_name`, `branch`, `account_no`, `holder_name`, `auth_token`, `premium_until`, `saldo`) VALUES
+(1, 'nyoba', 'nyoba', '0998888888', 'def.png', 'nyoba@gmail.com', '$2y$10$0YkFu8/lus0jDJLHZmsahOB84l1PHehFFFYfjsyyVIAUeVibteUb.', 'pending', NULL, '2021-09-11 17:35:41', '2021-09-11 17:35:41', NULL, NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', 0.00),
+(2, 'Michael', 'Butar butar', '+6281218445901', '2021-09-15-6141d1ec67a6d.png', 'indigomikezone@gmail.com', '$2y$10$6qXizvRS/92dK0VIlFPiZ.B5vP0bVgAcR25/XiY4jmM2e/KOqmlfS', 'approved', 'nGgQbvpAMgdzw1J3fMx5ySqrowcC2PZS6TyHXKXjTMug6Od827PoMQB7z2Ac', '2021-09-15 20:58:52', '2021-09-25 22:37:54', NULL, NULL, NULL, NULL, NULL, '2024-12-23 00:00:00', 0.00),
+(3, 'Michael', 'Butar butar', '+6281218445901', '2021-09-25-614ee6b8edc49.png', 'indigomikezone2@gmail.com', '$2y$10$/FKEpRg/dSScpyV6QQFSTOH4MP1.ckaADjI8iTr.NkebdM5GE25LC', 'approved', 'vGIwS42hqM545WWcRFC7Hds4dJVPZDhiALuzj21jq2K2y420H9RkQ7gAXuCU', '2021-09-25 19:07:05', '2021-09-26 02:17:22', NULL, NULL, NULL, NULL, NULL, '2023-05-02 00:00:00', 0.00),
+(5, 'Michael', 'Butar butar', '+6281218445901', '2021-09-25-614f4e50463cb.png', 'indigomikezone22@gmail.com', '$2y$10$Ux.98gSjSdakQ4NNkReJzOe6q7OQImZmQtke5Wj5H1dnAAJ2Ucjbq', 'approved', 'rx7qqbbStZYZs6zepds0g6eTB2j1F9fHDkRM51av77stbdjmrZeHJwhMy6nJ', '2021-09-26 02:29:04', '2021-09-26 16:38:59', NULL, NULL, NULL, NULL, NULL, '2022-03-24 22:30:46', 1210000.00);
 
 -- --------------------------------------------------------
 
@@ -1360,7 +1415,10 @@ CREATE TABLE `seller_wallets` (
 --
 
 INSERT INTO `seller_wallets` (`id`, `seller_id`, `balance`, `withdrawn`, `created_at`, `updated_at`) VALUES
-(1, 2, '0', '0', '2021-09-15 20:59:51', '2021-09-15 20:59:51');
+(1, 2, '0', '0', '2021-09-15 20:59:51', '2021-09-15 20:59:51'),
+(2, 3, '0', '0', '2021-09-25 23:28:37', '2021-09-25 23:28:37'),
+(3, 4, '0', '0', '2021-09-26 02:21:20', '2021-09-26 02:21:20'),
+(4, 5, '0', '0', '2021-09-26 02:29:53', '2021-09-26 02:29:53');
 
 -- --------------------------------------------------------
 
@@ -1458,7 +1516,9 @@ CREATE TABLE `shops` (
 INSERT INTO `shops` (`id`, `seller_id`, `name`, `address`, `contact`, `image`, `created_at`, `updated_at`) VALUES
 (1, 1, 'nyoba shop', 'nyoba shop', '0998888888', 'def.png', '2021-09-11 17:35:41', '2021-09-11 17:35:41'),
 (2, 2, 'Michael', 'Web Design', '+6281218445901', '2021-09-15-6141d1ec8049b.png', '2021-09-15 20:58:52', '2021-09-15 20:58:52'),
-(3, 3, 'Michael Web Design', 'Jl. Taman Sari', '+6281218445901', '2021-09-25-614ee6b9101b5.png', '2021-09-25 19:07:05', '2021-09-25 19:07:05');
+(3, 3, 'Michael Web Design', 'Jl. Taman Sari', '+6281218445901', '2021-09-25-614ee6b9101b5.png', '2021-09-25 19:07:05', '2021-09-25 19:07:05'),
+(4, 4, 'Michael', 'Store Shop', '+6281218445901', '2021-09-25-614f4bf366071.png', '2021-09-26 02:18:59', '2021-09-26 02:18:59'),
+(5, 5, 'Michael Web Design', 'store', '+6281218445901', '2021-09-25-614f4e5056216.png', '2021-09-26 02:29:04', '2021-09-26 02:29:04');
 
 -- --------------------------------------------------------
 
@@ -1710,6 +1770,18 @@ ALTER TABLE `contest`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `contest_category`
+--
+ALTER TABLE `contest_category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `contest_user`
+--
+ALTER TABLE `contest_user`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `coupons`
 --
 ALTER TABLE `coupons`
@@ -1861,6 +1933,12 @@ ALTER TABLE `product_stocks`
 -- Indexes for table `reviews`
 --
 ALTER TABLE `reviews`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `saldo`
+--
+ALTER TABLE `saldo`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -2041,7 +2119,19 @@ ALTER TABLE `contacts`
 -- AUTO_INCREMENT for table `contest`
 --
 ALTER TABLE `contest`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+
+--
+-- AUTO_INCREMENT for table `contest_category`
+--
+ALTER TABLE `contest_category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `contest_user`
+--
+ALTER TABLE `contest_user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `coupons`
@@ -2143,7 +2233,7 @@ ALTER TABLE `order_details`
 -- AUTO_INCREMENT for table `premium_paid`
 --
 ALTER TABLE `premium_paid`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `premium_settings`
@@ -2170,6 +2260,12 @@ ALTER TABLE `reviews`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `saldo`
+--
+ALTER TABLE `saldo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `saldo_purchased`
 --
 ALTER TABLE `saldo_purchased`
@@ -2185,13 +2281,13 @@ ALTER TABLE `search_functions`
 -- AUTO_INCREMENT for table `sellers`
 --
 ALTER TABLE `sellers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `seller_wallets`
 --
 ALTER TABLE `seller_wallets`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `seller_wallet_histories`
@@ -2215,7 +2311,7 @@ ALTER TABLE `shipping_methods`
 -- AUTO_INCREMENT for table `shops`
 --
 ALTER TABLE `shops`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `social_medias`

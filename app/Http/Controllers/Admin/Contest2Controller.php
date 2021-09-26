@@ -9,6 +9,7 @@ use App\CPU\ImageManager;
 use App\Http\Controllers\Controller;
 use App\Model\Contest;
 use App\Model\ContestUser;
+use App\Model\ContestCategory;
 use App\User;
 use App\Model\Seller;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -23,6 +24,11 @@ use Illuminate\Support\Str;
 
 class Contest2Controller extends Controller
 {
+    function category() {
+            $contestcat = ContestCategory::get();
+
+        return view('admin-views.contest.category', compact('contestcat'));
+    }
     function list() {
             $contest = Contest::where(['seller_id' => 0])->orderBy('created_at', 'desc')->get();
 
@@ -30,26 +36,39 @@ class Contest2Controller extends Controller
     }
     public function edit($id)
     {
+            $contestcat = ContestCategory::get();
         $contest = Contest::find($id);
-        return view('admin-views.contest.edit', compact('contest'));
+        return view('admin-views.contest.edit', compact('contest','contestcat'));
+
+    }
+    public function categoryedit($id)
+    {
+        $contest = ContestCategory::find($id);
+        return view('admin-views.contest.categoryedit', compact('contest'));
 
     }
 
     public function listmanage($id)
     {
+            $contestcat = ContestCategory::get();
         $contest = Contest::find($id);
         $user = new User();
         $seller = new Seller();
 		$contestuser = new ContestUser();
-        return view('admin-views.contest.view', compact('contest','user','seller','contestuser'));
+        return view('admin-views.contest.view', compact('contest','user','seller','contestuser','contestcat`'));
 
     }
  
     function add() {
-//		die("add");
-        return view('admin-views.contest.add');
+            $contestcat = ContestCategory::get();
+//			var_dump($contestcat);
+        return view('admin-views.contest.add',compact('contestcat'));
     }
 
+    function categoryadd() {
+//		die("add");
+        return view('admin-views.contest.categoryadd');
+    }
     public function remove_image(Request $request)
     {
         ImageManager::delete('contest/' . $request['image']);
@@ -82,6 +101,13 @@ class Contest2Controller extends Controller
         }}
         $contest->delete();
         Toastr::success('Contest removed successfully!');
+        return back();
+    }
+    public function categorydelete($id)
+    {
+        $contest = ContestCategory::find($id);
+        $contest->delete();
+        Toastr::success('Contest Category removed successfully!');
         return back();
     }
 	function displayImage($filename)
@@ -122,6 +148,7 @@ class Contest2Controller extends Controller
         $contest->end_date_2 = $request->end_date_2;
         $contest->start_date_3 = $request->start_date_3;
         $contest->end_date_3 = $request->end_date_3;
+        $contest->contestcat = $request->contestcat;
 //        $contest->created_date = date("Y-m-d H:i:s");
 
  
@@ -132,6 +159,32 @@ class Contest2Controller extends Controller
             $contest->picture = json_encode($product_images);
         }
 
+ 
+        if ($validator->errors()->count() > 0) {
+            return response()->json(['errors' => Helpers::error_processor($validator)]);
+        }
+
+        $contest->save();
+
+        return response()->json([], 200);
+        // Toastr::success('Product added successfully!');
+        // return redirect()->route('seller.product.list');
+    }
+
+    function categoryaddnew2(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'category' => 'required',
+            'description' => 'required',
+        ], [
+            'category.required' => 'Contest Category is required!',
+            'description.required' => 'Description  is required!',
+        ]);
+
+        $contest = new ContestCategory();
+        $contest->category = $request->category;
+        $contest->description = $request->description;
+
+ 
  
         if ($validator->errors()->count() > 0) {
             return response()->json(['errors' => Helpers::error_processor($validator)]);
@@ -227,7 +280,7 @@ class Contest2Controller extends Controller
         $contest->end_date_2 = $request->end_date_2;
         $contest->start_date_3 = $request->start_date_3;
         $contest->end_date_3 = $request->end_date_3;
-//        $contest->created_date = date("Y-m-d H:i:s");
+        $contest->contestcat = $request->contestcat;
 
 		$product_images=json_decode($contest->picture);
         if ($request->file('images')) {
@@ -237,6 +290,29 @@ class Contest2Controller extends Controller
             $contest->picture = json_encode($product_images);
         }
 
+ 
+        if ($validator->errors()->count() > 0) {
+            return response()->json(['errors' => Helpers::error_processor($validator)]);
+        }
+
+        $contest->save();
+
+        return response()->json([], 200);
+        // Toastr::success('Product added successfully!');
+        // return redirect()->route('seller.product.list');
+    }
+    function categoryupdate(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'category' => 'required',
+            'description' => 'required',
+        ], [
+            'category.required' => 'Contest Category is required!',
+            'description.required' => 'Description  is required!',
+        ]);
+
+        $contest = ContestCategory::find($request->id);
+        $contest->category = $request->category;
+        $contest->description = $request->description;
  
         if ($validator->errors()->count() > 0) {
             return response()->json(['errors' => Helpers::error_processor($validator)]);

@@ -9,8 +9,10 @@ use App\CPU\ImageManager;
 use App\Http\Controllers\Controller;
 use App\Model\Contest;
 use App\Model\ContestUser;
+use App\Model\ContestCategory;
 use App\User;
 use App\Model\Seller;
+use App\Model\Saldo;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -24,29 +26,35 @@ use Illuminate\Support\Str;
 class ContestController extends Controller
 {
     function list() {
+			$seller = Seller::find(auth('seller')->id());
             $contest = Contest::where(['seller_id' => auth('seller')->id()])->orderBy('created_at', 'desc')->get();
 
-        return view('seller-views.contest.list', compact('contest'));
+        return view('seller-views.contest.list', compact('contest','seller'));
     }
     public function edit($id)
     {
+            $contestcat = ContestCategory::get();
+			$seller = Seller::find(auth('seller')->id());
         $contest = Contest::find($id);
-        return view('seller-views.contest.edit', compact('contest'));
+        return view('seller-views.contest.edit', compact('contest','seller','contestcat'));
 
     }
 
     public function listmanage($id)
     {
+            $contestcat = ContestCategory::get();
         $contest = Contest::find($id);
         $user = new User();
         $seller = new Seller();
 		$contestuser = new ContestUser();
-        return view('seller-views.contest.view', compact('contest','user','seller','contestuser'));
+        return view('seller-views.contest.view', compact('contest','user','seller','contestuser','contestcat'));
 
     }
  
     function add() {
-        return view('seller-views.contest.add');
+            $contestcat = ContestCategory::get();
+			$seller = Seller::find(auth('seller')->id());
+        return view('seller-views.contest.add',compact('seller','contestcat'));
     }
 
     public function remove_image(Request $request)
@@ -83,18 +91,55 @@ class ContestController extends Controller
         $contest->update([
             'picture' => json_encode($array),
         ]);
-        Toastr::success('Product image removed successfully!');
-        return back();
+        Toastr::success('Product image small removed successfully!');
+         return redirect()->route('seller.contest.listjoin');
+    }
+    public function remove_image_user2(Request $request)
+    {
+        ImageManager::delete('contest/' . $request['image']);
+        $contest = ContestUser::where('contest_id', $request['id'])->where('seller_id', auth('seller')->id())->first();
+
+        $array = [];
+        foreach (json_decode($contest['picture2']) as $image) {
+            if ($image != $request['image']) {
+                array_push($array, $image);
+            }
+        }
+        $contest->update([
+            'picture2' => json_encode($array),
+        ]);
+        Toastr::success('Product image Medium removed successfully!');
+         return redirect()->route('seller.contest.listjoin');
+    }
+    public function remove_image_user3(Request $request)
+    {
+        ImageManager::delete('contest/' . $request['image']);
+        $contest = ContestUser::where('contest_id', $request['id'])->where('seller_id', auth('seller')->id())->first();
+
+        $array = [];
+        foreach (json_decode($contest['picture3']) as $image) {
+            if ($image != $request['image']) {
+                array_push($array, $image);
+            }
+        }
+        $contest->update([
+            'picture3' => json_encode($array),
+        ]);
+        Toastr::success('Product image Large removed successfully!');
+         return redirect()->route('seller.contest.listjoin');
     }
     public function listjoin()
     {
+            $contestcat = ContestCategory::get();
+
+			$seller = Seller::find(auth('seller')->id());
             $contest1 = Contest::where('seller_id',"!=", auth('seller')->id())->where("start_date","<=",date("Y-m-d H:i:s"))->where("end_date",">=",date("Y-m-d H:i:s"))->where("start_date","<>",null)->where("end_date","<>",null);
 			$contest2 = Contest::where('seller_id',"!=", auth('seller')->id())->where("start_date_1","<=",date("d"))->where("end_date_1",">=",date("d"))->where("start_date_1","<>",null)->where("end_date_1","<>",null);
 			$contest3 = Contest::where('seller_id',"!=", auth('seller')->id())->where("start_date_2","<=",date("d"))->where("end_date_2",">=",date("d"))->where("start_date_2","<>",null)->where("end_date_2","<>",null);
 			$contest = Contest::where('seller_id',"!=", auth('seller')->id())->where("start_date_3","<=",date("d"))->where("end_date_3",">=",date("d"))->where("start_date_3","<>",null)->where("end_date_3","<>",null)->union($contest1)->union($contest2)->union($contest3)->orderBy('created_at', 'desc')->get();
 			$contestuser = new ContestUser();
 
-        return view('seller-views.contest.listjoin', compact('contest','contestuser'));
+        return view('seller-views.contest.listjoin', compact('contest','contestuser','seller','contestcat'));
     }
     public function delete($id)
     {
@@ -145,7 +190,7 @@ class ContestController extends Controller
         $contest->end_date_2 = $request->end_date_2;
         $contest->start_date_3 = $request->start_date_3;
         $contest->end_date_3 = $request->end_date_3;
-//        $contest->created_date = date("Y-m-d H:i:s");
+        $contest->contestcat = $request->contestcat;
 
  
         if ($request->file('images')) {
@@ -174,7 +219,7 @@ class ContestController extends Controller
         ], [
             'answer-'.$request->id.'.required' => 'Answer is required!'
         ]);
-
+		$contest=Contest::find($request->id);
         $contestuser = ContestUser::where("seller_id","=",auth('seller')->id())->where("contest_id","=",$request->id)->first();
 		if(!empty($contestuser))
 		{
@@ -186,6 +231,27 @@ class ContestController extends Controller
 			$contestuser->seller_id = auth('seller')->id();
 			$contestuser->contest_id = $request->id;
 			$contestuser->answer = $request['answer-'.$request->id];
+
+						$seller = Seller::find(auth('seller')->id());
+			if($seller->premium_until > date("Y-m-d"))
+			{
+				$seller->saldo=$seller->saldo-(0.5*$contest->fund);
+				$seller->save();
+
+				$s = new Saldo();
+				$s->action="Join Contest";
+				$s->seller_id = auth('seller')->id();
+				$s->amount= (0.5*$contest->fund);
+				$s->save();
+
+			}
+			else
+			{
+//				echo '<script>alert("xxx");</script>';
+$returnData = array("errors" => [array("code"=>"premium","message"=>"you must be a premium user to join contest!")]);
+return response()->json($returnData);
+//return '{"errors":[{"code":"answer-62","message":"Answer is required!"}]}';
+			}
 		}
 		$product_images=json_decode($contestuser->picture);
         if ($request->file('images-'.$request->id)) {
@@ -193,6 +259,22 @@ class ContestController extends Controller
                 $product_images[] = ImageManager::upload('contest/', 'png', $img);
             }
             $contestuser->picture = json_encode($product_images);
+        }
+ 
+		$product_images2=json_decode($contestuser->picture2);
+        if ($request->file('images2-'.$request->id)) {
+            foreach ($request->file('images2-'.$request->id) as $img) {
+                $product_images2[] = ImageManager::upload('contest/', 'png', $img);
+            }
+            $contestuser->picture2 = json_encode($product_images2);
+        }
+ 
+		$product_images3=json_decode($contestuser->picture3);
+        if ($request->file('images3-'.$request->id)) {
+            foreach ($request->file('images3-'.$request->id) as $img) {
+                $product_images3[] = ImageManager::upload('contest/', 'png', $img);
+            }
+            $contestuser->picture3 = json_encode($product_images3);
         }
  
 
@@ -258,6 +340,7 @@ class ContestController extends Controller
         $contest->end_date_2 = $request->end_date_2;
         $contest->start_date_3 = $request->start_date_3;
         $contest->end_date_3 = $request->end_date_3;
+        $contest->contestcat = $request->contestcat;
 //        $contest->created_date = date("Y-m-d H:i:s");
 
 		$product_images=json_decode($contest->picture);

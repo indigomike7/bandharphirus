@@ -108,6 +108,11 @@
                                 </div>
 
                                 <div class="dropdown-divider"></div>
+                                <a class="dropdown-item"
+                                   href="{{route('seller.saldo.saldo')}}">
+                                    <span class="text-truncate pr-2" title="Settings">{{$seller->saldo}}</span>
+                                </a>
+
 								@if($seller->premium_until > date("Y-m-d"))
                                 <a class="dropdown-item"
                                    href="{{route('seller.premium.premium')}}">
@@ -119,6 +124,10 @@
                                     <span class="text-truncate pr-2" title="Settings">Become Premium</span>
                                 </a>
 
+                                <a class="dropdown-item"
+                                   href="{{route('seller.saldo.update')}}">
+                                    <span class="text-truncate pr-2" title="Settings">Buy Saldo</span>
+                                </a>
                                 <a class="dropdown-item"
                                    href="{{route('seller.profile.update',auth('seller')->user()->id)}}">
                                     <span class="text-truncate pr-2" title="Settings">Settings</span>

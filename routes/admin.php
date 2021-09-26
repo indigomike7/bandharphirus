@@ -178,10 +178,16 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
         Route::group(['prefix' => 'contest2', 'as' => 'contest2.'], function () {
             Route::get('listmanage/{id}', 'Contest2Controller@listmanage')->name('listmanage');
             Route::get('list', 'Contest2Controller@list')->name('list');
+            Route::get('category', 'Contest2Controller@category')->name('category');
+            Route::get('categoryadd', 'Contest2Controller@categoryadd')->name('categoryadd');
+            Route::get('categoryedit/{id}', 'Contest2Controller@categoryedit')->name('categoryedit');
+            Route::get('categorydelete/{id}', 'Contest2Controller@categorydelete')->name('categorydelete');
             Route::get('listjoin', 'Contest2Controller@listjoin')->name('listjoin');
             Route::get('adminadd', 'Contest2Controller@add')->name('adminadd');
             Route::post('addnew2', 'Contest2Controller@addnew2')->name('addnew2');
+            Route::post('categoryaddnew2', 'Contest2Controller@categoryaddnew2')->name('categoryaddnew2');
             Route::post('update', 'Contest2Controller@update')->name('update');
+            Route::post('categoryupdate', 'Contest2Controller@categoryupdate')->name('categoryupdate');
             Route::get('remove_image/{id}', 'Contest2Controller@remove_image')->name('remove_image');
             Route::get('detail/{id}', 'Contest2Controller@detail')->name('detail');
             Route::get('edit/{id}', 'Contest2Controller@edit')->name('edit');

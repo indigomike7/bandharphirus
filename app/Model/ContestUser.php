@@ -18,5 +18,5 @@ class ContestUser extends Model
 
     ];
 
-protected $fillable = ['picture'];
+protected $guarded = [];
 }

@@ -152,6 +152,12 @@
 @endif                        <div class="card-body">
                             <div class="form-group">
 							<h4>{{$contest->name}}</h4>
+							Category :
+							@foreach($contestcat as $key=>$value)
+							@if($value->id==$contest->contestcat)
+							{{$value->category}}<br/>
+							@endif
+							@endforeach
 							{{$contest->description}}<br/>
 							Biaya : {{$contest->fund}}<br/>
 							Dimulai tanggal {{$contest->start_date!==null ? $contest->start_date->format('Y-m-d') : 'N/A'}}<br/>

@@ -299,6 +299,12 @@
       <ul class="js-navbar-vertical-aside-submenu nav nav-sub"
           style="display: {{(Request::is('admin/attribute*') || Request::is('admin/contest2*'))?'block':''}}">
           <li class="nav-item {{Request::is('admin/contest2/list')?'active':''}}">
+              <a class="nav-link " href="{{route('admin.contest2.category',['in_house'])}}" title="InHouse Products">
+                  <span class="tio-circle nav-indicator-icon"></span>
+                  <span class="text-truncate">Category</span>
+              </a>
+          </li>
+          <li class="nav-item {{Request::is('admin/contest2/list')?'active':''}}">
               <a class="nav-link " href="{{route('admin.contest2.list',['in_house'])}}" title="InHouse Products">
                   <span class="tio-circle nav-indicator-icon"></span>
                   <span class="text-truncate">My Contest</span>

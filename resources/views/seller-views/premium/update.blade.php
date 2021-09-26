@@ -175,11 +175,12 @@
                             </div>
                         </div>
                     </div>
-					<div id="payment_30" class="modal">
+					<div id="payment_30" class="modal col-md-12">
+					<div class="row">
                         @php($data=json_decode($response,true))
                         @if($data)
 							@for($i=0;$i<count($data['data']);$i++)
-								<div class="col-md-6 mb-4" style="cursor: pointer">
+								<div class="col-md-3" style="cursor: pointer">
 									<div class="card">
 										<div class="card-body" style="height: 100px">
 											<a class="btn btn-block"
@@ -192,11 +193,13 @@
 							@endfor
                         @endif
 					</div>
-					<div id="payment_90" class="modal">
+					</div>
+					<div id="payment_90" class="modal col-md-12">
+					<div class="row">
                         @php($data=json_decode($response,true))
                         @if($data)
 							@for($i=0;$i<count($data['data']);$i++)
-								<div class="col-md-6 mb-4" style="cursor: pointer">
+								<div class="col-md-3" style="cursor: pointer">
 									<div class="card">
 										<div class="card-body" style="height: 100px">
 											<a class="btn btn-block"
@@ -209,11 +212,14 @@
 							@endfor
                         @endif
 					</div>
-					<div id="payment_180" class="modal">
+					</div>
+
+					<div id="payment_180" class="modal col-md-12">
+					<div class="row">
                         @php($data=json_decode($response,true))
                         @if($data)
 							@for($i=0;$i<count($data['data']);$i++)
-								<div class="col-md-6 mb-4" style="cursor: pointer">
+								<div class="col-md-3" style="cursor: pointer">
 									<div class="card">
 										<div class="card-body" style="height: 100px">
 											<a class="btn btn-block"
@@ -226,11 +232,13 @@
 							@endfor
                         @endif
 					</div>
-					<div id="payment_365" class="modal">
+					</div>
+					<div id="payment_365" class="modal col-md-12">
+					<div class="row">
                         @php($data=json_decode($response,true))
                         @if($data)
 							@for($i=0;$i<count($data['data']);$i++)
-								<div class="col-md-6 mb-4" style="cursor: pointer">
+								<div class="col-md-3" style="cursor: pointer">
 									<div class="card">
 										<div class="card-body" style="height: 100px">
 											<a class="btn btn-block"
@@ -242,6 +250,7 @@
 								</div>
 							@endfor
                         @endif
+					</div>
 					</div>
 					<div class="modal" tabindex="-1" role="dialog" id="bayarmodal">
 					  <div class="modal-dialog" role="document">

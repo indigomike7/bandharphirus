@@ -65,6 +65,8 @@ Route::group(['namespace' => 'Seller', 'prefix' => 'seller', 'as' => 'seller.'],
             Route::post('addnew', 'ContestController@addnew')->name('addnew');
             Route::post('update', 'ContestController@update')->name('update');
             Route::get('remove_image_user/{id}', 'ContestController@remove_image_user')->name('remove_image_user');
+            Route::get('remove_image_user2/{id}', 'ContestController@remove_image_user2')->name('remove_image_user2');
+            Route::get('remove_image_user3/{id}', 'ContestController@remove_image_user3')->name('remove_image_user3');
             Route::get('remove_image/{id}', 'ContestController@remove_image')->name('remove_image');
             Route::get('detail/{id}', 'ContestController@detail')->name('detail');
             Route::get('edit/{id}', 'ContestController@edit')->name('edit');
@@ -76,6 +78,11 @@ Route::group(['namespace' => 'Seller', 'prefix' => 'seller', 'as' => 'seller.'],
             Route::get('update', 'PremiumController@update')->name('update');
             Route::get('success', 'PremiumController@success')->name('success');
             Route::get('premium', 'PremiumController@premium')->name('premium');
+        });
+        Route::group(['prefix' => 'saldo', 'as' => 'saldo.'], function () {
+            Route::get('update', 'SaldoController@update')->name('update');
+            Route::get('success', 'SaldoController@success')->name('success');
+            Route::get('saldo', 'SaldoController@saldo')->name('saldo');
         });
         // Messaging
         Route::group(['prefix' => 'messages', 'as' => 'messages.'], function () {

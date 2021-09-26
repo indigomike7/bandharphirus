@@ -152,6 +152,15 @@
     </div>
 @endif                        <div class="card-body">
                             <div class="form-group">
+                                <label for="name">Contest Category</label>
+								<select name="contestcat">
+								@foreach($contestcat as $key=>$value)
+								<option value="{{$value->id}}">{{$value->category}}</option>
+								@endforeach
+								</select>
+                            </div>
+
+                            <div class="form-group">
                                 <label for="name">Contest Name</label>
                                 <input type="text" name="name" value="{{old('name')}}" class="form-control" id="name" placeholder="Ex : Kontes untuk memperingati HUT RI">
                             </div>

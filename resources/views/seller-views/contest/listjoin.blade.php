@@ -91,9 +91,10 @@
 
                             </div>
                                 <div class="p-2 border border-dashed"  style="max-width:430px;">
+								SMALL<br/>
                                     <div class="row" id="coba-{{$detail->id}}">
 									@if(!empty($contestuser2))
-									@if($contestuser2->picture!=null)
+									@if($contestuser2->picture!=null || $contestuser2->picture!="")
                                     @foreach (json_decode($contestuser2->picture) as $key => $photo)
                                             <div class="col-6">
                                                 <div class="card">
@@ -102,6 +103,50 @@
                                                             onerror=""
                                                             src="{{asset('storage/app/public/contest/'.$photo)}}" alt="Product image">
                                                         <a href="{{route('seller.contest.remove_image_user',['id'=>$detail->id,'image'=>$photo])}}"
+                                                        class="btn btn-danger btn-block">Remove</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+									@endif
+									@endif
+                                    </div>
+                                </div>
+                                <div class="p-2 border border-dashed"  style="max-width:430px;">
+								MEDIUM<br/>
+                                    <div class="row" id="coba2-{{$detail->id}}">
+									@if(!empty($contestuser2))
+									@if($contestuser2->picture2!=null || $contestuser2->picture2!="")
+                                    @foreach (json_decode($contestuser2->picture2) as $key2 => $photo2)
+                                            <div class="col-6">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <img style="width: 100%" height="auto"
+                                                            onerror=""
+                                                            src="{{asset('storage/app/public/contest/'.$photo2)}}" alt="Product image">
+                                                        <a href="{{route('seller.contest.remove_image_user2',['id'=>$detail->id,'image'=>$photo2])}}"
+                                                        class="btn btn-danger btn-block">Remove</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+									@endif
+									@endif
+                                    </div>
+                                </div>
+                                <div class="p-2 border border-dashed"  style="max-width:430px;">
+								LARGE<br/>
+                                    <div class="row" id="coba3-{{$detail->id}}">
+									@if(!empty($contestuser2))
+									@if($contestuser2->picture3!=null || $contestuser2->picture3!="")
+                                    @foreach (json_decode($contestuser2->picture3) as $key3 => $photo3)
+                                            <div class="col-6">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <img style="width: 100%" height="auto"
+                                                            onerror=""
+                                                            src="{{asset('storage/app/public/contest/'.$photo3)}}" alt="Product image">
+                                                        <a href="{{route('seller.contest.remove_image_user3',['id'=>$detail->id,'image'=>$photo3])}}"
                                                         class="btn btn-danger btn-block">Remove</a>
                                                     </div>
                                                 </div>
@@ -145,7 +190,7 @@
                             });
                         }
                     } else {
-                        toastr.success('Contest Joined successfully!', {
+                        toastr.success('Contest Joined successfully! Saldo is deducted!!', {
                             CloseButton: true,
                             ProgressBar: true
                         });
@@ -193,11 +238,45 @@
                 }
             });
 
-            $("#thumbnail-{{$detail->id}}").spartanMultiImagePicker({
-                fieldName: 'image-{{$detail->id}}',
-                maxCount: 1,
+            $("#coba2-{{$detail->id}}").spartanMultiImagePicker({
+                fieldName: 'images2-{{$detail->id}}[]',
+                maxCount: 4,
                 rowHeight: 'auto',
-                groupClassName: 'col-12',
+                groupClassName: 'col-6',
+                maxFileSize: '',
+                placeholderImage: {
+                    image: '{{asset('public/assets/back-end/img/400x400/img2.jpg')}}',
+                    width: '100%',
+                },
+                dropFileLabel: "Drop Here",
+                onAddRow: function (index, file) {
+
+                },
+                onRenderedPreview: function (index) {
+
+                },
+                onRemoveRow: function (index) {
+
+                },
+                onExtensionErr: function (index, file) {
+                    toastr.error('Please only input png or jpg type file', {
+                        CloseButton: true,
+                        ProgressBar: true
+                    });
+                },
+                onSizeErr: function (index, file) {
+                    toastr.error('File size too big', {
+                        CloseButton: true,
+                        ProgressBar: true
+                    });
+                }
+            });
+
+            $("#coba3-{{$detail->id}}").spartanMultiImagePicker({
+                fieldName: 'images3-{{$detail->id}}[]',
+                maxCount: 4,
+                rowHeight: 'auto',
+                groupClassName: 'col-6',
                 maxFileSize: '',
                 placeholderImage: {
                     image: '{{asset('public/assets/back-end/img/400x400/img2.jpg')}}',
