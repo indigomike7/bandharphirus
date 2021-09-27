@@ -6,6 +6,7 @@ use App\CPU\Helpers;
 use App\Http\Controllers\Controller;
 use App\Model\BusinessSetting;
 use App\Model\Wishlist;
+use App\Model\Collection;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -21,8 +22,9 @@ class LoginController extends Controller
 
     public function login()
     {
+		$collection=Collection::get();
         session()->put('keep_return_url', url()->previous());
-        return view('customer-view.auth.login');
+        return view('customer-view.auth.login',compact('collection'));
     }
 
     public function submit(Request $request)

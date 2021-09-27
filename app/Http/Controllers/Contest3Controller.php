@@ -9,6 +9,7 @@ use App\CPU\ImageManager;
 use App\Http\Controllers\Controller;
 use App\Model\Contest;
 use App\Model\ContestUser;
+use App\Model\Collection;
 use App\User;
 use App\Model\Seller;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -91,6 +92,7 @@ class Contest3Controller extends Controller
 	public function listjoin()
     {
 //		die(auth('customer')->id());
+		$collection=Collection::get();
 		if(auth('customer')->id()== null)
 		{
 			return redirect()->route('customer.auth.login');
@@ -101,7 +103,7 @@ class Contest3Controller extends Controller
 			$contest = Contest::where("start_date_3","<=",date("d"))->where("end_date_3",">=",date("d"))->where("start_date_3","<>",null)->where("end_date_3","<>",null)->union($contest1)->union($contest2)->union($contest3)->orderBy('created_at', 'desc')->get();
 			$contestuser = new ContestUser();
 
-        return view('web-views.contest.listjoin', compact('contest','contestuser'));
+        return view('web-views.contest.listjoin', compact('contest','contestuser','collection'));
     }/*
     public function delete($id)
     {

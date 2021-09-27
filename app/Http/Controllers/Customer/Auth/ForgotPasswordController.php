@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use App\Model\Collection;
 
 class ForgotPasswordController extends Controller
 {
@@ -19,7 +20,8 @@ class ForgotPasswordController extends Controller
     
     public function reset_password()
     {
-        return view('customer-view.auth.recover-password');
+		$collection=Collection::get();
+        return view('customer-view.auth.recover-password',compact('collection'));
     }
 
     public function reset_password_request(Request $request)

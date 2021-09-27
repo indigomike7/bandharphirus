@@ -53,10 +53,10 @@
                                             {{$k+1}}
                                         </td>
                                         <td>
-										
+										<!--
 										@if(!empty($contestuser2))
 											<h4><font color='blue'>Sudah Ikut Serta</font></h4>
-										@endif
+										@endif-->
                                         ID : {{$detail->id}}<br/>
 										Name : {{ $detail->name }}<br/>
 										Tanggal Dibuat :{{ $detail->created_at }}<br/>
@@ -70,9 +70,10 @@
 										<div style="text-align:justify;">
 										{{ $detail->description }}
 										</div>
-										@if(!empty($contestuser2))
+										<!--@if(!empty($contestuser2))
 											<h4><font color='blue'>Sudah Ikut Serta</font></h4>
 										@endif
+										
 										<form class="product-form-{{$detail->id}}" action="{{route('contest3.join')}}" method="post" enctype="multipart/form-data"
 											  id="product-form-{{$detail->id}}">@csrf
                             <div class="form-group">
@@ -119,7 +120,7 @@
                                     </div>
                                 </div>
                             </div>
-										</form>
+										</form>-->
     <script>
         $('#product-form-{{$detail->id}}').submit(function (e) {
             e.preventDefault();

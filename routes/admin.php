@@ -196,6 +196,33 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
 			Route::post('updatemanage', 'Contest2Controller@updatemanage')->name('updatemanage');
         });
 
+        Route::group(['prefix' => 'education', 'as' => 'education.'], function () {
+            Route::get('list', 'EducationController@list')->name('list');
+            Route::get('category', 'EducationCategoryController@category')->name('category');
+            Route::get('categoryadd', 'EducationCategoryController@categoryadd')->name('categoryadd');
+            Route::get('categoryedit/{id}', 'EducationCategoryController@categoryedit')->name('categoryedit');
+            Route::get('categorydelete/{id}', 'EducationCategoryController@categorydelete')->name('categorydelete');
+            Route::get('add', 'EducationController@add')->name('add');
+            Route::post('addnew2', 'EducationController@addnew2')->name('addnew2');
+            Route::post('categoryaddnew2', 'EducationCategoryController@categoryaddnew2')->name('categoryaddnew2');
+            Route::post('update', 'EducationController@update')->name('update');
+            Route::post('categoryupdate', 'EducationCategoryController@categoryupdate')->name('categoryupdate');
+            Route::get('remove_image/{id}', 'EducationController@remove_image')->name('remove_image');
+            Route::get('remove_image2/{id}', 'EducationCategoryController@remove_image2')->name('remove_image2');
+            Route::get('edit/{id}', 'EducationController@edit')->name('edit');
+            Route::get('delete/{id}', 'EducationController@delete')->name('delete');
+        });
+        Route::group(['prefix' => 'collection', 'as' => 'collection.'], function () {
+            Route::get('index', 'CollectionController@index')->name('index');
+            Route::get('add', 'CollectionController@add')->name('add');
+            Route::post('store', 'CollectionController@store')->name('store');
+            Route::post('update', 'CollectionController@update')->name('update');
+            Route::get('remove_image/{id}', 'CollectionController@remove_image')->name('remove_image');
+            Route::get('remove_image2/{id}', 'CollectionController@remove_image2')->name('remove_image2');
+            Route::get('detail/{id}', 'CollectionController@detail')->name('detail');
+            Route::get('edit/{id}', 'CollectionController@edit')->name('edit');
+            Route::get('delete/{id}', 'CollectionController@delete')->name('delete');
+        });
         Route::group(['prefix' => 'premium2', 'as' => 'premium2.'], function () {
             Route::get('settings', 'Premium2Controller@settings')->name('settings');
             Route::post('settingsupdate', 'Premium2Controller@settingsupdate')->name('settingsupdate');

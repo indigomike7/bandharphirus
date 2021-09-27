@@ -809,15 +809,18 @@
                                     <li class="active">
                                         <a href="{{route('home')}}">Home</a>
                                     </li>
+									@if($collection!= null)
                                     <li>
-                                        <a href="collection.html">Collection</a>
-
+                                        <a href="{{route('collection')}}">Collection</a>
                                         <ul>
-                                            <li><a href="koleksi-amerika.html">Amerika</a></li>
-                                            <li><a href="koleksi-cina.html">Cina</a></li>
-                                            <li><a href="koleksi-persian.html">Persian</a></li> 
+										@foreach($collection as $key=>$value)
+
+                                            <li><a href="{{route('collectionid',[$value->slug])}}">{{$value->name}}</a></li>
+										@endforeach
                                         </ul>
+
                                     </li>
+									@endif
                                     <li>
                                         <a href="{{route('contest3.listjoin')}}">Contest</a><!--
                                         <ul>
@@ -846,7 +849,7 @@
                                         <a href="chatroom.html">Chatroom</a>
                                     </li>
                                     <li>
-                                        <a href="education.html">Education</a>
+                                        <a href="{{route('educationcategory')}}">Education</a>
                                     </li>
                                 </ul>
                             </nav>

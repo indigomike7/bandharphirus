@@ -17,6 +17,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['namespace' => 'Web'], function () {
     Route::get('/', 'WebController@home')->name('home');
+    Route::get('collection', 'WebController@collection')->name('collection');
+    Route::get('collectionid/{slug}', 'WebController@collectionid')->name('collectionid');
+    Route::get('educationcategory', 'EducationCategoryController@educationcategory')->name('educationcategory');
+    Route::get('educationcategoryid/{id}', 'EducationCategoryController@educationcategoryid')->name('educationcategoryid');
+    Route::get('educationid/{id}', 'EducationCategoryController@educationid')->name('educationid');
     Route::get('quick-view', 'WebController@quick_view')->name('quick-view');
     Route::get('/product/{slug}', 'WebController@product')->name('product');
     Route::get('products', 'WebController@products')->name('products');

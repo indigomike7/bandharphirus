@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Customer\Auth;
 use App\CPU\Helpers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Model\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
@@ -17,8 +18,9 @@ class RegisterController extends Controller
 
     public function register()
     {
+		$collection=Collection::get();
         session()->put('keep_return_url', url()->previous());
-        return view('customer-view.auth.register');
+        return view('customer-view.auth.register',compact('collection'));
     }
 
     public function submit(Request $request)

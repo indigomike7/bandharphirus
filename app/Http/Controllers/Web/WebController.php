@@ -19,6 +19,7 @@ use App\Model\Product;
 use App\Model\Review;
 use App\Model\Shop;
 use App\Model\Order;
+use App\Model\Collection;
 use App\User;
 use App\Model\Wishlist;
 use Brian2694\Toastr\Facades\Toastr;
@@ -30,6 +31,7 @@ class WebController extends Controller
 {
     public function home(){
 //		dd(session()->all());
+		$collection=Collection::get();
         $featured_products = Product::with(['reviews'])->active()->where('featured_status', 1)->take(8)->get();
         $random_products = Product::with(['reviews'])->active()->inRandomOrder()->take(8)->get();
         $latest_products = Product::with(['reviews'])->active()->orderBy('id', 'desc')->take(6)->get();
@@ -61,10 +63,28 @@ class WebController extends Controller
 
         $deal_of_the_day = DealOfTheDay::join('products', 'products.id', '=', 'deal_of_the_days.product_id')->select('deal_of_the_days.*', 'products.unit_price')->where('deal_of_the_days.status', 1)->first();
 
-        return view('web-views.home', compact('featured_products', 'random_products', 'topRated', 'bestSellProduct', 'latest_products', 'categories', 'brands', 'deal_of_the_day'));
+        return view('web-views.home', compact('featured_products', 'random_products', 'topRated', 'bestSellProduct', 'latest_products', 'categories', 'brands', 'deal_of_the_day','collection'));
     }
 
+    public function collection(){
+//		dd(session()->all());
+		$collection=Collection::get();
+        return view('web-views.collection', compact('collection'));
+    }
+    public function collectionid(Request $request){
+		$collection=Collection::get();
+		$collection2=new Collection();
+		$collection3=$collection2->where('slug','=',$request->slug)->first();
+//		var_dump($collection2);
+//		var_dump($request->slug);
+		if($collection3!=null)
+		{
+			$product=Product::where('collection','=', $collection3->id)->get();
+		}
+        return view('web-views.collectionid', compact('collection','collection3','product'));
+    }
     public function flash_deals($id){
+		$collection=Collection::get();
         $deal = FlashDeal::with(['products.product.reviews'])->where(['id' => $id, 'status' => 1])->whereDate('start_date', '<=', date('Y-m-d'))->whereDate('end_date', '>=', date('Y-m-d'))->first();
 
         $discountPrice = FlashDealProduct::with(['product'])->get()->map(function ($data) {
@@ -78,7 +98,7 @@ class WebController extends Controller
         // dd($deal->toArray());
 
         if (isset($deal)) {
-            return view('web-views.deals', compact('deal', 'discountPrice'));
+            return view('web-views.deals', compact('deal', 'discountPrice','collection'));
         }
         Toastr::warning('no such deal found!');
         return back();
@@ -86,7 +106,7 @@ class WebController extends Controller
 
     public function all_categories(){
         $categories = Category::all();
-        return view('web-views.categories', compact('categories'));
+        return view('web-views.categories', compact('categories','collection'));
     }
 
     public function categories_by_category($id){
@@ -97,8 +117,9 @@ class WebController extends Controller
     }
 
     public function all_brands(){
+		$collection=Collection::get();
         $brands = Brand::paginate(12);
-        return view('web-views.brands', compact('brands'));
+        return view('web-views.brands', compact('brands','collection'));
     }
 
     public function searched_products(Request $request){
@@ -570,6 +591,7 @@ class WebController extends Controller
 
     public function product($slug)
     {
+		$collection=Collection::get();
         $product = Product::active()->with(['reviews'])->where('slug', $slug)->first();
         if ($product != null) {
             $countOrder = OrderDetail::where('product_id', $product->id)->count();
@@ -577,7 +599,7 @@ class WebController extends Controller
             $relatedProducts = Product::with(['reviews'])->active()->where('category_ids', $product->category_ids)->where('id', '!=', $product->id)->limit(12)->get();
             $deal_of_the_day = DealOfTheDay::where('product_id', $product->id)->where('status', 1)->first();
 
-            return view('web-views.products.details', compact('product', 'countWishlist', 'countOrder', 'relatedProducts', 'deal_of_the_day'));
+            return view('web-views.products.details', compact('product', 'countWishlist', 'countOrder', 'relatedProducts', 'deal_of_the_day','collection'));
         }
 
         Toastr::error('Product not found!');
@@ -586,6 +608,7 @@ class WebController extends Controller
 
     public function products(Request $request)
     {
+		$collection=Collection::get();
         if ($request['sort_by'] == null) {
             $request['sort_by'] = 'latest';
         }
@@ -776,13 +799,14 @@ class WebController extends Controller
             $data['brand_name'] = Brand::find((int)$request['id'])->name;
         }
 
-        return view('web-views.products.view', compact('products', 'data'), $data);
+        return view('web-views.products.view', compact('products', 'data','collection'), $data);
     }
 
     public function viewWishlist()
     {
+		$collection=Collection::get();
         $wishlists = Wishlist::where('customer_id', auth('customer')->id())->get();
-        return view('web-views.users-profile.account-wishlist', compact('wishlists'));
+        return view('web-views.users-profile.account-wishlist', compact('wishlists','collection'));
     }
 
     public function storeWishlist(Request $request)
@@ -832,36 +856,41 @@ class WebController extends Controller
     //for HelpTopic
     public function helpTopic()
     {
+		$collection=Collection::get();
         $helps = HelpTopic::Status()->latest()->get();
-        return view('web-views.help-topics', compact('helps'));
+        return view('web-views.help-topics', compact('helps','collection'));
     }
 
     //for Contact US Page
     public function contacts()
     {
 
-        return view('web-views.contacts');
+		$collection=Collection::get();
+        return view('web-views.contacts',compact('collection'));
     }
 
     public function about_us()
     {
+		$collection=Collection::get();
         $about_us = BusinessSetting::where('type', 'about_us')->first();
         return view('web-views.about-us', [
-            'about_us' => $about_us,
+            'about_us' => $about_us, 'collection'
         ]);
     }
 
     public function termsandCondition()
     {
+		$collection=Collection::get();
         $terms_condition = BusinessSetting::where('type', 'terms_condition')->first();
-        return view('web-views.terms', compact('terms_condition'));
+        return view('web-views.terms', compact('terms_condition','collection'));
     }
 
     //order Details
 
     public function orderdetails()
     {
-        return view('web-views.orderdetails');
+		$collection=Collection::get();
+        return view('web-views.orderdetails',compact('collection'));
     }
 
     public function chat_for_product(Request $request)
@@ -872,56 +901,67 @@ class WebController extends Controller
     //for test
     public function testOrderList()
     {
-        return view('web-views.users-profile.profile.order-list');
+		$collection=Collection::get();
+        return view('web-views.users-profile.profile.order-list',compact('collection'));
     }
 
     public function testOrder()
     {
-        return view('web-views.users-profile.profile.myorder');
+		$collection=Collection::get();
+        return view('web-views.users-profile.profile.myorder',compact('collection'));
     }
 
     public function testProfile()
     {
-        return view('web-views.users-profile.profile.profileInfo');
+		$collection=Collection::get();
+        return view('web-views.users-profile.profile.profileInfo',compact('collection'));
     }
 
     public function testSupport()
     {
-        return view('web-views.users-profile.profile.support-ticket');
+		$collection=Collection::get();
+        return view('web-views.users-profile.profile.support-ticket',compact('collection'));
     }
 
     public function testWish()
     {
-        return view('web-views.users-profile.profile.wishList');
+		$collection=Collection::get();
+        return view('web-views.users-profile.profile.wishList',compact('collection'));
     }
 
     public function testChat()
     {
-        return view('web-views.users-profile.profile.chat-with-seller');
+		$collection=Collection::get();
+        return view('web-views.users-profile.profile.chat-with-seller',compact('collection'));
     }
 
     public function testAddress()
     {
-        return view('web-views.users-profile.profile.address');
+		$collection=Collection::get();
+        return view('web-views.users-profile.profile.address',compact('collection'));
     }
 
     public function testAddressView()
     {
-        return view('web-views.users-profile.profile.address-view');
+		$collection=Collection::get();
+        return view('web-views.users-profile.profile.address-view',compact('collection'));
     }
 
     public function testpurchase()
     {
-        return view('web-views.users-profile.profile.purchase');
+		$collection=Collection::get();
+        return view('web-views.users-profile.profile.purchase',compact('collection'));
     }
 
     public function supportChat()
     {
-        return view('web-views.users-profile.profile.supportTicketChat');
+		$collection=Collection::get();
+        return view('web-views.users-profile.profile.supportTicketChat',compact('collection'));
     }
 
     public function error()
     {
-        return view('web-views.404-error-page');
+		$collection=Collection::get();
+        return view('web-views.404-error-page',compact('collection'));
     }
 }
