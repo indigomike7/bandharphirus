@@ -12,6 +12,7 @@ use App\Model\Color;
 use App\Model\DealOfTheDay;
 use App\Model\FlashDealProduct;
 use App\Model\Product;
+use App\Model\Collection;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -22,9 +23,10 @@ class ProductController extends BaseController
 {
     public function add_new()
     {
+        $categories=Collection::where(['position'=>0])->latest()->paginate(10);
         $cat = Category::where(['parent_id' => 0])->get();
         $br = Brand::orderBY('name', 'ASC')->get();
-        return view('admin-views.product.add-new', compact('cat', 'br'));
+        return view('admin-views.product.add-new', compact('cat', 'br','categories'));
     }
 
     public function featured_status(Request $request)
@@ -79,6 +81,7 @@ class ProductController extends BaseController
 
 
         $p = new Product();
+        $p->collection = $request->collection;
         $p->user_id = auth('admin')->id();
         $p->added_by = "admin";
         $p->name = $request->name;
@@ -275,13 +278,14 @@ class ProductController extends BaseController
 
     public function edit($id)
     {
+        $categories=Collection::where(['position'=>0])->latest()->paginate(10);
         $product = Product::find($id);
         $product_category = json_decode($product->category_ids);
         $product->colors = json_decode($product->colors);
 
         $categorys = Category::where(['parent_id' => 0])->get();
         $br = Brand::orderBY('name', 'ASC')->get();
-        return view('admin-views.product.edit', compact('categorys', 'br', 'product', 'product_category'));
+        return view('admin-views.product.edit', compact('categorys', 'br', 'product', 'product_category','categories'));
 
     }
 
@@ -317,6 +321,7 @@ class ProductController extends BaseController
         }
 
         $product = Product::find($id);
+        $product->collection = $request->collection;
         $product->details = $request->details;
         $product->name = $request->name;
 

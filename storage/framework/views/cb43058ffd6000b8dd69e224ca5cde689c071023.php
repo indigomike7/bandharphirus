@@ -339,6 +339,25 @@
          title="Pages">
           <i class="tio-premium-outlined nav-icon"></i>
           <span
+              class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Collection  </span>
+      </a>
+      <ul class="js-navbar-vertical-aside-submenu nav nav-sub"
+          style="display: <?php echo e((Request::is('admin/attribute*') || Request::is('admin/contest2*'))?'block':''); ?>">
+          <li class="nav-item <?php echo e(Request::is('admin/collection/index')?'active':''); ?>">
+              <a class="nav-link " href="<?php echo e(route('admin.collection.index',['in_house'])); ?>" title="InHouse Products">
+                  <span class="tio-circle nav-indicator-icon"></span>
+                  <span class="text-truncate">Collection Settings</span>
+              </a>
+          </li>
+
+      </ul>
+  </li>
+
+  <li class="navbar-vertical-aside-has-menu <?php echo e((Request::is('admin/attribute*') || Request::is('admin/product*'))?'active':''); ?>">
+      <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle" href="javascript:"
+         title="Pages">
+          <i class="tio-premium-outlined nav-icon"></i>
+          <span
               class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Premium  </span>
       </a>
       <ul class="js-navbar-vertical-aside-submenu nav nav-sub"
@@ -352,7 +371,6 @@
 
       </ul>
   </li>
-
   <li class="navbar-vertical-aside-has-menu <?php echo e((Request::is('admin/attribute*') || Request::is('admin/product*'))?'active':''); ?>">
       <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle" href="javascript:"
          title="Pages">

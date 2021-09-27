@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 26, 2021 at 08:30 AM
+-- Generation Time: Sep 27, 2021 at 01:59 AM
 -- Server version: 10.3.31-MariaDB-cll-lve
 -- PHP Version: 7.3.28
 
@@ -303,11 +303,21 @@ CREATE TABLE `collections` (
   `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_croatian_ci NOT NULL,
   `slug` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_croatian_ci NOT NULL,
   `icon` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `parent_id` int(11) NOT NULL,
-  `position` int(11) NOT NULL,
+  `parent_id` int(11) DEFAULT NULL,
+  `position` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pictures` text COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `collections`
+--
+
+INSERT INTO `collections` (`id`, `name`, `slug`, `icon`, `parent_id`, `position`, `created_at`, `updated_at`, `description`, `pictures`) VALUES
+(4, 'Asian yaa', 'asian-yaa', '[\"2021-09-27-61515714c5615.png\"]', NULL, 0, '2021-09-27 15:22:47', '2021-09-27 15:32:03', 'Asian ayaa', '[\"2021-09-27-6151552765035.png\",\"2021-09-27-6151575388e2d.png\"]'),
+(5, 'Iran', 'iran', '[\"2021-09-27-615157e204441.png\"]', 4, 0, '2021-09-27 15:34:26', '2021-09-27 15:34:26', 'Iranean', '[\"2021-09-27-615157e205ba5.png\"]');
 
 -- --------------------------------------------------------
 
@@ -627,7 +637,7 @@ CREATE TABLE `contest_user` (
 --
 
 INSERT INTO `contest_user` (`id`, `contest_id`, `user_id`, `seller_id`, `answer`, `created_at`, `updated_at`, `picture`, `picture2`, `picture3`) VALUES
-(5, 62, NULL, 5, 'NO', '2021-09-26 22:10:32', '2021-09-26 22:28:13', '[\"2021-09-26-61506338016cd.png\"]', '[\"2021-09-26-6150633802ff5.png\"]', '[\"2021-09-26-6150633803063.png\"]');
+(8, 62, NULL, 5, 'jgfjgfjgf', '2021-09-26 23:14:33', '2021-09-26 23:14:33', '[\"2021-09-26-61507239566b5.png\"]', '', '');
 
 -- --------------------------------------------------------
 
@@ -1212,16 +1222,18 @@ CREATE TABLE `products` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1,
-  `featured_status` tinyint(1) NOT NULL DEFAULT 1
+  `featured_status` tinyint(1) NOT NULL DEFAULT 1,
+  `collection` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `added_by`, `user_id`, `name`, `slug`, `category_ids`, `brand_id`, `unit`, `min_qty`, `refundable`, `images`, `thumbnail`, `featured`, `flash_deal`, `video_provider`, `video_url`, `colors`, `variant_product`, `attributes`, `choice_options`, `variation`, `published`, `unit_price`, `purchase_price`, `tax`, `tax_type`, `discount`, `discount_type`, `current_stock`, `details`, `free_shipping`, `attachment`, `created_at`, `updated_at`, `status`, `featured_status`) VALUES
-(3, 'admin', 1, 'Batu bacan', 'batu-bacan-cFNuZk', '[{\"id\":\"3\",\"position\":1}]', 1, 'pc', 1, 1, '[\"2021-08-02-6107cf8ea4332.png\",\"2021-08-02-6107cf8ea4784.png\"]', '2021-08-02-6107cf8ea48f6.png', NULL, NULL, NULL, NULL, '[\"#00FFFF\"]', 0, 'null', '[]', '[{\"type\":\"Aqua\",\"price\":400,\"sku\":\"Bb-Aqua\",\"qty\":0}]', 0, 400.00, 800000.00, '0', 'percent', '0', 'flat', 0, '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', 0, NULL, '2021-08-02 20:57:18', '2021-08-04 13:29:16', 1, 1),
-(5, 'admin', 1, 'Permata Kijang', 'permata-kijang-wN8YXV', '[{\"id\":\"3\",\"position\":1}]', 1, 'pc', 1, 1, '[\"2021-08-04-610a176b7cf88.png\",\"2021-08-04-610a176b81d58.png\"]', '2021-08-04-610a176b81e0a.png', NULL, NULL, NULL, NULL, '[]', 0, 'null', '[]', '[]', 0, 900000.00, 900000.00, '5', 'percent', '5', 'percent', 89996, '<p>Permata Kijang</p>', 0, NULL, '2021-08-04 14:28:27', '2021-08-04 18:58:37', 1, 1);
+INSERT INTO `products` (`id`, `added_by`, `user_id`, `name`, `slug`, `category_ids`, `brand_id`, `unit`, `min_qty`, `refundable`, `images`, `thumbnail`, `featured`, `flash_deal`, `video_provider`, `video_url`, `colors`, `variant_product`, `attributes`, `choice_options`, `variation`, `published`, `unit_price`, `purchase_price`, `tax`, `tax_type`, `discount`, `discount_type`, `current_stock`, `details`, `free_shipping`, `attachment`, `created_at`, `updated_at`, `status`, `featured_status`, `collection`) VALUES
+(3, 'admin', 1, 'Batu bacan', 'batu-bacan-cFNuZk', '[{\"id\":\"3\",\"position\":1}]', 1, 'pc', 1, 1, '[\"2021-08-02-6107cf8ea4332.png\",\"2021-08-02-6107cf8ea4784.png\"]', '2021-08-02-6107cf8ea48f6.png', NULL, NULL, NULL, NULL, '[\"#00FFFF\"]', 0, 'null', '[]', '[{\"type\":\"Aqua\",\"price\":400,\"sku\":\"Bb-Aqua\",\"qty\":0}]', 0, 400.00, 800000.00, '0', 'percent', '0', 'flat', 0, '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', 0, NULL, '2021-08-02 20:57:18', '2021-08-04 13:29:16', 1, 1, 0),
+(5, 'admin', 1, 'Permata Kijang', 'permata-kijang-wN8YXV', '[{\"id\":\"3\",\"position\":1}]', 1, 'pc', 1, 1, '[\"2021-08-04-610a176b7cf88.png\",\"2021-08-04-610a176b81d58.png\"]', '2021-08-04-610a176b81e0a.png', NULL, NULL, NULL, NULL, '[]', 0, 'null', '[]', '[]', 0, 900000.00, 900000.00, '5', 'percent', '5', 'percent', 89996, '<p>Permata Kijang</p>', 0, NULL, '2021-08-04 14:28:27', '2021-08-04 18:58:37', 1, 1, 0),
+(6, 'admin', 1, 'Zamrud', 'zamrud-x30KVM', '[{\"id\":\"3\",\"position\":1}]', 2, 'kg', 1, 1, '[\"2021-09-27-61515abb4a3c6.png\",\"2021-09-27-61515abb4ba1e.png\"]', '2021-09-27-61515abb4bb18.png', NULL, NULL, NULL, NULL, '[\"#F0F8FF\"]', 0, '[\"2\"]', '[{\"name\":\"choice_2\",\"title\":\"Colour\",\"options\":[\"blue\"]}]', '[{\"type\":\"AliceBlue-blue\",\"price\":500000,\"sku\":\"Z-AliceBlue-blue\",\"qty\":\"1\"}]', 0, 500000.00, 500000.00, '10', 'percent', '0', 'flat', 1, '<p>Testing Product</p>', 0, NULL, '2021-09-27 15:46:35', '2021-09-27 15:50:20', 1, 1, 5);
 
 -- --------------------------------------------------------
 
@@ -1279,7 +1291,9 @@ CREATE TABLE `saldo` (
 
 INSERT INTO `saldo` (`id`, `seller_id`, `action`, `amount`, `created_at`, `updated_at`) VALUES
 (1, 5, 'Buy', 210000, '2021-09-26 12:15:38', '2021-09-26 12:15:38'),
-(2, 5, 'Buy', 1000000, '2021-09-26 12:38:59', '2021-09-26 12:38:59');
+(2, 5, 'Buy', 1000000, '2021-09-26 12:38:59', '2021-09-26 12:38:59'),
+(3, 5, 'Join Contest', 10000, '2021-09-26 19:10:19', '2021-09-26 19:10:19'),
+(4, 5, 'Join Contest', 10000, '2021-09-26 19:14:33', '2021-09-26 19:14:33');
 
 -- --------------------------------------------------------
 
@@ -1393,7 +1407,8 @@ INSERT INTO `sellers` (`id`, `f_name`, `l_name`, `phone`, `image`, `email`, `pas
 (1, 'nyoba', 'nyoba', '0998888888', 'def.png', 'nyoba@gmail.com', '$2y$10$0YkFu8/lus0jDJLHZmsahOB84l1PHehFFFYfjsyyVIAUeVibteUb.', 'pending', NULL, '2021-09-11 17:35:41', '2021-09-11 17:35:41', NULL, NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', 0.00),
 (2, 'Michael', 'Butar butar', '+6281218445901', '2021-09-15-6141d1ec67a6d.png', 'indigomikezone@gmail.com', '$2y$10$6qXizvRS/92dK0VIlFPiZ.B5vP0bVgAcR25/XiY4jmM2e/KOqmlfS', 'approved', 'nGgQbvpAMgdzw1J3fMx5ySqrowcC2PZS6TyHXKXjTMug6Od827PoMQB7z2Ac', '2021-09-15 20:58:52', '2021-09-25 22:37:54', NULL, NULL, NULL, NULL, NULL, '2024-12-23 00:00:00', 0.00),
 (3, 'Michael', 'Butar butar', '+6281218445901', '2021-09-25-614ee6b8edc49.png', 'indigomikezone2@gmail.com', '$2y$10$/FKEpRg/dSScpyV6QQFSTOH4MP1.ckaADjI8iTr.NkebdM5GE25LC', 'approved', 'vGIwS42hqM545WWcRFC7Hds4dJVPZDhiALuzj21jq2K2y420H9RkQ7gAXuCU', '2021-09-25 19:07:05', '2021-09-26 02:17:22', NULL, NULL, NULL, NULL, NULL, '2023-05-02 00:00:00', 0.00),
-(5, 'Michael', 'Butar butar', '+6281218445901', '2021-09-25-614f4e50463cb.png', 'indigomikezone22@gmail.com', '$2y$10$Ux.98gSjSdakQ4NNkReJzOe6q7OQImZmQtke5Wj5H1dnAAJ2Ucjbq', 'approved', 'rx7qqbbStZYZs6zepds0g6eTB2j1F9fHDkRM51av77stbdjmrZeHJwhMy6nJ', '2021-09-26 02:29:04', '2021-09-26 16:38:59', NULL, NULL, NULL, NULL, NULL, '2022-03-24 22:30:46', 1210000.00);
+(5, 'Michael', 'Butar butar', '+6281218445901', '2021-09-25-614f4e50463cb.png', 'indigomikezone22@gmail.com', '$2y$10$Ux.98gSjSdakQ4NNkReJzOe6q7OQImZmQtke5Wj5H1dnAAJ2Ucjbq', 'approved', 'w6QIbkVNon1m6Qi1fLNbPUOtVOewUx8VYTKeDM1LqqCl2TZW6eKUolhTuYdp', '2021-09-26 02:29:04', '2021-09-26 23:14:33', NULL, NULL, NULL, NULL, NULL, '2022-03-24 22:30:46', 1170000.00),
+(6, 'Michael', 'Butar butar', '+6281218445901', '2021-09-26-6150730e4bfe8.png', 'indigomikezone33@gmail.com', '$2y$10$LQ4QFhAVsY4jFEouVruO9ORfBkR1jhsgi0JkOgOfC/YdAKn33Av0q', 'approved', 'nZ3BC1aNV3BMVaPDTDVY3GDFvSGAhu17rc84SOQtF4lpA3yFBEw0XwDKCivI', '2021-09-26 23:18:06', '2021-09-26 23:18:34', NULL, NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', 0.00);
 
 -- --------------------------------------------------------
 
@@ -1418,7 +1433,8 @@ INSERT INTO `seller_wallets` (`id`, `seller_id`, `balance`, `withdrawn`, `create
 (1, 2, '0', '0', '2021-09-15 20:59:51', '2021-09-15 20:59:51'),
 (2, 3, '0', '0', '2021-09-25 23:28:37', '2021-09-25 23:28:37'),
 (3, 4, '0', '0', '2021-09-26 02:21:20', '2021-09-26 02:21:20'),
-(4, 5, '0', '0', '2021-09-26 02:29:53', '2021-09-26 02:29:53');
+(4, 5, '0', '0', '2021-09-26 02:29:53', '2021-09-26 02:29:53'),
+(5, 6, '0', '0', '2021-09-26 23:18:47', '2021-09-26 23:18:47');
 
 -- --------------------------------------------------------
 
@@ -1518,7 +1534,8 @@ INSERT INTO `shops` (`id`, `seller_id`, `name`, `address`, `contact`, `image`, `
 (2, 2, 'Michael', 'Web Design', '+6281218445901', '2021-09-15-6141d1ec8049b.png', '2021-09-15 20:58:52', '2021-09-15 20:58:52'),
 (3, 3, 'Michael Web Design', 'Jl. Taman Sari', '+6281218445901', '2021-09-25-614ee6b9101b5.png', '2021-09-25 19:07:05', '2021-09-25 19:07:05'),
 (4, 4, 'Michael', 'Store Shop', '+6281218445901', '2021-09-25-614f4bf366071.png', '2021-09-26 02:18:59', '2021-09-26 02:18:59'),
-(5, 5, 'Michael Web Design', 'store', '+6281218445901', '2021-09-25-614f4e5056216.png', '2021-09-26 02:29:04', '2021-09-26 02:29:04');
+(5, 5, 'Michael Web Design', 'store', '+6281218445901', '2021-09-25-614f4e5056216.png', '2021-09-26 02:29:04', '2021-09-26 02:29:04'),
+(6, 6, 'Michael Web Design', 'Testing', '+6281218445901', '2021-09-26-6150730e5c63e.png', '2021-09-26 23:18:06', '2021-09-26 23:18:06');
 
 -- --------------------------------------------------------
 
@@ -1647,7 +1664,8 @@ INSERT INTO `users` (`id`, `name`, `f_name`, `l_name`, `phone`, `image`, `email`
 (7, NULL, 'Viva Feil', 'Viva Feil', '18967868039', 'def.png', 'yazan50@live.ca', NULL, '$2y$10$euqY2qTWlgiuaimIUa6/hOndxs69yENxhTVR/R7IRByI2x1oaMotG', 'h7lVmZFLBmWuQiztLiWrWRh27zz6x0NVBtvuZ3iJEV7Lgk74DMxvVacdfiDD', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (8, NULL, 'adsa', 'adsa', '1245165456', 'def.png', 'doni@doni.com', NULL, '$2y$10$xQKUSAQLaVHdYwEwJHGzq.muP4egVdVDMLvpsZPJkeLWsqnKqGohu', 'boqRm0JkQDzQWVXhga5P6Qc6b3uBCEH3jxS5FOc3mefhXHB9UDdHSYBO248N', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (9, NULL, 'Trace Runte', 'Trace Runte', '11760791424', 'def.png', 'davmiller11@verizon.net', NULL, '$2y$10$UBXEx3pBrKUnYHNoOJ3Qj.HIgELx9KBN3C4PkP3fAiWYItV34UUIm', '2Xbgqmv472Nz4cPGbfzrV4yH48nlVWjd9CHc6hobTn4z4EABGdoHImdTxq2j', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(10, NULL, 'Drew Dietrich', 'Drew Dietrich', '18058589444', 'def.png', 'dkm2trill@yahoo.com', NULL, '$2y$10$0pf8stUs.XSc.0v/qDeNZ.9mah8AWD/u/cWkn/4AwFbNhYQ.7jU4y', 'RkVDUfMhVKnYF3p9OziG9qA94Z31fIrVoxmNpSGfDIlqHTIjqeuvMVEM0CtO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(10, NULL, 'Drew Dietrich', 'Drew Dietrich', '18058589444', 'def.png', 'dkm2trill@yahoo.com', NULL, '$2y$10$0pf8stUs.XSc.0v/qDeNZ.9mah8AWD/u/cWkn/4AwFbNhYQ.7jU4y', 'RkVDUfMhVKnYF3p9OziG9qA94Z31fIrVoxmNpSGfDIlqHTIjqeuvMVEM0CtO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(11, NULL, 'Timothy Feeney', 'Timothy Feeney', '13514321941', 'def.png', 'barakemaya@gmail.com', NULL, '$2y$10$286fcYPN8HUkW/XJCVCmGeJO9Ya00mxZNnieHczVY1TzSKMo0zEqq', 'IybqIm0Z17NUgaDikblQgji5sBgVbUxq4XaqwSHBbfUKuEixBCGeyEAlcv8D', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2101,7 +2119,7 @@ ALTER TABLE `chattings`
 -- AUTO_INCREMENT for table `collections`
 --
 ALTER TABLE `collections`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `colors`
@@ -2131,7 +2149,7 @@ ALTER TABLE `contest_category`
 -- AUTO_INCREMENT for table `contest_user`
 --
 ALTER TABLE `contest_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `coupons`
@@ -2245,7 +2263,7 @@ ALTER TABLE `premium_settings`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `product_stocks`
@@ -2263,7 +2281,7 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT for table `saldo`
 --
 ALTER TABLE `saldo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `saldo_purchased`
@@ -2281,13 +2299,13 @@ ALTER TABLE `search_functions`
 -- AUTO_INCREMENT for table `sellers`
 --
 ALTER TABLE `sellers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `seller_wallets`
 --
 ALTER TABLE `seller_wallets`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `seller_wallet_histories`
@@ -2311,7 +2329,7 @@ ALTER TABLE `shipping_methods`
 -- AUTO_INCREMENT for table `shops`
 --
 ALTER TABLE `shops`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `social_medias`
@@ -2335,7 +2353,7 @@ ALTER TABLE `support_ticket_convs`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `wishlists`

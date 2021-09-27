@@ -79,7 +79,7 @@ class Contest2Controller extends Controller
                 array_push($array, $image);
             }
         }
-        Product::where('id', $request['id'])->update([
+        Contest::where('id', $request['id'])->update([
             'picture' => json_encode($array),
         ]);
         Toastr::success('Contest image removed successfully!');

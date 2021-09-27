@@ -1,11 +1,10 @@
-@extends('layouts.back-end.app')
-@section('title','Product Edit')
-@push('css_or_js')
-    <link href="{{asset('public/assets/back-end/css/croppie.css')}}" rel="stylesheet">
-    <link href="{{asset('public/assets/back-end/css/tags-input.min.css')}}" rel="stylesheet">
-    <link href="{{ asset('public/assets/select2/css/select2.min.css')}}" rel="stylesheet">
-    <link href="{{ asset('public/assets/back-end/css/custom.css')}}" rel="stylesheet">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+<?php $__env->startSection('title','Product Edit'); ?>
+<?php $__env->startPush('css_or_js'); ?>
+    <link href="<?php echo e(asset('public/assets/back-end/css/croppie.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('public/assets/back-end/css/tags-input.min.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('public/assets/select2/css/select2.min.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('public/assets/back-end/css/custom.css')); ?>" rel="stylesheet">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
     <style>
         .switch {
             position: relative;
@@ -113,79 +112,79 @@
             }
         }
     </style>
-@endpush
+<?php $__env->stopPush(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
     <!-- Page Heading -->
     <div class="content container-fluid">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('messages.Dashboard')}}</a></li>
-            <li class="breadcrumb-item" aria-current="page"><a href="{{route('admin.product.list', 'in_house')}}">{{trans('messages.Product')}}</a></li>
-            <li class="breadcrumb-item" aria-current="page">{{trans('messages.Edit')}}</li>
+            <li class="breadcrumb-item"><a href="<?php echo e(route('admin.dashboard')); ?>"><?php echo e(trans('messages.Dashboard')); ?></a></li>
+            <li class="breadcrumb-item" aria-current="page"><a href="<?php echo e(route('admin.product.list', 'in_house')); ?>"><?php echo e(trans('messages.Product')); ?></a></li>
+            <li class="breadcrumb-item" aria-current="page"><?php echo e(trans('messages.Edit')); ?></li>
         </ol>
     </nav>
 
     <div class="d-sm-flex align-items-center justify-content-between mb-2">
-        <h1 class="h3 mb-0 text-black-50">{{trans('messages.Product')}} {{trans('messages.Edit')}} </h1>
+        <h1 class="h3 mb-0 text-black-50"><?php echo e(trans('messages.Product')); ?> <?php echo e(trans('messages.Edit')); ?> </h1>
     </div>
 
     <!-- Content Row -->
     <div class="row">
         <div class="col-md-12">
-            <form class="product-form" action="{{route('admin.product.update',$product->id)}}" method="post" enctype="multipart/form-data"
+            <form class="product-form" action="<?php echo e(route('admin.product.update',$product->id)); ?>" method="post" enctype="multipart/form-data"
                   id="product_form">
-                @csrf
+                <?php echo csrf_field(); ?>
                 <div class="card">
                     <div class="card-header">
-                        <h4>{{trans('messages.General Info')}}</h4>
+                        <h4><?php echo e(trans('messages.General Info')); ?></h4>
                     </div>
                     <div class="card-body">
                             <div class="form-group">
                                 <label for="name">Collection </label>
 								<select name="collection">
-								@foreach($categories as $key=>$value)
-								<option value="{{$value->id}}" {{($value->id==$product->collection) ? " selected='selected' " : ""}}>{{$value->name}}</option>
-								@endforeach
+								<?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+								<option value="<?php echo e($value->id); ?>" <?php echo e(($value->id==$product->collection) ? " selected='selected' " : ""); ?>><?php echo e($value->name); ?></option>
+								<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 								</select>
                             </div>
                         <div class="form-group">
-                            <label for="name">{{trans('messages.Product Name')}}</label>
+                            <label for="name"><?php echo e(trans('messages.Product Name')); ?></label>
                             <input type="text" name="name" class="form-control" id="name" placeholder="Ex : LUX"
-                                   value="{{$product->name}}">
+                                   value="<?php echo e($product->name); ?>">
                         </div>
 
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <label for="name">{{trans('messages.Category')}}</label>
+                                    <label for="name"><?php echo e(trans('messages.Category')); ?></label>
                                     <select
                                         class="js-example-basic-multiple js-states js-example-responsive form-control"
                                         name="category_id"
                                         id="category_id"
-                                        onchange="getRequest('{{url('/')}}/admin/product/get-categories?parent_id='+this.value,'sub-category-select','select')">
+                                        onchange="getRequest('<?php echo e(url('/')); ?>/admin/product/get-categories?parent_id='+this.value,'sub-category-select','select')">
                                         <option value="0" selected disabled>---Select---</option>
-                                        @foreach($categorys as $category)
+                                        <?php $__currentLoopData = $categorys; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <option
-                                                value="{{$category['id']}}" {{ $category->id==$product_category[0]->id ? 'selected' : ''}} >{{$category['name']}}</option>
-                                        @endforeach
+                                                value="<?php echo e($category['id']); ?>" <?php echo e($category->id==$product_category[0]->id ? 'selected' : ''); ?> ><?php echo e($category['name']); ?></option>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </select>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="name">{{trans('messages.Sub Category')}}</label>
+                                    <label for="name"><?php echo e(trans('messages.Sub Category')); ?></label>
                                     <select
                                         class="js-example-basic-multiple js-states js-example-responsive form-control"
                                         name="sub_category_id" id="sub-category-select"
-                                        data-id="{{count($product_category)>=2?$product_category[1]->id:''}}"
-                                        onchange="getRequest('{{url('/')}}/admin/product/get-categories?parent_id='+this.value,'sub-sub-category-select','select')">
+                                        data-id="<?php echo e(count($product_category)>=2?$product_category[1]->id:''); ?>"
+                                        onchange="getRequest('<?php echo e(url('/')); ?>/admin/product/get-categories?parent_id='+this.value,'sub-sub-category-select','select')">
                                     </select>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="name">{{trans('messages.Sub Sub Category')}}</label>
+                                    <label for="name"><?php echo e(trans('messages.Sub Sub Category')); ?></label>
 
                                     <select
                                         class="js-example-basic-multiple js-states js-example-responsive form-control"
-                                        data-id="{{count($product_category)>=3?$product_category[2]->id:''}}"
+                                        data-id="<?php echo e(count($product_category)>=3?$product_category[2]->id:''); ?>"
                                         name="sub_sub_category_id" id="sub-sub-category-select">
 
                                     </select>
@@ -197,27 +196,27 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label for="name">{{trans('messages.Brand')}}</label>
+                                    <label for="name"><?php echo e(trans('messages.Brand')); ?></label>
                                     <select
                                         class="js-example-basic-multiple js-states js-example-responsive form-control"
                                         name="brand_id">
-                                        <option value="{{null}}" selected disabled>---Select---</option>
-                                        @foreach($br as $b)
+                                        <option value="<?php echo e(null); ?>" selected disabled>---Select---</option>
+                                        <?php $__currentLoopData = $br; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $b): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <option
-                                                value="{{$b['id']}}" {{ $b->id==$product->brand_id ? 'selected' : ''}} >{{$b['name']}}</option>
-                                        @endforeach
+                                                value="<?php echo e($b['id']); ?>" <?php echo e($b->id==$product->brand_id ? 'selected' : ''); ?> ><?php echo e($b['name']); ?></option>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </select>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="name">{{trans('messages.Unit')}}</label>
+                                    <label for="name"><?php echo e(trans('messages.Unit')); ?></label>
                                     <select
                                         class="js-example-basic-multiple js-states js-example-responsive form-control"
                                         name="unit">
-                                        @foreach(\App\CPU\Helpers::units() as $x)
+                                        <?php $__currentLoopData = \App\CPU\Helpers::units(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $x): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <option
-                                                value={{$x}} {{ $product->unit==$x ? 'selected' : ''}}>{{$x}}</option>
-                                        @endforeach
+                                                value=<?php echo e($x); ?> <?php echo e($product->unit==$x ? 'selected' : ''); ?>><?php echo e($x); ?></option>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </select>
                                 </div>
                             </div>
@@ -227,7 +226,7 @@
 
                 <div class="card mt-2">
                     <div class="card-header">
-                        <h4>{{trans('messages.Variation')}}</h4>
+                        <h4><?php echo e(trans('messages.Variation')); ?></h4>
                     </div>
                     <div class="card-body">
 
@@ -236,50 +235,52 @@
                                 <div class="col-md-6">
 
                                     <label for="colors">
-                                        {{trans('messages.Colors')}} :
+                                        <?php echo e(trans('messages.Colors')); ?> :
                                     </label>
                                     <label class="switch">
                                         <input type="checkbox" class="status"
-                                               name="colors_active" {{count($product['colors'])>0?'checked':''}}>
+                                               name="colors_active" <?php echo e(count($product['colors'])>0?'checked':''); ?>>
                                         <span class="slider round"></span>
                                     </label>
 
                                     <select
                                         class="js-example-basic-multiple js-states js-example-responsive form-control color-var-select"
                                         name="colors[]" multiple="multiple"
-                                        id="colors-selector" {{count($product['colors'])>0?'':'disabled'}}>
-                                        @foreach (\App\Model\Color::orderBy('name', 'asc')->get() as $key => $color)
+                                        id="colors-selector" <?php echo e(count($product['colors'])>0?'':'disabled'); ?>>
+                                        <?php $__currentLoopData = \App\Model\Color::orderBy('name', 'asc')->get(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $color): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <option
-                                                value={{ $color->code }} {{in_array($color->code,$product['colors'])?'selected':''}}>
-                                                {{$color['name']}}
+                                                value=<?php echo e($color->code); ?> <?php echo e(in_array($color->code,$product['colors'])?'selected':''); ?>>
+                                                <?php echo e($color['name']); ?>
+
                                             </option>
-                                        @endforeach
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </select>
                                 </div>
 
                                 <div class="col-md-6">
                                     <label for="attributes" style="padding-bottom: 3px">
-                                        {{trans('messages.Attributes')}} :
+                                        <?php echo e(trans('messages.Attributes')); ?> :
                                     </label>
                                     <select
                                         class="js-example-basic-multiple js-states js-example-responsive form-control"
                                         name="choice_attributes[]" id="choice_attributes" multiple="multiple">
-                                        @foreach (\App\Model\Attribute::orderBy('name', 'asc')->get() as $key => $a)
-                                            @if($product['attributes']!='null')
+                                        <?php $__currentLoopData = \App\Model\Attribute::orderBy('name', 'asc')->get(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $a): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <?php if($product['attributes']!='null'): ?>
                                                 <option
-                                                    value="{{ $a['id']}}" {{in_array($a->id,json_decode($product['attributes'],true))?'selected':''}}>
-                                                    {{$a['name']}}
+                                                    value="<?php echo e($a['id']); ?>" <?php echo e(in_array($a->id,json_decode($product['attributes'],true))?'selected':''); ?>>
+                                                    <?php echo e($a['name']); ?>
+
                                                 </option>
-                                            @else
-                                                <option value="{{ $a['id']}}">{{$a['name']}}</option>
-                                            @endif
-                                        @endforeach
+                                            <?php else: ?>
+                                                <option value="<?php echo e($a['id']); ?>"><?php echo e($a['name']); ?></option>
+                                            <?php endif; ?>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </select>
                                 </div>
 
                                 <div class="col-md-12 mt-2 mb-2">
                                     <div class="customer_choice_options" id="customer_choice_options">
-                                        @include('admin-views.product.partials._choices',['choice_no'=>json_decode($product['attributes']),'choice_options'=>json_decode($product['choice_options'],true)])
+                                        <?php echo $__env->make('admin-views.product.partials._choices',['choice_no'=>json_decode($product['attributes']),'choice_options'=>json_decode($product['choice_options'],true)], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                                     </div>
                                 </div>
                             </div>
@@ -289,59 +290,59 @@
 
                 <div class="card mt-2">
                     <div class="card-header">
-                        <h4>{{trans('messages.Product price & stock')}}</h4>
+                        <h4><?php echo e(trans('messages.Product price & stock')); ?></h4>
                     </div>
                     <div class="card-body">
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label class="control-label">{{trans('messages.Unit price')}}</label>
+                                    <label class="control-label"><?php echo e(trans('messages.Unit price')); ?></label>
                                     <input type="number" min="0" step="0.01"
-                                           placeholder="{{trans('messages.Unit price') }}"
+                                           placeholder="<?php echo e(trans('messages.Unit price')); ?>"
                                            name="unit_price" class="form-control"
-                                           value={{\App\CPU\Convert::default($product->unit_price)}} required>
+                                           value=<?php echo e(\App\CPU\Convert::default($product->unit_price)); ?> required>
                                 </div>
                                 <div class="col-md-6">
                                     <label
-                                        class="control-label">{{trans('messages.Purchase price')}}</label>
+                                        class="control-label"><?php echo e(trans('messages.Purchase price')); ?></label>
                                     <input type="number" min="0" step="0.01"
-                                           placeholder="{{trans('messages.Purchase price') }}"
+                                           placeholder="<?php echo e(trans('messages.Purchase price')); ?>"
                                            name="purchase_price" class="form-control"
-                                           value={{ \App\CPU\Convert::default($product->purchase_price) }} required>
+                                           value=<?php echo e(\App\CPU\Convert::default($product->purchase_price)); ?> required>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label class="control-label">{{trans('messages.Tax')}}</label>
-                                    <label class="badge badge-info">{{trans('messages.Percent')}} ( % )</label>
-                                    <input type="number" min="0" value={{ $product->tax }} step="0.01"
-                                           placeholder="{{trans('messages.Tax') }}" name="tax"
+                                    <label class="control-label"><?php echo e(trans('messages.Tax')); ?></label>
+                                    <label class="badge badge-info"><?php echo e(trans('messages.Percent')); ?> ( % )</label>
+                                    <input type="number" min="0" value=<?php echo e($product->tax); ?> step="0.01"
+                                           placeholder="<?php echo e(trans('messages.Tax')); ?>" name="tax"
                                            class="form-control" required>
                                     <input name="tax_type" value="percent" style="display: none">
                                 </div>
 
                                 <div class="col-md-5">
-                                    <label class="control-label">{{trans('messages.Discount')}}</label>
+                                    <label class="control-label"><?php echo e(trans('messages.Discount')); ?></label>
                                     <input type="number" min="0"
-                                           value={{ $product->discount_type=='flat'?\App\CPU\Convert::default($product->discount): $product->discount}} step="0.01"
-                                           placeholder="{{trans('messages.Discount') }}" name="discount"
+                                           value=<?php echo e($product->discount_type=='flat'?\App\CPU\Convert::default($product->discount): $product->discount); ?> step="0.01"
+                                           placeholder="<?php echo e(trans('messages.Discount')); ?>" name="discount"
                                            class="form-control" required>
                                 </div>
                                 <div class="col-md-1" style="padding-top: 30px;margin-left: -20px;">
                                     <select
                                         class="js-example-basic-multiple js-states js-example-responsive demo-select2"
                                         name="discount_type">
-                                        <option value="percent" {{$product['discount_type']=='percent'?'selected':''}}>{{trans('messages.Percent')}}</option>
-                                        <option value="flat" {{$product['discount_type']=='flat'?'selected':''}}>{{trans('messages.Flat')}}</option>
+                                        <option value="percent" <?php echo e($product['discount_type']=='percent'?'selected':''); ?>><?php echo e(trans('messages.Percent')); ?></option>
+                                        <option value="flat" <?php echo e($product['discount_type']=='flat'?'selected':''); ?>><?php echo e(trans('messages.Flat')); ?></option>
 
                                     </select>
                                 </div>
                                 <div class="col-12 pt-4 sku_combination" id="sku_combination">
-                                    @include('admin-views.product.partials._edit_sku_combinations',['combinations'=>json_decode($product['variation'],true)])
+                                    <?php echo $__env->make('admin-views.product.partials._edit_sku_combinations',['combinations'=>json_decode($product['variation'],true)], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                                 </div>
                                 <div class="col-md-6" id="quantity">
-                                    <label class="control-label">{{trans('messages.total')}} {{trans('messages.Quantity')}}</label>
-                                    <input type="number" min="0" value={{ $product->current_stock }} step="1"
-                                           placeholder="{{trans('messages.Quantity') }}"
+                                    <label class="control-label"><?php echo e(trans('messages.total')); ?> <?php echo e(trans('messages.Quantity')); ?></label>
+                                    <input type="number" min="0" value=<?php echo e($product->current_stock); ?> step="1"
+                                           placeholder="<?php echo e(trans('messages.Quantity')); ?>"
                                            name="current_stock" class="form-control" required>
                                 </div>
                             </div>
@@ -359,7 +360,7 @@
                         <div class="form-group">
                             <div class="col-xl-12">
                                 <textarea name="details" id="editor" cols="30"
-                                          rows="10">{{$product['details']}}</textarea>
+                                          rows="10"><?php echo e($product['details']); ?></textarea>
                             </div>
                         </div>
                     </div>
@@ -370,25 +371,25 @@
                     <div class="row">
                             <div class="col-md-8">
                                 <div class="form-group">
-                                    <label>{{trans('messages.Upload product images')}}</label><small
-                                        style="color: red">* ( {{trans('messages.ratio')}} 1:1 )</small>
+                                    <label><?php echo e(trans('messages.Upload product images')); ?></label><small
+                                        style="color: red">* ( <?php echo e(trans('messages.ratio')); ?> 1:1 )</small>
                                 </div>
                                 <div class="p-2 border border-dashed"  style="max-width:430px;">
                                     <div class="row" id="coba">
-                                    @foreach (json_decode($product->images) as $key => $photo)
+                                    <?php $__currentLoopData = json_decode($product->images); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $photo): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <div class="col-6">
                                                 <div class="card">
                                                     <div class="card-body">
                                                         <img style="width: 100%" height="auto"
-                                                            onerror="this.src='{{asset('public/assets/front-end/img/image-place-holder.png')}}'"
-                                                            src="{{asset("storage/app/public/product/$photo")}}" alt="Product image">
-                                                        <a href="{{route('admin.product.remove-image',['id'=>$product['id'],'name'=>$photo])}}"
+                                                            onerror="this.src='<?php echo e(asset('public/assets/front-end/img/image-place-holder.png')); ?>'"
+                                                            src="<?php echo e(asset("storage/app/public/product/$photo")); ?>" alt="Product image">
+                                                        <a href="<?php echo e(route('admin.product.remove-image',['id'=>$product['id'],'name'=>$photo])); ?>"
                                                         class="btn btn-danger btn-block">Remove</a>
 
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endforeach
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </div>
                                 </div>
 
@@ -396,8 +397,8 @@
 
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="name">{{trans('messages.Upload thumbnail')}}</label><small
-                                        style="color: red">* ( {{trans('messages.ratio')}} 1:1 )</small>
+                                    <label for="name"><?php echo e(trans('messages.Upload thumbnail')); ?></label><small
+                                        style="color: red">* ( <?php echo e(trans('messages.ratio')); ?> 1:1 )</small>
                                 </div>
                                 <div style="max-width:200px;">
                                     <div class="row" id="thumbnail">
@@ -408,7 +409,7 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-12" style="padding-top: 20px">
-                                    <button type="submit" class="btn btn-primary">{{trans('messages.Update')}}</button>
+                                    <button type="submit" class="btn btn-primary"><?php echo e(trans('messages.Update')); ?></button>
                                 </div>
                             </div>
                         </div>
@@ -419,24 +420,22 @@
     </div>
 
     <!--modal-->
-    @include('shared-partials.image-process._image-crop-modal',['modal_id'=>'product-images-modal'])
+    <?php echo $__env->make('shared-partials.image-process._image-crop-modal',['modal_id'=>'product-images-modal'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-    @include('shared-partials.image-process._image-crop-modal',['modal_id'=>'thumbnail-image-modal'])
+    <?php echo $__env->make('shared-partials.image-process._image-crop-modal',['modal_id'=>'thumbnail-image-modal'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-    {{--@include('shared-partials.image-process._image-crop-modal',['modal_id'=>'hot-deal-image-modal'])
-
-    @include('shared-partials.image-process._image-crop-modal',['modal_id'=>'featured-image-modal'])--}}
+    
     <!--modal-->
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('script')
-    <script src="{{asset('public/assets/back-end')}}/js/tags-input.min.js"></script>
-    <script src="{{ asset('public/assets/select2/js/select2.min.js')}}"></script>
-    <script src="{{asset('public/assets/back-end/js/spartan-multi-image-picker.js')}}"></script>
+<?php $__env->startPush('script'); ?>
+    <script src="<?php echo e(asset('public/assets/back-end')); ?>/js/tags-input.min.js"></script>
+    <script src="<?php echo e(asset('public/assets/select2/js/select2.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('public/assets/back-end/js/spartan-multi-image-picker.js')); ?>"></script>
     <script>
-    var imageCount = {{4-count(json_decode($product->images))}};
-    var thumbnail = '{{\App\CPU\ProductManager::product_image_path('thumbnail').'/'.$product->thumbnail??asset('public/assets/back-end/img/400x400/img2.jpg')}}';
+    var imageCount = <?php echo e(4-count(json_decode($product->images))); ?>;
+    var thumbnail = '<?php echo e(\App\CPU\ProductManager::product_image_path('thumbnail').'/'.$product->thumbnail??asset('public/assets/back-end/img/400x400/img2.jpg')); ?>';
         $(function () {
             if(imageCount > 0)
             {
@@ -447,7 +446,7 @@
                     groupClassName: 'col-6',
                     maxFileSize: '',
                     placeholderImage: {
-                        image: '{{asset('public/assets/back-end/img/400x400/img2.jpg')}}',
+                        image: '<?php echo e(asset('public/assets/back-end/img/400x400/img2.jpg')); ?>',
                         width: '100%',
                     },
                     dropFileLabel: "Drop Here",
@@ -566,7 +565,7 @@
 
         function add_more_customer_choice_option(i, name) {
             let n = name.split(' ').join('');
-            $('#customer_choice_options').append('<div class="row"><div class="col-md-3"><input type="hidden" name="choice_no[]" value="' + i + '"><input type="text" class="form-control" name="choice[]" value="' + n + '" placeholder="{{trans('messages.Choice Title') }}" readonly></div><div class="col-lg-9"><input type="text" class="form-control" name="choice_options_' + i + '[]" placeholder="{{trans('messages.Enter choice values') }}" data-role="tagsinput" onchange="update_sku()"></div></div>');
+            $('#customer_choice_options').append('<div class="row"><div class="col-md-3"><input type="hidden" name="choice_no[]" value="' + i + '"><input type="text" class="form-control" name="choice[]" value="' + n + '" placeholder="<?php echo e(trans('messages.Choice Title')); ?>" readonly></div><div class="col-lg-9"><input type="text" class="form-control" name="choice_options_' + i + '[]" placeholder="<?php echo e(trans('messages.Enter choice values')); ?>" data-role="tagsinput" onchange="update_sku()"></div></div>');
             $("input[data-role=tagsinput], select[multiple][data-role=tagsinput]").tagsinput();
         }
 
@@ -593,7 +592,7 @@
 
             $.ajax({
                 type: "POST",
-                url: '{{route('admin.product.sku-combination')}}',
+                url: '<?php echo e(route('admin.product.sku-combination')); ?>',
                 data: $('#product_form').serialize(),
                 success: function (data) {
                     $('#sku_combination').html(data.view);
@@ -612,8 +611,8 @@
                 let category = $("#category_id").val();
                 let sub_category = $("#sub-category-select").attr("data-id");
                 let sub_sub_category = $("#sub-sub-category-select").attr("data-id");
-                getRequest('{{url('/')}}/admin/product/get-categories?parent_id=' + category + '&sub_category=' + sub_category, 'sub-category-select', 'select');
-                getRequest('{{url('/')}}/admin/product/get-categories?parent_id=' + sub_category + '&sub_category=' + sub_sub_category, 'sub-sub-category-select', 'select');
+                getRequest('<?php echo e(url('/')); ?>/admin/product/get-categories?parent_id=' + category + '&sub_category=' + sub_category, 'sub-category-select', 'select');
+                getRequest('<?php echo e(url('/')); ?>/admin/product/get-categories?parent_id=' + sub_category + '&sub_category=' + sub_sub_category, 'sub-sub-category-select', 'select');
             }, 100)
             // color select select2
             $('.color-var-select').select2({
@@ -645,7 +644,7 @@
                 }
             });
             $.post({
-                url: '{{route('admin.product.update',$product->id)}}',
+                url: '<?php echo e(route('admin.product.update',$product->id)); ?>',
                 data: formData,
                 contentType: false,
                 processData: false,
@@ -700,4 +699,6 @@
             $('input[name="current_stock"]').val(total_qty);
         });
     </script>
-@endpush
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('layouts.back-end.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/bandbkmp/public_html/resources/views/admin-views/product/edit.blade.php ENDPATH**/ ?>

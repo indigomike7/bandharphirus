@@ -1,19 +1,18 @@
-@extends('layouts.back-end.app')
-@section('title','Contest Category')
+<?php $__env->startSection('title','Contest Category'); ?>
 
-@push('css_or_js')
+<?php $__env->startPush('css_or_js'); ?>
     <!-- Custom styles for this page -->
-    <link href="{{asset('public/assets/back-end')}}/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <link href="{{asset('public/assets/back-end/css/croppie.css')}}" rel="stylesheet">
-@endpush
+    <link href="<?php echo e(asset('public/assets/back-end')); ?>/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="<?php echo e(asset('public/assets/back-end/css/croppie.css')); ?>" rel="stylesheet">
+<?php $__env->stopPush(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
     <!-- Page Heading -->
     <div class="content container-fluid">
         <div class="row align-items-center mb-3">
             <div class="col-sm">
                 <h1 class="page-header-title">Collection <span
-                        class="badge badge-soft-dark ml-2">{{\App\Model\Collection::count()}}</span>
+                        class="badge badge-soft-dark ml-2"><?php echo e(\App\Model\Collection::count()); ?></span>
                 </h1>
 
             </div>
@@ -24,7 +23,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h5>My Collection Lists</h5>
-						<p style="text-align:right;"><a href="{{route('admin.collection.add')}}">Add New Collection</a></p>
+						<p style="text-align:right;"><a href="<?php echo e(route('admin.collection.add')); ?>">Add New Collection</a></p>
                     </div>
                     <div class="card-body" style="padding: 0">
                         <div class="table-responsive">
@@ -38,21 +37,22 @@
                                     <th>Collection Name</th>
                                     <th>Created Date</th>
                                     <th>Updated Date</th>
-                                    <th style="width: 30px">{{trans('messages.Action')}}</th>
+                                    <th style="width: 30px"><?php echo e(trans('messages.Action')); ?></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($categories as $k=>$detail)
+                                <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $k=>$detail): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
                                         <td>
-                                            {{$k+1}}
+                                            <?php echo e($k+1); ?>
+
                                         </td>
                                         <td>
-                                            <a href="{{route('seller.contest.detail',$detail['id'])}}">{{$detail['id']}}</a>
+                                            <a href="<?php echo e(route('seller.contest.detail',$detail['id'])); ?>"><?php echo e($detail['id']); ?></a>
                                         </td>
-                                        <td>{{ $detail->name }}</td>
-                                        <td>{{ $detail->created_at }}</td>
-                                        <td>{{ $detail->updated_at }}</td>
+                                        <td><?php echo e($detail->name); ?></td>
+                                        <td><?php echo e($detail->created_at); ?></td>
+                                        <td><?php echo e($detail->updated_at); ?></td>
                                         <td>
 
                                             <div class="dropdown">
@@ -64,14 +64,14 @@
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                     <a class="dropdown-item"
-                                                       href="{{route('admin.collection.edit',[$detail['id']])}}"> Edit</a>
+                                                       href="<?php echo e(route('admin.collection.edit',[$detail['id']])); ?>"> Edit</a>
                                                     <a class="dropdown-item"
-                                                       href="{{route('admin.collection.delete',[$detail['id']])}}"> Delete</a>
+                                                       href="<?php echo e(route('admin.collection.delete',[$detail['id']])); ?>"> Delete</a>
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
-                                @endforeach
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
                             </table>
                         </div>
@@ -80,15 +80,15 @@
             </div>
         </div>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('script')
+<?php $__env->startPush('script'); ?>
     <!-- Page level plugins -->
-    <script src="{{asset('public/assets/back-end')}}/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="{{asset('public/assets/back-end')}}/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="<?php echo e(asset('public/assets/back-end')); ?>/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?php echo e(asset('public/assets/back-end')); ?>/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="{{asset('public/assets/back-end/js/croppie.js')}}"></script>
+    <script src="<?php echo e(asset('public/assets/back-end/js/croppie.js')); ?>"></script>
     <script>
         // Call the dataTables jQuery plugin
         $(document).ready(function () {
@@ -104,4 +104,6 @@ $('#dataTable').DataTable(
     }			);
         });
     </script>
-@endpush
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('layouts.back-end.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/bandbkmp/public_html/resources/views/admin-views/collection/view.blade.php ENDPATH**/ ?>
