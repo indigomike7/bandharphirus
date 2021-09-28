@@ -23,6 +23,8 @@
     <script
         src="<?php echo e(asset('public/assets/back-end')); ?>/vendor/hs-navbar-vertical-aside/hs-navbar-vertical-aside-mini-cache.js"></script>
     <link rel="stylesheet" href="<?php echo e(asset('public/assets/back-end')); ?>/css/toastr.css">
+<!-- ========== END SECONDARY CONTENTS ========== -->
+<script src="<?php echo e(asset('public/assets/back-end')); ?>/js/vendor.min.js"></script>
 </head>
 
 <body class="footer-offset">
@@ -57,8 +59,6 @@
 </main>
 <!-- ========== END MAIN CONTENT ========== -->
 
-<!-- ========== END SECONDARY CONTENTS ========== -->
-<script src="<?php echo e(asset('public/assets/back-end')); ?>/js/vendor.min.js"></script>
 <script src="<?php echo e(asset('public/assets/back-end')); ?>/js/custom.js"></script>
 <!-- JS Implementing Plugins -->
 

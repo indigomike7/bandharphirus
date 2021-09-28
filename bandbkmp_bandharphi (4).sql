@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 27, 2021 at 10:25 AM
+-- Generation Time: Sep 28, 2021 at 07:50 AM
 -- Server version: 10.3.31-MariaDB-cll-lve
 -- PHP Version: 7.3.28
 
@@ -158,6 +158,142 @@ INSERT INTO `banners` (`id`, `photo`, `banner_type`, `published`, `created_at`, 
 (1, '2021-08-02-6107ca57670be.png', 'Main Banner', 1, '2021-08-02 20:35:03', '2021-08-02 20:35:26', 'https://www.google.com/'),
 (2, '2021-08-02-6107ca62e0b2c.png', 'Footer Banner', 1, '2021-08-02 20:35:14', '2021-08-02 20:35:26', 'https://www.google.com/'),
 (3, '2021-08-02-6107ca6ac4a34.png', 'Popup Banner', 1, '2021-08-02 20:35:22', '2021-08-02 20:35:25', 'https://www.google.com/');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `barter`
+--
+
+CREATE TABLE `barter` (
+  `id` int(11) NOT NULL,
+  `seller_id` int(11) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `category` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `barter`
+--
+
+INSERT INTO `barter` (`id`, `seller_id`, `created_at`, `updated_at`, `category`) VALUES
+(21, 0, '2021-09-28 14:51:12', '2021-09-28 17:21:20', 1),
+(22, 0, '2021-09-28 14:58:03', '2021-09-28 14:58:03', 3),
+(23, 0, '2021-09-28 17:13:26', '2021-09-28 17:13:26', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `barter_buy`
+--
+
+CREATE TABLE `barter_buy` (
+  `id` int(11) NOT NULL,
+  `barter_id` int(11) NOT NULL,
+  `product_name` text NOT NULL,
+  `picture` text NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `description` text NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `barter_buy`
+--
+
+INSERT INTO `barter_buy` (`id`, `barter_id`, `product_name`, `picture`, `quantity`, `description`, `created_at`, `updated_at`) VALUES
+(1, 15, 'Batu Phirus Kalimantan', '[\"2021-09-28-6152d1dcae423.png\",\"2021-09-28-6152d1dcae4b6.png\",\"2021-09-28-6152d1dcae531.png\"]', 1, 'Blablabla', '2021-09-28 14:27:08', '2021-09-28 14:27:08'),
+(2, 17, 'Batu Phirus Kalimantan', '[\"2021-09-28-6152d3a89453b.png\",\"2021-09-28-6152d3a8945ce.png\",\"2021-09-28-6152d3a894641.png\"]', 1, 'Blablabla', '2021-09-28 14:34:48', '2021-09-28 14:34:48'),
+(3, 18, 'Batu Phirus Kalimantan', '[\"2021-09-28-6152d51ebb2b1.png\"]', 1, 'Saya mencari batu phirus kalimantan seperti photo ini', '2021-09-28 14:41:02', '2021-09-28 14:41:02'),
+(4, 19, 'Batu Phirus Kalimantan', '[\"2021-09-28-6152d5eef3fba.png\"]', 1, 'Saya mencari batu phirus kalimantan seperti photo ini', '2021-09-28 14:44:30', '2021-09-28 14:44:30'),
+(5, 20, 'Batu Phirus Kalimantan', '[\"2021-09-28-6152d6b1b8aa5.png\"]', 1, 'Saya mencari batu phirus kalimantan seperti photo ini', '2021-09-28 14:47:45', '2021-09-28 14:47:45'),
+(6, 21, 'Batu Phirus Kalimantan', '[\"2021-09-28-6152d78051e6e.png\"]', 1, 'Blablabla', '2021-09-28 14:51:12', '2021-09-28 14:51:12'),
+(7, 22, 'Batu Phirus Kalimantan Utara', '[\"2021-09-28-6152f4d82d203.png\"]', 9, 'YaaaBlablabla xxxx', '2021-09-28 14:58:03', '2021-09-28 16:58:18'),
+(8, 22, 'Batu Phirus Korea', '[\"2021-09-28-6152ff6e6dcfe.png\",\"2021-09-28-6152ff6e6e074.png\"]', 9, 'Blablabla', '2021-09-28 17:41:34', '2021-09-28 17:41:34');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `barter_money_buy`
+--
+
+CREATE TABLE `barter_money_buy` (
+  `id` int(11) NOT NULL,
+  `barter_id` int(11) NOT NULL,
+  `amount` decimal(18,2) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `barter_money_buy`
+--
+
+INSERT INTO `barter_money_buy` (`id`, `barter_id`, `amount`, `created_at`, `updated_at`) VALUES
+(1, 22, 60000.00, '2021-09-28 14:58:03', '2021-09-28 17:10:38'),
+(2, 21, 20000.00, '2021-09-28 17:43:19', '2021-09-28 17:43:45');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `barter_money_sell`
+--
+
+CREATE TABLE `barter_money_sell` (
+  `id` int(11) NOT NULL,
+  `barter_id` int(11) NOT NULL,
+  `amount` decimal(18,2) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `barter_money_sell`
+--
+
+INSERT INTO `barter_money_sell` (`id`, `barter_id`, `amount`, `created_at`, `updated_at`) VALUES
+(1, 22, 90000.00, '2021-09-28 14:58:03', '2021-09-28 17:05:21'),
+(2, 21, 7000000.00, '2021-09-28 17:42:53', '2021-09-28 17:42:53');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `barter_sell`
+--
+
+CREATE TABLE `barter_sell` (
+  `id` int(11) NOT NULL,
+  `barter_id` int(11) NOT NULL,
+  `product_name` text NOT NULL,
+  `picture` text NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `description` text NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `barter_sell`
+--
+
+INSERT INTO `barter_sell` (`id`, `barter_id`, `product_name`, `picture`, `quantity`, `description`, `created_at`, `updated_at`) VALUES
+(4, 14, 'Batu Phirus Madagascar', '[\"2021-09-28-6152d08ddd38f.png\",\"2021-09-28-6152d08ddeb46.png\",\"2021-09-28-6152d08ddebd0.png\"]', 1, 'Blablabla', '2021-09-28 14:21:33', '2021-09-28 14:21:33'),
+(5, 15, 'Batu Phirus Madagascar', '[\"2021-09-28-6152d1dcac5f4.png\",\"2021-09-28-6152d1dcadb82.png\",\"2021-09-28-6152d1dcadc23.png\"]', 1, 'Blablabla', '2021-09-28 14:27:08', '2021-09-28 14:27:08'),
+(6, 16, 'Batu Phirus Madagascar', '[\"2021-09-28-6152d38fb5a62.png\",\"2021-09-28-6152d38fb7084.png\",\"2021-09-28-6152d38fb713c.png\"]', 1, 'Blablabla', '2021-09-28 14:34:23', '2021-09-28 14:34:23'),
+(7, 17, 'Batu Phirus Madagascar', '[\"2021-09-28-6152d3a8936ea.png\",\"2021-09-28-6152d3a893a20.png\",\"2021-09-28-6152d3a893ad2.png\"]', 1, 'Blablabla', '2021-09-28 14:34:48', '2021-09-28 14:34:48'),
+(8, 18, 'Batu Phirus Madagascar', '[\"2021-09-28-6152d51eb8952.png\"]', 1, 'batu ini berasal dari madagascar', '2021-09-28 14:41:02', '2021-09-28 14:41:02'),
+(9, 18, 'Batu Phirus Afrika Selatan', '[\"2021-09-28-6152d51eba532.png\"]', 1, 'Batu ini berasal dari Afrika Selatan', '2021-09-28 14:41:02', '2021-09-28 14:41:02'),
+(10, 19, 'Batu Phirus Madagascar', '[\"2021-09-28-6152d5eef1791.png\"]', 1, 'batu ini berasal dari madagascar', '2021-09-28 14:44:30', '2021-09-28 14:44:30'),
+(11, 19, 'Batu Phirus Afrika Selatan', '[\"2021-09-28-6152d5eef384f.png\"]', 1, 'Batu ini berasal dari Afrika Selatan', '2021-09-28 14:44:30', '2021-09-28 14:44:30'),
+(12, 20, 'Batu Phirus Madagascar', '[\"2021-09-28-6152d6b1b6550.png\"]', 1, 'batu ini berasal dari madagascar', '2021-09-28 14:47:45', '2021-09-28 14:47:45'),
+(13, 20, 'Batu Phirus Afrika Selatan', '[\"2021-09-28-6152d6b1b8461.png\"]', 1, 'Batu ini berasal dari Afrika Selatan', '2021-09-28 14:47:45', '2021-09-28 14:47:45'),
+(14, 21, 'Batu Phirus Madagascar', '[\"2021-09-28-6152d7804fbf0.png\"]', 1, 'Testing', '2021-09-28 14:51:12', '2021-09-28 14:51:12'),
+(15, 21, 'Batu Phirus Afrika Selatan', '[\"2021-09-28-6152d78051823.png\"]', 1, 'Blablabla', '2021-09-28 14:51:12', '2021-09-28 14:51:12'),
+(16, 22, 'Batu Phirus Madagascar uyyy', '[\"2021-09-28-6152f35b8ffc6.png\",\"2021-09-28-6152f37d11e8c.png\",\"2021-09-28-6152f37d12264.png\"]', 10, 'Testing Yaaa', '2021-09-28 14:58:03', '2021-09-28 16:50:37'),
+(17, 22, 'Batu Phirus Afrika Selatan Tenggara', '[\"2021-09-28-6152d91bceac0.png\",\"2021-09-28-6152f3ab5e053.png\"]', 5, 'Yaaa  Blablabla', '2021-09-28 14:58:03', '2021-09-28 16:51:23'),
+(18, 22, 'Batu Phirus Papua', '[\"2021-09-28-6152ff15afc68.png\"]', 9, 'Blablabla', '2021-09-28 17:40:05', '2021-09-28 17:40:05');
 
 -- --------------------------------------------------------
 
@@ -533,7 +669,6 @@ CREATE TABLE `contest` (
 --
 
 INSERT INTO `contest` (`id`, `seller_id`, `name`, `description`, `fund`, `result`, `updated_at`, `picture`, `created_at`, `start_date_1`, `end_date_1`, `start_date_2`, `end_date_2`, `start_date_3`, `end_date_3`, `start_date`, `end_date`, `contestcat`) VALUES
-(3, 1, 'Kontes Beringin', 'Jakarta - Vaksinasi COVID-19 CT Corp kini menyediakan vaksin Pfizer. Kamu bisa mendapatkannya di Menara Bank Mega, Jl Tendean, Jakarta Selatan.\r\nKamu hanya perlu mendaftar lewat detik.com/vaksinctcorp. Vaksin Pfizer ini akan disuntikkan mulai 11 September 2021 hingga 1 Desember 2021, dengan kuota 1.000 orang per hari.\r\n\r\nSelain di Menara Bank Mega Jakarta Selatan, vaksin Pfizer secara bertahap nantinya juga akan hadir di beberapa lokasi berikut:', 20000.00, 'Pemenangnya Michael Owen', '2021-09-15 07:54:56', '[\"2021-09-09-6139cc8479599.png\",\"2021-09-09-6139cc84810aa.png\"]', '2021-09-09 12:46:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
 (6, 2, 'Kontes Anak Anak I', 'Ini Kontes anak anak 1', 0.00, '', '2021-09-09 09:25:48', '[\"2021-09-09-6139e12c70670.png\",\"2021-09-09-6139e12c8c124.png\"]', '2021-09-09 16:25:48', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
 (7, 2, 'Kontes Anak Anak IV', 'Testing is testing', 0.00, '', '2021-09-09 09:28:01', '[\"2021-09-09-6139e1b154461.png\",\"2021-09-09-6139e1b159f48.png\"]', '2021-09-09 16:28:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
 (8, 2, 'Kontes Anak Anak V', 'Testing is testing', 0.00, '', '2021-09-09 09:29:08', '[\"2021-09-09-6139e1f408b35.png\",\"2021-09-09-6139e1f415382.png\"]', '2021-09-09 16:29:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
@@ -1811,6 +1946,36 @@ ALTER TABLE `banners`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `barter`
+--
+ALTER TABLE `barter`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `barter_buy`
+--
+ALTER TABLE `barter_buy`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `barter_money_buy`
+--
+ALTER TABLE `barter_money_buy`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `barter_money_sell`
+--
+ALTER TABLE `barter_money_sell`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `barter_sell`
+--
+ALTER TABLE `barter_sell`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `brands`
 --
 ALTER TABLE `brands`
@@ -2173,6 +2338,36 @@ ALTER TABLE `attributes`
 --
 ALTER TABLE `banners`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `barter`
+--
+ALTER TABLE `barter`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT for table `barter_buy`
+--
+ALTER TABLE `barter_buy`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `barter_money_buy`
+--
+ALTER TABLE `barter_money_buy`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `barter_money_sell`
+--
+ALTER TABLE `barter_money_sell`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `barter_sell`
+--
+ALTER TABLE `barter_sell`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `brands`

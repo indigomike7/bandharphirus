@@ -818,15 +818,18 @@
                                     <li class="active">
                                         <a href="<?php echo e(route('home')); ?>">Home</a>
                                     </li>
+									<?php if($collection!= null): ?>
                                     <li>
-                                        <a href="collection.html">Collection</a>
-
+                                        <a href="<?php echo e(route('collection')); ?>">Collection</a>
                                         <ul>
-                                            <li><a href="koleksi-amerika.html">Amerika</a></li>
-                                            <li><a href="koleksi-cina.html">Cina</a></li>
-                                            <li><a href="koleksi-persian.html">Persian</a></li> 
+										<?php $__currentLoopData = $collection; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+                                            <li><a href="<?php echo e(route('collectionid',[$value->slug])); ?>"><?php echo e($value->name); ?></a></li>
+										<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </ul>
+
                                     </li>
+									<?php endif; ?>
                                     <li>
                                         <a href="<?php echo e(route('contest3.listjoin')); ?>">Contest</a><!--
                                         <ul>
@@ -855,7 +858,7 @@
                                         <a href="chatroom.html">Chatroom</a>
                                     </li>
                                     <li>
-                                        <a href="education.html">Education</a>
+                                        <a href="<?php echo e(route('educationcategory')); ?>">Education</a>
                                     </li>
                                 </ul>
                             </nav>

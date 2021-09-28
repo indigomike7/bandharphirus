@@ -57,6 +57,23 @@ Route::group(['namespace' => 'Seller', 'prefix' => 'seller', 'as' => 'seller.'],
 
         });
 
+        Route::group(['prefix' => 'barter', 'as' => 'barter.'], function () {
+            Route::get('listmanage/{id}', 'ContestController@listmanage')->name('listmanage');
+            Route::get('list', 'ContestController@list')->name('list');
+            Route::get('listjoin', 'ContestController@listjoin')->name('listjoin');
+            Route::get('add', 'ContestController@add')->name('add');
+            Route::post('addnew', 'ContestController@addnew')->name('addnew');
+            Route::post('update', 'ContestController@update')->name('update');
+            Route::get('remove_image_user/{id}', 'ContestController@remove_image_user')->name('remove_image_user');
+            Route::get('remove_image_user2/{id}', 'ContestController@remove_image_user2')->name('remove_image_user2');
+            Route::get('remove_image_user3/{id}', 'ContestController@remove_image_user3')->name('remove_image_user3');
+            Route::get('remove_image/{id}', 'ContestController@remove_image')->name('remove_image');
+            Route::get('detail/{id}', 'ContestController@detail')->name('detail');
+            Route::get('edit/{id}', 'ContestController@edit')->name('edit');
+            Route::get('delete/{id}', 'ContestController@delete')->name('delete');
+			Route::post('join', 'ContestController@join')->name('join');
+			Route::post('updatemanage', 'ContestController@updatemanage')->name('updatemanage');
+        });
         Route::group(['prefix' => 'contest', 'as' => 'contest.'], function () {
             Route::get('listmanage/{id}', 'ContestController@listmanage')->name('listmanage');
             Route::get('list', 'ContestController@list')->name('list');

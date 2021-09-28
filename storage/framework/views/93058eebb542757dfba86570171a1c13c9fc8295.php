@@ -53,10 +53,10 @@
 
                                         </td>
                                         <td>
-										
+										<!--
 										<?php if(!empty($contestuser2)): ?>
 											<h4><font color='blue'>Sudah Ikut Serta</font></h4>
-										<?php endif; ?>
+										<?php endif; ?>-->
                                         ID : <?php echo e($detail->id); ?><br/>
 										Name : <?php echo e($detail->name); ?><br/>
 										Tanggal Dibuat :<?php echo e($detail->created_at); ?><br/>
@@ -71,9 +71,10 @@
 										<?php echo e($detail->description); ?>
 
 										</div>
-										<?php if(!empty($contestuser2)): ?>
+										<!--<?php if(!empty($contestuser2)): ?>
 											<h4><font color='blue'>Sudah Ikut Serta</font></h4>
 										<?php endif; ?>
+										
 										<form class="product-form-<?php echo e($detail->id); ?>" action="<?php echo e(route('contest3.join')); ?>" method="post" enctype="multipart/form-data"
 											  id="product-form-<?php echo e($detail->id); ?>"><?php echo csrf_field(); ?>
                             <div class="form-group">
@@ -122,7 +123,7 @@
                                     </div>
                                 </div>
                             </div>
-										</form>
+										</form>-->
     <script>
         $('#product-form-<?php echo e($detail->id); ?>').submit(function (e) {
             e.preventDefault();

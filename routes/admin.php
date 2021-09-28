@@ -196,6 +196,34 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
 			Route::post('updatemanage', 'Contest2Controller@updatemanage')->name('updatemanage');
         });
 
+        Route::group(['prefix' => 'barter', 'as' => 'barter.'], function () {
+            Route::post('updateproducts', 'BarterController@updateproducts')->name('updateproducts');
+            Route::post('updatebarter', 'BarterController@updatebarter')->name('updatebarter');
+            Route::post('editproductsell', 'BarterController@editproductsell')->name('editproductsell');
+            Route::post('editproductbuy', 'BarterController@editproductbuy')->name('editproductbuy');
+            Route::post('updateamountsell', 'BarterController@updateamountsell')->name('updateamountsell');
+            Route::post('updateamountbuy', 'BarterController@updateamountbuy')->name('updateamountbuy');
+            Route::get('remove_image_sell', 'BarterController@remove_image_sell')->name('remove_image_sell');
+            Route::get('remove_image_buy', 'BarterController@remove_image_buy')->name('remove_image_buy');
+            Route::get('listmanage/{id}', 'BarterController@listmanage')->name('listmanage');
+            Route::get('list', 'BarterController@list')->name('list');
+            Route::get('category', 'Contest2Controller@category')->name('category');
+            Route::get('categoryadd', 'Contest2Controller@categoryadd')->name('categoryadd');
+            Route::get('categoryedit/{id}', 'Contest2Controller@categoryedit')->name('categoryedit');
+            Route::get('categorydelete/{id}', 'Contest2Controller@categorydelete')->name('categorydelete');
+            Route::get('listjoin', 'Contest2Controller@listjoin')->name('listjoin');
+            Route::get('adminadd', 'BarterController@adminadd')->name('adminadd');
+            Route::post('addnew', 'BarterController@addnew')->name('addnew');
+            Route::post('categoryaddnew2', 'Contest2Controller@categoryaddnew2')->name('categoryaddnew2');
+            Route::post('update', 'Contest2Controller@update')->name('update');
+            Route::post('categoryupdate', 'Contest2Controller@categoryupdate')->name('categoryupdate');
+            Route::get('remove_image/{id}', 'Contest2Controller@remove_image')->name('remove_image');
+            Route::get('detail/{id}', 'Contest2Controller@detail')->name('detail');
+            Route::get('edit/{id}', 'BarterController@edit')->name('edit');
+            Route::get('delete/{id}', 'BarterController@delete')->name('delete');
+			Route::post('join', 'Contest2Controller@join')->name('join');
+			Route::post('updatemanage', 'Contest2Controller@updatemanage')->name('updatemanage');
+        });
         Route::group(['prefix' => 'education', 'as' => 'education.'], function () {
             Route::get('list', 'EducationController@list')->name('list');
             Route::get('category', 'EducationCategoryController@category')->name('category');
