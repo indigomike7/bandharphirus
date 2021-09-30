@@ -1,4 +1,4 @@
-@extends('layouts.back-end.app')
+@extends('layouts.back-end.app-seller')
 @section('title','Edit My Barter')
 
 @push('css_or_js')
@@ -121,7 +121,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('seller.dashboard')}}">Dashboard</a></li>
-                <li class="breadcrumb-item" aria-current="page"><a href="{{route('admin.barter.list')}}">Barter</a></li>
+                <li class="breadcrumb-item" aria-current="page"><a href="{{route('seller.barter.list')}}">Barter</a></li>
                 <li class="breadcrumb-item">Edit</li>
             </ol>
         </nav>
@@ -135,7 +135,7 @@
         <div class="row">
             <div class="col-md-12">
 
-                <form class="product-form" action="{{route('admin.barter.updatebarter')}}" method="post" enctype="multipart/form-data"
+                <form class="product-form" action="{{route('seller.barter.updatebarter')}}" method="post" enctype="multipart/form-data"
                       id="product_form">
                     @csrf
                     <div class="card">
@@ -167,10 +167,10 @@
 							BARTER IN DB #<br>
 							PRODUCT TO BARTER ##
 							@foreach($bs as $key=>$value)
-							<form action="{{route('admin.barter.editproductsell')}}" method="post" enctype="multipart/form-data"
+							<form action="{{route('seller.barter.editproductsell')}}" method="post" enctype="multipart/form-data"
                       id="product_form_edit{{$value->id}}">
 							  <input type="hidden" name="id" value="{{$value->id}}">
-							  <a href="{{route('admin.barter.deleteproductbarter',[$value->id])}}">Delete This Product Barter</a><br/><br/>
+							  <a href="{{route('seller.barter.deleteproductbarter',[$value->id])}}">Delete This Product Barter</a><br/><br/>
 								<div class="form-group">
 										<label for="name">Product Name</label>
 										<input type="text" name="product_name" value="{{$value->product_name}}" class="form-control" id="product_name" placeholder="Ex : Batu Phirus">
@@ -199,7 +199,7 @@
                                                         <img style="width: 100%" height="auto"
                                                             onerror=""
                                                             src="{{asset('storage/app/public/barter/'.$photo)}}" alt="Product image">
-                                                        <a href="{{route('admin.barter.remove_image_sell',['id'=>$value['id'],'image'=>$photo])}}"
+                                                        <a href="{{route('seller.barter.remove_image_sell',['id'=>$value['id'],'image'=>$photo])}}"
                                                         class="btn btn-danger btn-block">Remove</a>
                                                     </div>
                                                 </div>
@@ -260,7 +260,7 @@
 												}
 											});
 											$.post({
-												url: '{{route('admin.barter.editproductsell')}}',
+												url: '{{route('seller.barter.editproductsell')}}',
 												data: formData,
 												contentType: false,
 												processData: false,
@@ -278,7 +278,7 @@
 															ProgressBar: true
 														});
 														setInterval(function () {
-															location.href = '{{route("admin.barter.edit",[$value->barter_id])}}';
+															location.href = '{{route("seller.barter.edit",[$value->barter_id])}}';
 														}, 2000);
 													}
 												}
@@ -300,10 +300,10 @@
 							BARTER IN DB #<br>
 							PRODUCT IN DEMAND ##
 							@foreach($bb as $key=>$value)
-							<form action="{{route('admin.barter.editproductsell')}}" method="post" enctype="multipart/form-data"
+							<form action="{{route('seller.barter.editproductsell')}}" method="post" enctype="multipart/form-data"
                       id="product_form_edit_buy{{$value->id}}">
 							  <input type="hidden" name="id" value="{{$value->id}}">
-							  <a href="{{route('admin.barter.deleteproductbuy',[$value->id])}}">Delete This Product Demand</a><br/><br/>
+							  <a href="{{route('seller.barter.deleteproductbuy',[$value->id])}}">Delete This Product Demand</a><br/><br/>
 								<div class="form-group">
 										<label for="name">Product Name</label>
 										<input type="text" name="product_name" value="{{$value->product_name}}" class="form-control" id="product_name" placeholder="Ex : Batu Phirus">
@@ -332,7 +332,7 @@
                                                         <img style="width: 100%" height="auto"
                                                             onerror=""
                                                             src="{{asset('storage/app/public/barter/'.$photo)}}" alt="Product image">
-                                                        <a href="{{route('admin.barter.remove_image_buy',['id'=>$value['id'],'image'=>$photo])}}"
+                                                        <a href="{{route('seller.barter.remove_image_buy',['id'=>$value['id'],'image'=>$photo])}}"
                                                         class="btn btn-danger btn-block">Remove</a>
                                                     </div>
                                                 </div>
@@ -393,7 +393,7 @@
 												}
 											});
 											$.post({
-												url: '{{route('admin.barter.editproductbuy')}}',
+												url: '{{route('seller.barter.editproductbuy')}}',
 												data: formData,
 												contentType: false,
 												processData: false,
@@ -411,7 +411,7 @@
 															ProgressBar: true
 														});
 														setInterval(function () {
-															location.href = '{{route("admin.barter.edit",[$value->barter_id])}}';
+															location.href = '{{route("seller.barter.edit",[$value->barter_id])}}';
 														}, 2000);
 													}
 												}
@@ -432,10 +432,10 @@
 
 							@if(count($bms)>0)
 							@foreach($bms as $key=>$value)
-							<form action="{{route('admin.barter.updateamountsell')}}" method="post" enctype="multipart/form-data"
+							<form action="{{route('seller.barter.updateamountsell')}}" method="post" enctype="multipart/form-data"
                       id="amount_sell_edit{{$value->id}}">
 							  <input type="hidden" name="id" value="{{$b->id}}">
-							  <a href="{{route('admin.barter.deleteamountbarter',[$b->id])}}">Delete This Amount Barter</a><br/><br/>
+							  <a href="{{route('seller.barter.deleteamountbarter',[$b->id])}}">Delete This Amount Barter</a><br/><br/>
 								<div class="form-group">
 									<label for="name">Amount Sell</label>
 									<input type="number" name="amount_sell" value="{{$value->amount}}" class="form-control" id="amount_sell" placeholder="2">
@@ -454,7 +454,7 @@
 												}
 											});
 											$.post({
-												url: '{{route('admin.barter.updateamountsell')}}',
+												url: '{{route('seller.barter.updateamountsell')}}',
 												data: formData,
 												contentType: false,
 												processData: false,
@@ -472,7 +472,7 @@
 															ProgressBar: true
 														});
 														setInterval(function () {
-															location.href = '{{route("admin.barter.edit",[$value->barter_id])}}';
+															location.href = '{{route("seller.barter.edit",[$value->barter_id])}}';
 														}, 2000);
 													}
 												}
@@ -494,10 +494,10 @@
 
 							@if(count($bmb)>0)
 							@foreach($bmb as $key=>$value)
-							<form action="{{route('admin.barter.updateamountbuy')}}" method="post" enctype="multipart/form-data"
+							<form action="{{route('seller.barter.updateamountbuy')}}" method="post" enctype="multipart/form-data"
                       id="amount_buy_edit{{$value->id}}">
 							  <input type="hidden" name="id" value="{{$b->id}}">
-							  <a href="{{route('admin.barter.deleteamountbuy',[$b->id])}}">Delete This Amount Demand</a><br/><br/>
+							  <a href="{{route('seller.barter.deleteamountbuy',[$b->id])}}">Delete This Amount Demand</a><br/><br/>
 								<div class="form-group">
 									<label for="name">Amount Buy</label>
 									<input type="number" name="amount_buy" value="{{$value->amount}}" class="form-control" id="amount_buy" placeholder="2">
@@ -516,7 +516,7 @@
 												}
 											});
 											$.post({
-												url: '{{route('admin.barter.updateamountbuy')}}',
+												url: '{{route('seller.barter.updateamountbuy')}}',
 												data: formData,
 												contentType: false,
 												processData: false,
@@ -534,7 +534,7 @@
 															ProgressBar: true
 														});
 														setInterval(function () {
-															location.href = '{{route("admin.barter.edit",[$value->barter_id])}}';
+															location.href = '{{route("seller.barter.edit",[$value->barter_id])}}';
 														}, 2000);
 													}
 												}
@@ -558,7 +558,7 @@
                     </div>
 
                 </form>
-				                <form class="product-form" action="{{route('admin.barter.updateproducts')}}" method="post" enctype="multipart/form-data"
+				                <form class="product-form" action="{{route('seller.barter.updateproducts')}}" method="post" enctype="multipart/form-data"
                       id="product_updates">
 					  <input type="hidden" name="id" value="{{$b->id}}">
 						<input type="hidden" name="counter" id="counter" value="1">
@@ -917,7 +917,7 @@ function addmoneybuy()
                 }
             });
             $.post({
-                url: '{{route('admin.barter.updatebarter')}}',
+                url: '{{route('seller.barter.updatebarter')}}',
                 data: formData,
                 contentType: false,
                 processData: false,
@@ -935,7 +935,7 @@ function addmoneybuy()
                             ProgressBar: true
                         });
                         setInterval(function () {
-                            location.href = '{{route("admin.barter.edit",[$b->id])}}';
+                            location.href = '{{route("seller.barter.edit",[$b->id])}}';
                         }, 2000);
                     }
                 }
@@ -956,7 +956,7 @@ function addmoneybuy()
 												}
 											});
 											$.post({
-												url: '{{route('admin.barter.updateproducts')}}',
+												url: '{{route('seller.barter.updateproducts')}}',
 												data: formData,
 												contentType: false,
 												processData: false,
@@ -974,7 +974,7 @@ function addmoneybuy()
 															ProgressBar: true
 														});
 														setInterval(function () {
-															location.href = '{{route("admin.barter.edit",[$b->id])}}';
+															location.href = '{{route("seller.barter.edit",[$b->id])}}';
 														}, 2000);
 													}
 												}

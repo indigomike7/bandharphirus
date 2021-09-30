@@ -1,4 +1,4 @@
-@extends('layouts.back-end.app')
+@extends('layouts.back-end.app-seller')
 @section('title','My Barter List')
 
 @push('css_or_js')
@@ -24,7 +24,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h5>My Barter Lists</h5>
-						<p style="text-align:right;"><a href="{{route('admin.barter.adminadd')}}">Add New Barter</a></p>
+						<p style="text-align:right;"><a href="{{route('seller.barter.selleradd')}}">Add New Barter</a></p>
                     </div>
                     <div class="card-body" style="padding: 0">
                         <div class="table-responsive">
@@ -47,7 +47,7 @@
                                             {{$k+1}}
                                         </td>
                                         <td>
-                                            <a href="{{route('admin.barter.edit',$detail['id'])}}">{{$detail['id']}}</a>
+                                            <a href="{{route('seller.barter.edit',$detail['id'])}}">{{$detail['id']}}</a>
                                         </td>
                                         <td>{{ $detail->created_at }}</td>
                                         <td>{{ $detail->updated_at }}</td>
@@ -62,9 +62,9 @@
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                     <a class="dropdown-item"
-                                                       href="{{route('admin.barter.edit',[$detail['id']])}}"> Edit</a>
+                                                       href="{{route('seller.barter.edit',[$detail['id']])}}"> Edit</a>
                                                     <a class="dropdown-item"
-                                                       href="{{route('admin.barter.delete',[$detail['id']])}}"> Delete</a>
+                                                       href="{{route('seller.barter.delete',[$detail['id']])}}"> Delete</a>
                                                 </div>
                                             </div>
                                         </td>

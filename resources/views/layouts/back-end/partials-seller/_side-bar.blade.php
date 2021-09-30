@@ -141,16 +141,17 @@
                             <ul class="js-navbar-vertical-aside-submenu nav nav-sub"
                                 style="display: {{Request::is('seller/order*')?'block':'none'}}">
 
-                                <li class="nav-item {{Request::is('seller/contest/list/all')?'active':''}}">
-                                    <a class="nav-link " href="{{route('seller.contest.list',['all'])}}" title="">
+                                <li class="nav-item {{Request::is('seller/barter/list')?'active':''}}">
+                                    <a class="nav-link " href="{{route('seller.barter.list',['all'])}}" title="">
                                         <span class="tio-circle nav-indicator-icon"></span>
                                         <span class="text-truncate">My Barter</span>
                                     </a>
                                 </li>
-                                <li class="nav-item {{Request::is('seller/contest/list/all')?'active':''}}">
-                                    <a class="nav-link " href="{{route('seller.contest.list',['all'])}}" title="">
+
+                                <li class="nav-item {{Request::is('seller/barter/listjoin')?'active':''}}">
+                                    <a class="nav-link " href="{{route('seller.barter.listjoin',['all'])}}" title="">
                                         <span class="tio-circle nav-indicator-icon"></span>
-                                        <span class="text-truncate">Requested Barter</span>
+                                        <span class="text-truncate">Join Barter</span>
                                     </a>
                                 </li>
 

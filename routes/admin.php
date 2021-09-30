@@ -203,6 +203,10 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
             Route::post('editproductbuy', 'BarterController@editproductbuy')->name('editproductbuy');
             Route::post('updateamountsell', 'BarterController@updateamountsell')->name('updateamountsell');
             Route::post('updateamountbuy', 'BarterController@updateamountbuy')->name('updateamountbuy');
+            Route::get('deleteamountbarter/{id}', 'BarterController@deleteamountbarter')->name('deleteamountbarter');
+            Route::get('deleteamountbuy/{id}', 'BarterController@deleteamountbuy')->name('deleteamountbuy');
+            Route::get('deleteproductbarter/{id}', 'BarterController@deleteproductbarter')->name('deleteproductbarter');
+            Route::get('deleteproductbuy/{id}', 'BarterController@deleteproductbuy')->name('deleteproductbuy');
             Route::get('remove_image_sell', 'BarterController@remove_image_sell')->name('remove_image_sell');
             Route::get('remove_image_buy', 'BarterController@remove_image_buy')->name('remove_image_buy');
             Route::get('listmanage/{id}', 'BarterController@listmanage')->name('listmanage');

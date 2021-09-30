@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Seller;
 
 use App\CPU\BackEndHelper;
 use App\CPU\Convert;
@@ -29,29 +29,44 @@ class BarterController extends Controller
 {
     function category() {
             $contestcat = ContestCategory::get();
+			$seller = Seller::find(auth('seller')->id());
 
-        return view('admin-views.contest.category', compact('contestcat'));
+        return view('seller-views.contest.category', compact('contestcat','seller'));
     }
     function list() {
-            $b = Barter::where(['seller_id' => 0])->orderBy('created_at', 'desc')->get();
+            $b = Barter::where(['seller_id'  => auth('seller')->id()])->orderBy('created_at', 'desc')->get();
+			$seller = Seller::find(auth('seller')->id());
 
-        return view('admin-views.barter.list', compact('b'));
+        return view('seller-views.barter.list', compact('b','seller'));
+    }
+    function listjoin() {
+            $b = Barter::where('seller_id' ,'!=',auth('seller')->id())->orderBy('created_at', 'desc')->get();
+			$bs=new BarterSell();
+			$bb=new BarterBuy();
+			$bms=new BarterMoneySell();
+			$bmb=new BarterMoneyBuy();
+			$category=Category::get();
+			$seller = Seller::find(auth('seller')->id());
+
+        return view('seller-views.barter.listjoin', compact('b','seller','category','bs','bb','bms','bmb'));
     }
     public function edit($id)
     {
+		$seller = Seller::find(auth('seller')->id());
 		$category=Category::get();
         $b = Barter::find($id);
 		$bs = BarterSell::where('barter_id','=',$b->id)->get();
 		$bb = BarterBuy::where('barter_id','=',$b->id)->get();
 		$bms = BarterMoneySell::where('barter_id','=',$b->id)->get();
 		$bmb= BarterMoneyBuy::where('barter_id','=',$b->id)->get();
-        return view('admin-views.barter.adminedit', compact('b','bs','bb','bms','bmb','category'));
+        return view('seller-views.barter.selleredit', compact('b','bs','bb','bms','bmb','category','seller'));
 
     }
     public function categoryedit($id)
     {
+			$seller = Seller::find(auth('seller')->id());
         $contest = ContestCategory::find($id);
-        return view('admin-views.contest.categoryedit', compact('contest'));
+        return view('seller-views.contest.categoryedit', compact('contest','seller'));
 
     }
 
@@ -62,18 +77,19 @@ class BarterController extends Controller
         $user = new User();
         $seller = new Seller();
 		$contestuser = new ContestUser();
-        return view('admin-views.contest.view', compact('contest','user','seller','contestuser','contestcat`'));
+        return view('seller-views.contest.view', compact('contest','user','seller','contestuser','contestcat`'));
 
     }
  
-    function adminadd() {
+    function selleradd() {
+			$seller = Seller::find(auth('seller')->id());
 		$category=Category::get();
-        return view('admin-views.barter.adminadd',compact('category'));
+        return view('seller-views.barter.selleradd',compact('category','seller'));
     }
 
     function categoryadd() {
 //		die("add");
-        return view('admin-views.contest.categoryadd');
+        return view('seller-views.contest.categoryadd');
     }
     public function remove_image_sell(Request $request)
     {
@@ -106,13 +122,6 @@ class BarterController extends Controller
         ]);
         Toastr::success('Barter image demand removed successfully!');
         return back();
-    }
-    public function listjoin()
-    {
-            $contest = Contest::where('seller_id',"!=", auth('seller')->id())->orderBy('created_at', 'desc')->get();
-			$contestuser = new ContestUser();
-
-        return view('admin-views.contest.listjoin', compact('contest','contestuser'));
     }
     public function delete($id)
     {
@@ -172,7 +181,7 @@ class BarterController extends Controller
 	}
     function addnew(Request $request) {
         $b = new Barter();
-        $b->seller_id = 0;
+        $b->seller_id = auth('seller')->id();
 		$b->category=$request->category;
 		$b->save();
 
