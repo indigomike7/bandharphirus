@@ -236,6 +236,13 @@ class ContestController extends Controller
 			if($seller->premium_until > date("Y-m-d"))
 			{
 				$seller->saldo=$seller->saldo-(0.5*$contest->fund);
+				if($seller->saldo<0)
+				{
+					$returnData = array("errors" => [array("code"=>"premium","message"=>"Saldo anda tidak cukup untuk ikut contest!")]);
+					return response()->json($returnData);
+					exit();
+					
+				}
 				$seller->save();
 
 				$s = new Saldo();

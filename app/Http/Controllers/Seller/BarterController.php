@@ -13,6 +13,11 @@ use App\Model\BarterBuy;
 use App\Model\BarterMoneySell;
 use App\Model\BarterMoneyBuy;
 use App\Model\Category;
+use App\Model\SellerAddress;
+use App\Model\SellerBarterCart;
+use App\Model\SellerBarterOrder;
+use App\Model\SellerBarterOrderDeliveryStatus;
+use App\Model\SellerBarterOrderDetail;
 use App\User;
 use App\Model\Seller;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -27,17 +32,66 @@ use Illuminate\Support\Str;
 
 class BarterController extends Controller
 {
-    function category() {
+    function category() 
+	{
             $contestcat = ContestCategory::get();
 			$seller = Seller::find(auth('seller')->id());
 
         return view('seller-views.contest.category', compact('contestcat','seller'));
     }
-    function list() {
-            $b = Barter::where(['seller_id'  => auth('seller')->id()])->orderBy('created_at', 'desc')->get();
+    function list() 
+	{
+		$b = Barter::where(['seller_id'  => auth('seller')->id()])->orderBy('created_at', 'desc')->get();
+		$seller = Seller::find(auth('seller')->id());
+		$sa=SellerAddress::where(['seller_id' => auth('seller')->id()])->where(['primary_address' => 1])->get();
+
+        return view('seller-views.barter.list', compact('b','seller','sa'));
+    }
+    function addtocart(Request $request) 
+	{
+//		var_dump($request->id);
+//		var_dump($request['id']);
+//		die($_POST['id']);
+		
+		
+ 		$sa=SellerAddress::where(['seller_id' => auth('seller')->id()])->where(['primary_address' => 1])->get();
+		if(count($sa)>0)
+		{
+			$sbc = SellerBarterCart::where('seller_id','=',auth('seller')->id())->where('barter_id','=',$request->id)->first();
+			if($sbc)
+			{
+				$returnData = array("errors" => [array("code"=>"premium","message"=>"Barter sudah ada di cart!")]);
+				return response()->json($returnData);
+				exit();
+				
+			}
+			else
+			{
+				$sbc = new SellerBarterCart();
+				$sbc->seller_id = auth('seller')->id();
+				$sbc->barter_id=$request->id;
+				$sbc->save();
+			}
+		}
+		else
+		{
+			$returnData = array("errors" => [array("code"=>"premium","message"=>"Mohon tambahkan primary address, sebelum proses cart dan order!")]);
+			return response()->json($returnData);
+			exit();
+			
+		}
+		return response()->json([], 200);
+    }
+    function order(Request $request) {
+            $b = Barter::where('seller_id' ,'!=',auth('seller')->id())->orderBy('created_at', 'desc')->get();
+			$bs=new BarterSell();
+			$bb=new BarterBuy();
+			$bms=new BarterMoneySell();
+			$bmb=new BarterMoneyBuy();
+			$category=Category::get();
 			$seller = Seller::find(auth('seller')->id());
 
-        return view('seller-views.barter.list', compact('b','seller'));
+        return view('seller-views.barter.listjoin', compact('b','seller','category','bs','bb','bms','bmb'));
     }
     function listjoin() {
             $b = Barter::where('seller_id' ,'!=',auth('seller')->id())->orderBy('created_at', 'desc')->get();
@@ -184,7 +238,35 @@ class BarterController extends Controller
         $b->seller_id = auth('seller')->id();
 		$b->category=$request->category;
 		$b->save();
+		$statussell=false;
+		$statusbuy=false;
 
+		for($i=1;$i<($request->counter);$i++)
+		{
+			if($request['product_name'.$i]!="" && $request['quantity'.$i]!="" && $request['description'.$i]!="")
+			{
+				$statussell=true;
+			}
+		}
+		for($i=1;$i<($request->counterbuy);$i++)
+		{
+			if($request['product_buy_name'.$i]!="" && $request['quantity_buy'.$i]!="" && $request['description_buy'.$i]!="")
+			{
+				$statusbuy=true;
+			}
+		}
+		if($statussell==false)
+		{
+					$returnData = array("errors" => [array("code"=>"barter data","message"=>"Please add product to barter!")]);
+					return response()->json($returnData);
+					exit();
+		}
+		if($statusbuy==false)
+		{
+					$returnData = array("errors" => [array("code"=>"barter data","message"=>"Please add product in Demand!")]);
+					return response()->json($returnData);
+					exit();
+		}
 		for($i=1;$i<($request->counter);$i++)
 		{
 			if($request['product_name'.$i]!="" && $request['quantity'.$i]!="" && $request['description'.$i]!="")
@@ -202,7 +284,7 @@ class BarterController extends Controller
 					$bs->picture = json_encode($product_images);
 				}
 				$bs->save();
-
+				
 			}
 		}
 
@@ -246,7 +328,47 @@ class BarterController extends Controller
 
     function updateproducts(Request $request) {
         $b = Barter::find($request->id);
-
+		$statusbuy=false;
+		$statussell=false;
+		$abs = BarterSell::where('barter_id','=',$b->id)->get();
+		$abb = BarterBuy::where('barter_id','=',$b->id)->get();
+		
+		for($i=1;$i<($request->counter);$i++)
+		{
+			if($request['product_name'.$i]!="" && $request['quantity'.$i]!="" && $request['description'.$i]!="" && count($abs)==0)
+			{
+				$statussell =true;
+			}
+			if($request['product_name'.$i]!="" && $request['quantity'.$i]!="" && $request['description'.$i]!="" && count($abs)>0)
+			{
+				$statussell =true;
+			}
+		}
+		
+		for($i=1;$i<($request->counterbuy);$i++)
+		{
+			if($request['product_buy_name'.$i]!="" && $request['quantity_buy'.$i]!="" && $request['description_buy'.$i]!="" && count($abb)==0)
+			{
+				$statusbuy=true;
+			}
+			if($request['product_buy_name'.$i]!="" && $request['quantity_buy'.$i]!="" && $request['description_buy'.$i]!="" && count($abb)>0)
+			{
+				$statusbuy=true;
+			}
+		}
+		
+		if($statussell==false)
+		{
+					$returnData = array("errors" => [array("code"=>"barter data","message"=>"Please add product to barter!")]);
+					return response()->json($returnData);
+					exit();
+		}
+		if($statusbuy==false)
+		{
+					$returnData = array("errors" => [array("code"=>"barter data","message"=>"Please add product in Demand!")]);
+					return response()->json($returnData);
+					exit();
+		}
 		for($i=1;$i<($request->counter);$i++)
 		{
 			if($request['product_name'.$i]!="" && $request['quantity'.$i]!="" && $request['description'.$i]!="")
