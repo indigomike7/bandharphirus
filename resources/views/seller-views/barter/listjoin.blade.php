@@ -137,33 +137,37 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h4>Edit My Barter</h4>
+                            <h4>Join Barter</h4>
                         </div>
                       <div class="card-body">
 					  @foreach($b as $key=>$eachbarter)
-						<input type="hidden" name="id" id="id" value="{{$eachbarter->id}}">
+						<div  style="border:1px solid lightgray; border-radius:3px; padding:10px;">
 						<div class="row">
+						<input type="hidden" name="id" id="id" value="{{$eachbarter->id}}">
 							<div class="col-md-6">
                             <div class="form-group">
-                                <label for="name">Barter ID : </label>
-								{{$eachbarter->id}}
+                                <label for="name"><h3>Barter ID : </label>
+								{{$eachbarter->id}}<br></h3>
                             </div>
 							</div>
 							<div class="col-md-6">
                             <div class="form-group">
-                                <label for="name">Barter Category</label>
+                                <label for="name">Barter Category : </label>
 								@foreach($category as $key=>$value)
 								@if($value->id==$eachbarter->category)
 								{{$value->name}}
 								@endif
 								@endforeach
+								<br>
                             </div>
 							</div>
-							PRODUCT TO BARTER ##
+							<div class="col-md-12">
+							<h5>PRODUCT TO BARTER ##</h5>
 							@php(
 							$objbs=$bs->where('barter_id','=',$eachbarter->id)->get()
 							)
 							@foreach($objbs as $key=>$value)
+							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 										<label for="name">Product Name : </label>
@@ -178,8 +182,8 @@
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="name">Description</label>
-									{{$value->description}}
+									<label for="name">Description</label><br>
+									{{$value->description}}<br>
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -203,12 +207,13 @@
 							</div>
 							<div style="clear:both">
 							</div>
-							BARTER IN DB #<br>
-							PRODUCT IN DEMAND ##
+							<div class="col-md-12">
+							<h5>PRODUCT IN DEMAND ##</h5>
 							@php(
 							$objbb=$bb->where('barter_id','=',$eachbarter->id)->get()
 							)
 							@foreach($objbb as $key=>$value)
+							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 										<label for="name">Product Name : </label>
@@ -216,7 +221,6 @@
 								</div>
 							</div>
 							<div class="col-md-6">
-
 								<div class="form-group">
 									<label for="name">Quantity : </label>
 										{{$value->quantity}}
@@ -247,6 +251,8 @@
 									</div>
 							</div>
 							@endforeach
+
+
 							@php( $objbms=$bms->where('barter_id','=',$eachbarter->id)->get())
 							@if(count($objbms)>0)
 							@foreach($objbms as $key=>$value)
@@ -270,13 +276,64 @@
 							</div>
 							@endforeach
 							@endif
-
-							<a href="{{route('seller.barter.order',[$eachbarter->id])}}" class="btn btn-primary">Order</a>
+							
+							<br>
+							<div class="col-md-12">
+							<a href="javascript:;" onclick="addtocart({{$eachbarter->id}})" class="btn btn-primary">Add To Barter Cart</a>
+							<a href="{{route('seller.barter.order',[$eachbarter->id])}}" class="btn btn-primary">Order</a><br><br>
+							</div>
+							</div>
+						</div>
+						</div>
+						<br>
 					@endforeach
+				</div>
+			</div>
+		</div>
+	</div>
 @endsection
 
 @push('script')
     <script src="{{asset('public/assets/back-end')}}/js/tags-input.min.js"></script>
     <script src="{{ asset('public/assets/select2/js/select2.min.js')}}"></script>
     <script src="{{asset('public/assets/back-end/js/spartan-multi-image-picker.js')}}"></script>
+	<script type="text/javascript">
+	function addtocart(id)
+	{
+		var formData = new FormData();
+		formData.append('id', id);
+           $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                }
+            });
+            $.post({
+                url: '{{route('seller.barter.addtocart')}}',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    if (data.errors) {
+                        for (var i = 0; i < data.errors.length; i++) {
+                            toastr.error(data.errors[i].message, {
+                                CloseButton: true,
+                                ProgressBar: true
+                            });
+                        }
+                    } else {
+                        toastr.success('Barter added successfully to cart!', {
+                            CloseButton: true,
+                            ProgressBar: true
+                        });
+                        setInterval(function () {
+                            location.href = '{{route("seller.barter.listjoin")}}';
+                        }, 2000);
+                    }
+                }
+            });
+			e.stopImmediatePropagation();
+			return false;
+
+	}
+	</script>
 @endpush

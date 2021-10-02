@@ -120,7 +120,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('seller.dashboard')}}">Dashboard</a></li>
-                <li class="breadcrumb-item" aria-current="page"><a href="{{route('seller.contest.list')}}">Contest</a></li>
+                <li class="breadcrumb-item" aria-current="page"><a href="{{route('admin.contest.list')}}">Contest</a></li>
                 <li class="breadcrumb-item">Edit</li>
             </ol>
         </nav>

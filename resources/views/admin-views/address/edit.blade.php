@@ -1,11 +1,11 @@
 @extends('layouts.back-end.app')
-@section('title','Join List')
+@section('title','Address Edit')
 
 @push('css_or_js')
     <link href="{{asset('public/assets/back-end/css/croppie.css')}}" rel="stylesheet">
     <link href="{{asset('public/assets/back-end/css/tags-input.min.css')}}" rel="stylesheet">
-    <link href="{{asset('public/assets/select2/css/select2.min.css')}}" rel="stylesheet">
-    <link href="{{asset('public/assets/back-end/css/custom.css')}}" rel="stylesheet">
+    <link href="{{ asset('public/assets/select2/css/select2.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('public/assets/back-end/css/custom.css')}}" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <style>
         .switch {
@@ -121,8 +121,8 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('seller.dashboard')}}">Dashboard</a></li>
-                <li class="breadcrumb-item" aria-current="page"><a href="{{route('admin.contest.list')}}">Contest</a></li>
-                <li class="breadcrumb-item">Add new</li>
+                <li class="breadcrumb-item" aria-current="page"><a href="{{route('admin.address.list')}}">Address</a></li>
+                <li class="breadcrumb-item">Edit</li>
             </ol>
         </nav>
 
@@ -135,92 +135,27 @@
         <div class="row">
             <div class="col-md-12">
 
-                <form class="product-form" action="{{route('seller.contest.add')}}" method="post" enctype="multipart/form-data"
+                <form class="product-form" action="{{route('admin.address.update')}}" method="post" enctype="multipart/form-data"
                       id="product_form">
                     @csrf
                     <div class="card">
                         <div class="card-header">
-                            <h4>Add New Contest</h4>
+                            <h4>Edit Contest</h4>
                         </div>
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif                        <div class="card-body">
+                       <div class="card-body">
                             <div class="form-group">
-                                <label for="name">Contest Category</label>
-								<select name="contestcat">
-								@foreach($contestcat as $key=>$value)
-								<option value="{{$value->id}}">{{$value->category}}</option>
-								@endforeach
-								</select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="name">Contest Name</label>
-                                <input type="text" name="name" value="{{old('name')}}" class="form-control" id="name" placeholder="Ex : Kontes untuk memperingati HUT RI">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="name">Description</label>
-                                <textarea name="description" value="{{old('description')}}" class="form-control" id="description" >
+                                <label for="name">Address</label>
+                                <textarea name="address" class="form-control" id="address" >{{$a->address}}
 								</textarea>
                             </div>
                             <div class="form-group">
-                                <label for="fund">Fund</label>
-                                <input type="number" name="fund" value="{{old('fund')}}" class="form-control" id="fund" placeholder="20000">
+								<input type="hidden" name="id" value="{{$a->id}}">
+                                <label for="name">Contest Name</label>
+                                <input type="text" name="zip_code" value="{{$a->zip_code}}" class="form-control" id="zip_code" placeholder="11620">
                             </div>
-                            <div class="form-group">
-                                <label for="name">Start Date (Masukkan jika hanya untuk 1 bulan)</label>
-                                <input type="date" name="start_date" value="{{old('start_date')}}" class="form-control" id="start_date" >
-                            </div>
-                            <div class="form-group">
-                                <label for="name">End Date (Masukkan jika hanya untuk 1 bulan)</label>
-                                <input type="date" name="end_date" value="{{old('end_date')}}" class="form-control" id="end_date" >
-                            </div>
-                            <div class="form-group">
-                                <label for="name">Start Date 1 (Jika Periodic, misal mulai tanggal 1 tiap bulan, kosongkan jika tidak periodic)</label>
-                                <input type="number" name="start_date_1" value="{{old('start_date_1')}}" class="form-control" id="start_date" >
-                            </div>
-                            <div class="form-group">
-                                <label for="name">End Date 1 (Jika Periodic, misal berakhir tanggal 3 tiap bulan kosongkan jika tidak periodic)</label>
-                                <input type="number" name="end_date_1" value="{{old('end_date_1')}}" class="form-control" id="end_date" >
-                            </div>
-                            <div class="form-group">
-                                <label for="name">Start Date 2 (Jika Periodic, misal mulai tanggal 14 tiap bulan, kosongkan jika tidak periodic)</label>
-                                <input type="number" name="start_date_2" value="{{old('start_date_2')}}" class="form-control" id="start_date" >
-                            </div>
-                            <div class="form-group">
-                                <label for="name">End Date 2 (Jika Periodic, misal berakhir tanggal 17 tiap bulan, kosongkan jika tidak periodic)</label>
-                                <input type="number" name="end_date_2" value="{{old('end_date_2')}}" class="form-control" id="end_date" >
-                            </div>
-                            <div class="form-group">
-                                <label for="name">Start Date 3 (Jika Periodic, misal mulai tanggal 27 tiap bulan, kosongkan jika tidak periodic)</label>
-                                <input type="number" name="start_date_3" value="{{old('start_date_3')}}" class="form-control" id="start_date" >
-                            </div>
-                            <div class="form-group">
-                                <label for="name">End Date 3 (Jika Periodic, misal berakhir tanggal 30 tiap bulan, kosongkan jika tidak periodic)</label>
-                                <input type="number" name="end_date_3" value="{{old('end_date_3')}}" class="form-control" id="end_date" >
-                            </div>
-
 
                     <div class="card mt-2">
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <div class="form-group">
-                                        <label>Upload Image</label><small
-                                            style="color: red">* </small>
-                                    </div>
-                                    <div  class="p-2 border border-dashed"  style="max-width:430px;">
-                                        <div class="row" id="coba1"></div>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-12" style="padding-top: 20px">
@@ -244,7 +179,7 @@
     <script src="{{asset('public/assets/back-end/js/spartan-multi-image-picker.js')}}"></script>
     <script>
         $(function () {
-            $("#coba1").spartanMultiImagePicker({
+            $("#coba").spartanMultiImagePicker({
                 fieldName: 'images[]',
                 maxCount: 4,
                 rowHeight: 'auto',
@@ -410,8 +345,7 @@
     <script>
         $('#product_form').submit(function (e) {
             e.preventDefault();
-			e.stopImmediatePropagation();
-			for ( instance in CKEDITOR.instances ) {
+            for ( instance in CKEDITOR.instances ) {
                 CKEDITOR.instances[instance].updateElement();
             }
             var formData = new FormData(this);
@@ -421,7 +355,7 @@
                 }
             });
             $.post({
-                url: '{{route('admin.contest2.addnew2')}}',
+                url: '{{route('admin.address.update')}}',
                 data: formData,
                 contentType: false,
                 processData: false,
@@ -434,18 +368,16 @@
                             });
                         }
                     } else {
-                        toastr.success('Contest added successfully!', {
+                        toastr.success('Address updated successfully!', {
                             CloseButton: true,
                             ProgressBar: true
                         });
                         setInterval(function () {
-                            location.href = '{{route("admin.contest2.list")}}';
+                            location.href = '{{route('admin.address.list')}}';
                         }, 2000);
                     }
                 }
             });
-			e.stopImmediatePropagation();
-			return false;
         });
     </script>
 @endpush

@@ -1,5 +1,5 @@
 @extends('layouts.back-end.app')
-@section('title','My Barter List')
+@section('title','My Address List')
 
 @push('css_or_js')
     <!-- Custom styles for this page -->
@@ -12,20 +12,19 @@
     <div class="content container-fluid">
         <div class="row align-items-center mb-3">
             <div class="col-sm">
-                <h1 class="page-header-title">Barter <span
-                        class="badge badge-soft-dark ml-2">{{\App\Model\Barter::where('seller_id',0)->count()}}</span>
+                <h1 class="page-header-title">Address <span
+                        class="badge badge-soft-dark ml-2">{{\App\Model\SellerAddress::where('seller_id',0)->count()}}</span>
                 </h1>
 
             </div>
         </div>
 
-						@if(count($sa)>0)
         <div class="row" style="margin-top: 20px">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5>My Barter Lists</h5>
-						<p style="text-align:right;"><a href="{{route('admin.barter.adminadd')}}">Add New Barter</a></p>
+                        <h5>My Address Lists</h5>
+						<p style="text-align:right;"><a href="{{route('admin.address.add')}}">Add New Address</a></p>
                     </div>
                     <div class="card-body" style="padding: 0">
                         <div class="table-responsive">
@@ -36,20 +35,24 @@
                                 <tr>
                                     <th>#</th>
                                     <th>ID</th>
-                                    <th>Created Date</th>
+                                    <th>Address</th>
+                                    <th>Primary</th>
+                                    <th>Address</th>
                                     <th>Updated Date</th>
                                     <th style="width: 30px">{{trans('messages.Action')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($b as $k=>$detail)
+                                @foreach($a as $k=>$detail)
                                     <tr>
                                         <td>
                                             {{$k+1}}
                                         </td>
                                         <td>
-                                            <a href="{{route('admin.barter.edit',$detail['id'])}}">{{$detail['id']}}</a>
+                                            <a href="{{route('admin.address.edit',$detail['id'])}}">{{$detail['id']}}</a>
                                         </td>
+                                        <td>{{ $detail->address }}</td>
+                                        <td>{{ ($detail->primary_address==1) ? "Primary" : "" }}</td>
                                         <td>{{ $detail->created_at }}</td>
                                         <td>{{ $detail->updated_at }}</td>
                                         <td>
@@ -63,9 +66,11 @@
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                     <a class="dropdown-item"
-                                                       href="{{route('admin.barter.edit',[$detail['id']])}}"> Edit</a>
+                                                       href="{{route('admin.address.edit',[$detail['id']])}}"> Edit</a>
                                                     <a class="dropdown-item"
-                                                       href="{{route('admin.barter.delete',[$detail['id']])}}"> Delete</a>
+                                                       href="{{route('admin.address.defaultaddress',[$detail['id']])}}"> Set As Default Address</a>
+                                                    <a class="dropdown-item"
+                                                       href="{{route('admin.address.delete',[$detail['id']])}}"> Delete</a>
                                                 </div>
                                             </div>
                                         </td>
@@ -78,14 +83,6 @@
                 </div>
             </div>
         </div>
-		@endif
-		@if(count($sa)==0)
-        <div class="row" style="margin-top: 20px">
-			<div class="col-md-6">
-			Please add your primary address firstly, before you can add new barter!! Add <a href="{{route('admin.address.add')}}">Here</a>
-			</div>
-		</div>
-		@endif
     </div>
 @endsection
 

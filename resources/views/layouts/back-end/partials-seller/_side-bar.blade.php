@@ -159,6 +159,28 @@
                             </ul>
                         </li>
                         <!-- End Pages -->
+                        <!-- Pages -->
+                        <li class="navbar-vertical-aside-has-menu {{Request::is('seller/address*')?'active':''}}">
+                            <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle" href="javascript:"
+                               title="Pages">
+                                <i class="tio-premium-outlined  nav-icon"></i>
+                                <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">
+                                    Address
+                                </span>
+                            </a>
+                            <ul class="js-navbar-vertical-aside-submenu nav nav-sub"
+                                style="display: {{Request::is('seller/address*')?'block':'none'}}">
+
+                                <li class="nav-item {{Request::is('seller/address/list')?'active':''}}">
+                                    <a class="nav-link " href="{{route('seller.address.list',['all'])}}" title="">
+                                        <span class="tio-circle nav-indicator-icon"></span>
+                                        <span class="text-truncate">My Address</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <!-- End Pages -->
                         <li class="nav-item">
                             <small class="nav-subtitle" title="Pages">{{trans('messages.product_management')}}</small>
                             <small class="tio-more-horizontal nav-subtitle-replacer"></small>
