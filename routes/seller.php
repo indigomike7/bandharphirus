@@ -89,22 +89,30 @@ Route::group(['namespace' => 'Seller', 'prefix' => 'seller', 'as' => 'seller.'],
             Route::get('remove_image_buy', 'BarterController@remove_image_buy')->name('remove_image_buy');
             Route::get('listmanage/{id}', 'BarterController@listmanage')->name('listmanage');
             Route::get('list', 'BarterController@list')->name('list');
-            Route::get('category', 'Contest2Controller@category')->name('category');
-            Route::get('categoryadd', 'Contest2Controller@categoryadd')->name('categoryadd');
-            Route::get('categoryedit/{id}', 'Contest2Controller@categoryedit')->name('categoryedit');
-            Route::get('categorydelete/{id}', 'Contest2Controller@categorydelete')->name('categorydelete');
             Route::get('listjoin', 'BarterController@listjoin')->name('listjoin');
             Route::get('selleradd', 'BarterController@selleradd')->name('selleradd');
             Route::post('addnew', 'BarterController@addnew')->name('addnew');
-            Route::post('categoryaddnew2', 'Contest2Controller@categoryaddnew2')->name('categoryaddnew2');
-            Route::post('update', 'Contest2Controller@update')->name('update');
-            Route::post('categoryupdate', 'Contest2Controller@categoryupdate')->name('categoryupdate');
-            Route::get('remove_image/{id}', 'Contest2Controller@remove_image')->name('remove_image');
             Route::get('detail/{id}', 'Contest2Controller@detail')->name('detail');
             Route::get('edit/{id}', 'BarterController@edit')->name('edit');
+            Route::get('cart', 'BarterController@cart')->name('cart');
+            Route::get('checkout/{id}', 'BarterController@checkout')->name('checkout');
+            Route::get('orderlistbuy', 'BarterController@orderlistbuy')->name('orderlistbuy');
+            Route::post('addtocart', 'BarterController@addtocart')->name('addtocart');
+            Route::post('buy', 'BarterController@buy')->name('buy');
+            Route::post('updateorderdeliverystatus', 'BarterController@updateorderdeliverystatus')->name('updateorderdeliverystatus');
+            Route::get('buydetail/{id}', 'BarterController@buydetail')->name('buydetail');
+            Route::get('order/{id}', 'BarterController@order')->name('order');
             Route::get('delete/{id}', 'BarterController@delete')->name('delete');
-			Route::post('join', 'Contest2Controller@join')->name('join');
-			Route::post('updatemanage', 'Contest2Controller@updatemanage')->name('updatemanage');
+        });
+		
+        Route::group(['prefix' => 'address', 'as' => 'address.'], function () {
+            Route::get('defaultaddress/{id}', 'AddressController@defaultaddress')->name('defaultaddress');
+            Route::get('edit/{id}', 'AddressController@edit')->name('edit');
+            Route::get('delete/{id}', 'AddressController@delete')->name('delete');
+			Route::get('list', 'AddressController@list')->name('list');
+			Route::get('add', 'AddressController@add')->name('add');
+			Route::post('addnew', 'AddressController@addnew')->name('addnew');
+			Route::post('update', 'AddressController@update')->name('update');
         });
         Route::group(['prefix' => 'premium', 'as' => 'premium.'], function () {
             Route::get('update', 'PremiumController@update')->name('update');

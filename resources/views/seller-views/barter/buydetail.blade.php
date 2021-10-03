@@ -1,5 +1,5 @@
 @extends('layouts.back-end.app-seller')
-@section('title','Edit My Barter')
+@section('title','Order')
 
 @push('css_or_js')
     <link href="{{asset('public/assets/back-end/css/croppie.css')}}" rel="stylesheet">
@@ -121,14 +121,14 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('seller.dashboard')}}">Dashboard</a></li>
-                <li class="breadcrumb-item" aria-current="page"><a href="{{route('seller.barter.list')}}">Barter</a></li>
-                <li class="breadcrumb-item">Join Barter</li>
+                <li class="breadcrumb-item" aria-current="page"><a href="{{route('seller.barter.orderlistbuy')}}">Order</a></li>
+                <li class="breadcrumb-item">Order Detail</li>
             </ol>
         </nav>
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
-            <h1 class="h3 mb-0 text-black-50">Join Barter</h1>
+            <h1 class="h3 mb-0 text-black-50">Order Detail</h1>
         </div>
 
         <!-- Content Row -->
@@ -137,25 +137,34 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h4>Join Barter</h4>
+                            <h4>Order</h4>
                         </div>
                       <div class="card-body">
-					  @if(count($sa)>0)
-					  @foreach($b as $key=>$eachbarter)
+					  @if($sbo!=null)
 						<div  style="border:1px solid lightgray; border-radius:3px; padding:10px;">
 						<div class="row">
-						<input type="hidden" name="id" id="id" value="{{$eachbarter->id}}">
+							<div class="col-md-12">
+                            <div class="form-group">
+                                <label for="name"><h3>Order ID : </label>
+								{{$sbo->id}}<br></h3>
+                            </div>
+							</div>
+							@foreach($sbod as $key=>$detail)
+							@php(
+								$objb=$b->find($detail->barter_id)
+							)
+							@endforeach
 							<div class="col-md-6">
                             <div class="form-group">
                                 <label for="name"><h3>Barter ID : </label>
-								{{$eachbarter->id}}<br></h3>
+								{{$objb->id}}<br></h3>
                             </div>
 							</div>
 							<div class="col-md-6">
                             <div class="form-group">
                                 <label for="name">Barter Category : </label>
 								@foreach($category as $key=>$value)
-								@if($value->id==$eachbarter->category)
+								@if($value->id==$objb->category)
 								{{$value->name}}
 								@endif
 								@endforeach
@@ -165,7 +174,7 @@
 							<div class="col-md-12">
 							<h5>PRODUCT TO BARTER ##</h5>
 							@php(
-							$objbs=$bs->where('barter_id','=',$eachbarter->id)->get()
+							$objbs=$bs->where('barter_id','=',$objb->id)->get()
 							)
 							@foreach($objbs as $key=>$value)
 							</div>
@@ -211,7 +220,7 @@
 							<div class="col-md-12">
 							<h5>PRODUCT IN DEMAND ##</h5>
 							@php(
-							$objbb=$bb->where('barter_id','=',$eachbarter->id)->get()
+							$objbb=$bb->where('barter_id','=',$objb->id)->get()
 							)
 							@foreach($objbb as $key=>$value)
 							</div>
@@ -254,7 +263,7 @@
 							@endforeach
 
 
-							@php( $objbms=$bms->where('barter_id','=',$eachbarter->id)->get())
+							@php( $objbms=$bms->where('barter_id','=',$objb->id)->get())
 							@if(count($objbms)>0)
 							@foreach($objbms as $key=>$value)
 							<div class="col-md-6">
@@ -266,7 +275,7 @@
 							@endforeach
 							@endif
 
-							@php( $objbmb=$bmb->where('barter_id','=',$eachbarter->id)->get())
+							@php( $objbmb=$bmb->where('barter_id','=',$objb->id)->get())
 							@if(count($objbmb)>0)
 							@foreach($objbmb as $key=>$value)
 							<div class="col-md-6">
@@ -278,24 +287,109 @@
 							@endforeach
 							@endif
 							
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="name">My Delivery Address :</label><br>
+									@foreach($sa as $key=>$detail)
+									{{$detail->address}}<br>
+										{{$detail->zip_code}}<br/>
+									@endforeach
+									
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="name">Seller Delivery Address :</label><br>
+									@foreach($sa2 as $key=>$detail)
+									{{$detail->address}}<br>
+										{{$detail->zip_code}}<br/>
+									@endforeach
+									
+								</div>
+							</div>
 							<br>
-							<div class="col-md-12">
-							<!--<a href="javascript:;" onclick="addtocart({{$eachbarter->id}})" class="btn btn-primary">Add To Barter Cart</a>-->
-							<a href="{{route('seller.barter.order',[$eachbarter->id])}}" class="btn btn-primary">Order</a><br><br>
-							</div>
-							</div>
-						</div>
 						</div>
 						<br>
-					@endforeach
 					@endif
-					@if(count($sa)==0)
-        <div class="row" style="margin-top: 20px">
-			<div class="col-md-6">
-			Please add your primary address firstly, before you can add new barter!! Add <a href="{{route('seller.address.add')}}">Here</a>
-			</div>
-		</div>
-					@endif
+				<h3>Seller Delivery Status</h3>
+                            <table id="datatable"
+                                   class="table table-hover table-borderless table-thead-bordered table-nowrap table-align-middle card-table"
+                                   style="width: 100%">
+                                <thead class="thead-light">
+                                <tr>
+                                    <th>#</th>
+                                    <th>ID</th>
+									<th>Status</th>
+                                    <th>Created Date</th>
+                                    <th>Updated Date</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($sbods2 as $k=>$detail)
+                                    <tr>
+                                        <td>
+                                            {{$k+1}}
+                                        </td>
+                                        <td>
+                                            {{$detail['id']}}
+                                        </td>
+                                        <td>{{ $detail->status }}</td>
+                                        <td>{{ $detail->created_at }}</td>
+                                        <td>{{ $detail->updated_at }}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+					
+                <form class="product-form" action="{{route('seller.barter.updateorderdeliverystatus')}}" method="post" enctype="multipart/form-data"
+                      id="product_form">
+                            <div class="form-group">
+								<input type="hidden" name="order_id" value="{{$sbo->id}}" id="order_id"/>
+                                <label for="name">My Delivery Status</label>
+								<select name="status">
+								<option value="Demand in Packing">Demand in Packing</option>
+								<option value="Demand Delivered">Demand Delivered</option>
+								<option value="Bought Barter Accepted">Bought Barter Accepted</option>
+								</select>
+                            </div>
+					        <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-12" style="padding-top: 20px">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+
+				</form>
+				<h3>My Delivery Status</h3>
+                            <table id="datatable"
+                                   class="table table-hover table-borderless table-thead-bordered table-nowrap table-align-middle card-table"
+                                   style="width: 100%">
+                                <thead class="thead-light">
+                                <tr>
+                                    <th>#</th>
+                                    <th>ID</th>
+                                    <th>Status</th>
+                                    <th>Created Date</th>
+                                    <th>Updated Date</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($sbods as $k=>$detail)
+                                    <tr>
+                                        <td>
+                                            {{$k+1}}
+                                        </td>
+                                        <td>
+                                            {{$detail['id']}}
+                                        </td>
+                                        <td>{{ $detail->status }}</td>
+                                        <td>{{ $detail->created_at }}</td>
+                                        <td>{{ $detail->updated_at }}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
 				</div>
 			</div>
 		</div>
@@ -306,18 +400,20 @@
     <script src="{{asset('public/assets/back-end')}}/js/tags-input.min.js"></script>
     <script src="{{ asset('public/assets/select2/js/select2.min.js')}}"></script>
     <script src="{{asset('public/assets/back-end/js/spartan-multi-image-picker.js')}}"></script>
-	<script type="text/javascript">
-	function addtocart(id)
-	{
-		var formData = new FormData();
-		formData.append('id', id);
-           $.ajaxSetup({
+    <script>
+        $('#product_form').submit(function (e) {
+            e.preventDefault();
+            for ( instance in CKEDITOR.instances ) {
+                CKEDITOR.instances[instance].updateElement();
+            }
+            var formData = new FormData(this);
+            $.ajaxSetup({
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
             $.post({
-                url: '{{route('seller.barter.addtocart')}}',
+                url: '{{route('seller.barter.updateorderdeliverystatus')}}',
                 data: formData,
                 contentType: false,
                 processData: false,
@@ -330,19 +426,17 @@
                             });
                         }
                     } else {
-                        toastr.success('Barter added successfully to cart!', {
+                        toastr.success('Order Status Set successfully!', {
                             CloseButton: true,
                             ProgressBar: true
                         });
                         setInterval(function () {
-                            location.href = '{{route("seller.barter.listjoin")}}';
+                            location.href = '{{route("seller.barter.buydetail",[$sbo->id])}}';
                         }, 2000);
                     }
                 }
             });
-			e.stopImmediatePropagation();
-			return false;
+        });
+    </script>
 
-	}
-	</script>
 @endpush

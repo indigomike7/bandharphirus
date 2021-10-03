@@ -34,7 +34,7 @@ class BarterController extends Controller
         return view('admin-views.contest.category', compact('contestcat'));
     }
     function list() {
-		$b = Barter::where(['seller_id' => 0])->orderBy('created_at', 'desc')->get();
+		$b = Barter::where(['seller_id' => 0])->where('status','=',0)->orderBy('created_at', 'desc')->get();
 		$sa=SellerAddress::where(['seller_id' => 0])->where(['primary_address' => 1])->get();
 
 		return view('admin-views.barter.list', compact('b','sa'));
@@ -273,13 +273,22 @@ class BarterController extends Controller
 		$abs = BarterSell::where('barter_id','=',$b->id)->get();
 		$abb = BarterBuy::where('barter_id','=',$b->id)->get();
 		
+		if(count($abs)>0)
+		{
+			$statussell=true;
+		}
+		
+		if(count($abb)>0)
+		{
+			$statusbuy=true;
+		}
 		for($i=1;$i<($request->counter);$i++)
 		{
 			if($request['product_name'.$i]!="" && $request['quantity'.$i]!="" && $request['description'.$i]!="" && count($abs)==0)
 			{
 				$statussell =true;
 			}
-			if($request['product_name'.$i]!="" && $request['quantity'.$i]!="" && $request['description'.$i]!="" && count($abs)>0)
+			if($request['product_name'.$i]!="" && $request['quantity'.$i]!="" && $request['description'.$i]!="" && count($abs)>0 )
 			{
 				$statussell =true;
 			}
@@ -287,7 +296,7 @@ class BarterController extends Controller
 		
 		for($i=1;$i<($request->counterbuy);$i++)
 		{
-			if($request['product_buy_name'.$i]!="" && $request['quantity_buy'.$i]!="" && $request['description_buy'.$i]!="" && count($abb)==0)
+			if($request['product_buy_name'.$i]!="" && $request['quantity_buy'.$i]!="" && $request['description_buy'.$i]!="" && count($abb)==0 )
 			{
 				$statusbuy=true;
 			}
@@ -297,17 +306,39 @@ class BarterController extends Controller
 			}
 		}
 		
-		if($statussell==false)
+		if($statussell==false )
 		{
+			if($request['amount']!=null)
+			{
+				
+			}
+			elseif($request['amount_buy']!=null)
+			{
+				
+			}
+			else
+			{
 					$returnData = array("errors" => [array("code"=>"barter data","message"=>"Please add product to barter!")]);
 					return response()->json($returnData);
 					exit();
+			}
 		}
 		if($statusbuy==false)
 		{
+			if($request['amount']!=null)
+			{
+				
+			}
+			elseif($request['amount_buy']!=null)
+			{
+				
+			}
+			else
+			{
 					$returnData = array("errors" => [array("code"=>"barter data","message"=>"Please add product in Demand!")]);
 					return response()->json($returnData);
 					exit();
+			}
 		}
 
 		for($i=1;$i<($request->counter);$i++)

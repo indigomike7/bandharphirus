@@ -11,6 +11,7 @@ class Barter extends Model
         'id' => 'integer',
         'seller_id' => 'integer',
         'category' => 'integer',
+		'status'=>'integer'
     ];
 protected $guarded = [];
 

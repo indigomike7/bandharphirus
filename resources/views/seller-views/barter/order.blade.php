@@ -1,5 +1,5 @@
 @extends('layouts.back-end.app-seller')
-@section('title','Edit My Barter')
+@section('title','Order')
 
 @push('css_or_js')
     <link href="{{asset('public/assets/back-end/css/croppie.css')}}" rel="stylesheet">
@@ -121,14 +121,14 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('seller.dashboard')}}">Dashboard</a></li>
-                <li class="breadcrumb-item" aria-current="page"><a href="{{route('seller.barter.list')}}">Barter</a></li>
-                <li class="breadcrumb-item">Join Barter</li>
+                <li class="breadcrumb-item" aria-current="page"><a href="{{route('seller.barter.listjoin')}}">Barter</a></li>
+                <li class="breadcrumb-item">Order</li>
             </ol>
         </nav>
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
-            <h1 class="h3 mb-0 text-black-50">Join Barter</h1>
+            <h1 class="h3 mb-0 text-black-50">Order</h1>
         </div>
 
         <!-- Content Row -->
@@ -137,25 +137,24 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h4>Join Barter</h4>
+                            <h4>Order</h4>
                         </div>
                       <div class="card-body">
-					  @if(count($sa)>0)
-					  @foreach($b as $key=>$eachbarter)
+					  @if(count($sa)>0 && $b!=null)
 						<div  style="border:1px solid lightgray; border-radius:3px; padding:10px;">
 						<div class="row">
-						<input type="hidden" name="id" id="id" value="{{$eachbarter->id}}">
+						<input type="hidden" name="id" id="id" value="{{$b->id}}">
 							<div class="col-md-6">
                             <div class="form-group">
                                 <label for="name"><h3>Barter ID : </label>
-								{{$eachbarter->id}}<br></h3>
+								{{$b->id}}<br></h3>
                             </div>
 							</div>
 							<div class="col-md-6">
                             <div class="form-group">
                                 <label for="name">Barter Category : </label>
 								@foreach($category as $key=>$value)
-								@if($value->id==$eachbarter->category)
+								@if($value->id==$b->category)
 								{{$value->name}}
 								@endif
 								@endforeach
@@ -165,7 +164,7 @@
 							<div class="col-md-12">
 							<h5>PRODUCT TO BARTER ##</h5>
 							@php(
-							$objbs=$bs->where('barter_id','=',$eachbarter->id)->get()
+							$objbs=$bs->where('barter_id','=',$b->id)->get()
 							)
 							@foreach($objbs as $key=>$value)
 							</div>
@@ -211,7 +210,7 @@
 							<div class="col-md-12">
 							<h5>PRODUCT IN DEMAND ##</h5>
 							@php(
-							$objbb=$bb->where('barter_id','=',$eachbarter->id)->get()
+							$objbb=$bb->where('barter_id','=',$b->id)->get()
 							)
 							@foreach($objbb as $key=>$value)
 							</div>
@@ -254,7 +253,7 @@
 							@endforeach
 
 
-							@php( $objbms=$bms->where('barter_id','=',$eachbarter->id)->get())
+							@php( $objbms=$bms->where('barter_id','=',$b->id)->get())
 							@if(count($objbms)>0)
 							@foreach($objbms as $key=>$value)
 							<div class="col-md-6">
@@ -266,7 +265,7 @@
 							@endforeach
 							@endif
 
-							@php( $objbmb=$bmb->where('barter_id','=',$eachbarter->id)->get())
+							@php( $objbmb=$bmb->where('barter_id','=',$b->id)->get())
 							@if(count($objbmb)>0)
 							@foreach($objbmb as $key=>$value)
 							<div class="col-md-6">
@@ -278,23 +277,38 @@
 							@endforeach
 							@endif
 							
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="name">Delivery Address</label>
+									@foreach($sa as $key=>$detail)
+									{{$detail->address}}<br>
+										{{$detail->zip_code}}<br/>
+									@endforeach
+									
+								</div>
+							</div>
 							<br>
 							<div class="col-md-12">
-							<!--<a href="javascript:;" onclick="addtocart({{$eachbarter->id}})" class="btn btn-primary">Add To Barter Cart</a>-->
-							<a href="{{route('seller.barter.order',[$eachbarter->id])}}" class="btn btn-primary">Order</a><br><br>
+							<a href="{{route('seller.barter.checkout',[$b->id])}}" class="btn btn-primary">Check Out</a><br><br>
 							</div>
 							</div>
 						</div>
 						</div>
 						<br>
-					@endforeach
 					@endif
 					@if(count($sa)==0)
         <div class="row" style="margin-top: 20px">
 			<div class="col-md-6">
-			Please add your primary address firstly, before you can add new barter!! Add <a href="{{route('seller.address.add')}}">Here</a>
+			Please add your primary address firstly, before you can add new barter Order!! Add <a href="{{route('seller.address.add')}}">Here</a>
 			</div>
 		</div>
+					@endif
+					@if($b==null)
+						<div class="row" style="margin-top: 20px">
+							<div class="col-md-6">
+							Barter sudah di beli!
+							</div>
+						</div>
 					@endif
 				</div>
 			</div>

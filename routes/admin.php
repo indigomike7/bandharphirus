@@ -196,7 +196,17 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'], fu
 			Route::post('updatemanage', 'Contest2Controller@updatemanage')->name('updatemanage');
         });
 
-        Route::group(['prefix' => 'barter', 'as' => 'barter.'], function () {
+        Route::group(['prefix' => 'address', 'as' => 'address.'], function () {
+            Route::get('defaultaddress/{id}', 'AddressController@defaultaddress')->name('defaultaddress');
+            Route::get('edit/{id}', 'AddressController@edit')->name('edit');
+            Route::get('delete/{id}', 'AddressController@delete')->name('delete');
+			Route::get('list', 'AddressController@list')->name('list');
+			Route::get('add', 'AddressController@add')->name('add');
+			Route::post('addnew', 'AddressController@addnew')->name('addnew');
+			Route::post('update', 'AddressController@update')->name('update');
+        });
+
+		Route::group(['prefix' => 'barter', 'as' => 'barter.'], function () {
             Route::post('updateproducts', 'BarterController@updateproducts')->name('updateproducts');
             Route::post('updatebarter', 'BarterController@updatebarter')->name('updatebarter');
             Route::post('editproductsell', 'BarterController@editproductsell')->name('editproductsell');

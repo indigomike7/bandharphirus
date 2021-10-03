@@ -154,6 +154,12 @@
                                         <span class="text-truncate">Join Barter</span>
                                     </a>
                                 </li>
+                                <li class="nav-item {{Request::is('seller/barter/orderlistbuy')?'active':''}}">
+                                    <a class="nav-link " href="{{route('seller.barter.orderlistbuy',['all'])}}" title="">
+                                        <span class="tio-circle nav-indicator-icon"></span>
+                                        <span class="text-truncate">My Buying List</span>
+                                    </a>
+                                </li>
 
 
                             </ul>
