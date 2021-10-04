@@ -96,11 +96,15 @@ Route::group(['namespace' => 'Seller', 'prefix' => 'seller', 'as' => 'seller.'],
             Route::get('edit/{id}', 'BarterController@edit')->name('edit');
             Route::get('cart', 'BarterController@cart')->name('cart');
             Route::get('checkout/{id}', 'BarterController@checkout')->name('checkout');
+            Route::get('orderlistsell', 'BarterController@orderlistsell')->name('orderlistsell');
             Route::get('orderlistbuy', 'BarterController@orderlistbuy')->name('orderlistbuy');
             Route::post('addtocart', 'BarterController@addtocart')->name('addtocart');
+            Route::post('sell', 'BarterController@sell')->name('sell');
             Route::post('buy', 'BarterController@buy')->name('buy');
+            Route::post('updateorderdeliverystatusseller', 'BarterController@updateorderdeliverystatusseller')->name('updateorderdeliverystatusseller');
             Route::post('updateorderdeliverystatus', 'BarterController@updateorderdeliverystatus')->name('updateorderdeliverystatus');
             Route::get('buydetail/{id}', 'BarterController@buydetail')->name('buydetail');
+            Route::get('selldetail/{id}', 'BarterController@selldetail')->name('selldetail');
             Route::get('order/{id}', 'BarterController@order')->name('order');
             Route::get('delete/{id}', 'BarterController@delete')->name('delete');
         });

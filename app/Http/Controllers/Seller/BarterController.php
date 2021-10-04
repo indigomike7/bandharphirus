@@ -103,6 +103,109 @@ class BarterController extends Controller
 			return view('seller-views.barter.buydetail', compact('seller','category','b','bs','bb','bms','bmb','category','sbo','sbod','sa','sa2','sbods','sbods2'));
     } 
 	 
+    function selldetail(Request $request) {
+			$status_pay = false;
+		$sbo = SellerBarterOrder::find($request->id);
+		
+		$sbods=SellerBarterOrderDeliveryStatus::where('order_id','=',$request->id)->where("seller_sell_id","=",auth("seller")->id())->get();
+		$sbods2=SellerBarterOrderDeliveryStatus::where('order_id','=',$request->id)->where("seller_demand_id","=",$sbo->seller_id_demand)->get();
+		$sbod=SellerBarterOrderDetail::where('order_id','=',$sbo->id)->get();    
+		$seller = Seller::find(auth('seller')->id());
+		if($sbo->status!="paid barter")
+		{
+			foreach($sbod as $key=>$detail)
+			{
+            $b = Barter::where('id' ,'=',$detail->barter_id)->first();
+			}
+			$bs=BarterSell::where('barter_id','=',$b->id)->get();
+//			var_dump($bs);
+			$bb=BarterBuy::where('barter_id','=',$b->id)->get();
+			$bms=BarterMoneySell::where('barter_id','=',$b->id)->first();
+			$bmb=BarterMoneyBuy::where('barter_id','=',$b->id)->first();
+			$category=Category::get();
+			$seller = Seller::find(auth('seller')->id());
+			if($bms!= null && $bmb!= null)
+			{
+				$sell_amount=($bms->amount)-($bmb->amount);
+				if(($bms->amount)-($bmb->amount)>0)
+				{
+					$status_pay = true;
+				}
+			}
+			elseif($bms== null && $bmb!= null)
+			{
+				$sell_amount=0;
+					$status_pay = false;
+			}
+			elseif($bms!= null && $bmb== null)
+			{
+				$sell_amount=$bms->amount;
+					$status_pay = true;
+			}
+			else
+			{
+				$sell_amount =0;
+				$status_pay=false;
+			}
+		}
+		else
+		{
+			$status_pay=false;
+			$sell_amount=0;
+		}
+			if($status_pay==false)
+			{
+				$response=null;
+			}
+			else
+			{
+				
+            $ps = PremiumSettings::find(1);
+			$seller = Seller::find(auth('seller')->id());
+		$config=\App\CPU\Helpers::get_business_settings('tripay');
+		$apiKey = $config["tripay_api"];
+					$curl = curl_init();
+
+					curl_setopt_array($curl, array(
+					  CURLOPT_FRESH_CONNECT     => true,
+					  CURLOPT_URL               => "https://tripay.co.id/api-sandbox/merchant/payment-channel",
+					  CURLOPT_RETURNTRANSFER    => true,
+					  CURLOPT_HEADER            => false,
+					  CURLOPT_HTTPHEADER        => array(
+						"Authorization: Bearer ".$apiKey
+					  ),
+					  CURLOPT_FAILONERROR       => false
+					));
+
+					$response = curl_exec($curl);
+					$err = curl_error($curl);
+
+					curl_close($curl);
+
+
+			}
+		
+		$b=new Barter();
+		$bs=new BarterSell();
+		$bb=new BarterBuy();
+		$bms=new BarterMoneySell();
+		$bmb=new BarterMoneyBuy();
+		$category=Category::get();
+			
+		$sa=SellerAddress::where(['seller_id' => auth('seller')->id()])->where(['primary_address' => 1])->get();
+		$sa2=SellerAddress::where(['seller_id' => $sbo->seller_id_sell])->where(['primary_address' => 1])->get();
+			return view('seller-views.barter.selldetail', compact('seller','category','b','bs','bb','bms','bmb','category','sbo','sbod','sa','sa2','sbods','sbods2','sell_amount','status_pay'),['response'=>$response]);
+    } 
+    function updateorderdeliverystatusseller(Request $request) 
+	{
+			$sbods=new SellerBarterOrderDeliveryStatus();
+			$sbods->seller_sell_id = auth('seller')->id();
+			$sbods->order_id=$request->order_id;
+			$sbods->status=$request->status;
+			$sbods->save();
+			return response()->json([], 200);
+	
+    }
     function updateorderdeliverystatus(Request $request) 
 	{
 			$sbods=new SellerBarterOrderDeliveryStatus();
@@ -120,6 +223,14 @@ class BarterController extends Controller
 		$sa=SellerAddress::where(['seller_id' => auth('seller')->id()])->where(['primary_address' => 1])->get();
 
         return view('seller-views.barter.orderlistbuy', compact('seller','sbo','sa')); 
+	}
+	function orderlistsell(Request $request)
+	{
+		$sbo=SellerBarterOrder::where('seller_id_sell','=',auth('seller')->id())->get();
+		$seller = Seller::find(auth('seller')->id());
+		$sa=SellerAddress::where(['seller_id' => auth('seller')->id()])->where(['primary_address' => 1])->get();
+
+        return view('seller-views.barter.orderlistsell', compact('seller','sbo','sa')); 
 	}
 	function buy(Request $request)
 	{
@@ -150,6 +261,16 @@ class BarterController extends Controller
 			Barter::where('id', $b->id)->update([
 				'status' => 1,
 			]);
+
+			return response()->json([], 200);
+	
+	}
+	function sell(Request $request)
+	{
+			$sbo=SellerBarterOrder::find($request->id);
+			$sbo->status="paid barter";
+			$sbo->save();
+	 		
 
 			return response()->json([], 200);
 	
