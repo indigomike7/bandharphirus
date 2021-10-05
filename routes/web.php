@@ -183,16 +183,14 @@ Route::get('payment-razor/fail', 'RazorPayController@success')->name('payment-ra
 Route::get('payment-success', 'Customer\PaymentController@success')->name('payment-success');
 Route::get('payment-fail', 'Customer\PaymentController@fail')->name('payment-fail');
 Route::group(['prefix' => 'contest3', 'as' => 'contest3.'], function () {
-	Route::get('listmanage/{id}', 'Contest3Controller@listmanage')->name('listmanage');
-	Route::get('list', 'Contest3Controller@list')->name('list');
 	Route::get('listjoin', 'Contest3Controller@listjoin')->name('listjoin');
-	Route::get('adminadd', 'Contest3Controller@add')->name('adminadd');
-	Route::post('addnew2', 'Contest3Controller@addnew2')->name('addnew2');
-	Route::post('update', 'Contest3Controller@update')->name('update');
-	Route::get('remove_image/{id}', 'Contest3Controller@remove_image')->name('remove_image');
-	Route::get('detail/{id}', 'Contest3Controller@detail')->name('detail');
-	Route::get('edit/{id}', 'Contest3Controller@edit')->name('edit');
-	Route::get('delete/{id}', 'Contest3Controller@delete')->name('delete');
-	Route::post('join', 'Contest3Controller@join')->name('join');
-	Route::post('updatemanage', 'Contest3Controller@updatemanage')->name('updatemanage');
+});
+Route::group(['prefix' => 'barter', 'as' => 'barter.'], function () {
+	Route::get('listjoin', 'BarterController@listjoin')->name('listjoin');
+});
+Route::group(['prefix' => 'auction', 'as' => 'auction.'], function () {
+	Route::get('listjoin', 'AuctionController@listjoin')->name('listjoin');
+});
+Route::group(['prefix' => 'chatroom', 'as' => 'chatroom.'], function () {
+	Route::get('listjoin', 'ChatroomController@listjoin')->name('listjoin');
 });

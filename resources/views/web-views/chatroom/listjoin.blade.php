@@ -1,6 +1,6 @@
 @extends('layouts.front-end.app')
 
-@section('title',''. $web_config['name']->value.' - Auction')
+@section('title',''. $web_config['name']->value.' - Chatroom')
 
 @push('css_or_js')
     <meta property="og:image" content="{{asset('storage/app/public/company')}}/{{$web_config['web_logo']->value}}"/>
@@ -225,85 +225,29 @@
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-							<li class="breadcrumb-item">Auction</li>
+							<li class="breadcrumb-item">Chatroom</li>
 						</ol>
 					</nav>
 
-					<!-- CONTENT-->
-					<div class="col-md-12">
-						<div class="card">
-							<div class="card-header">
-								<h5>Join Contest Lists</h5>
-								<p style="text-align:right;">Let's Join Luck in Contest</p>
-							</div>
-							<div class="card-body" style="padding: 0">
-								<div class="table-responsive">
-									<table id="datatable"
-										   class="table table-hover table-borderless table-thead-bordered table-nowrap table-align-middle card-table"
-										   style="width: 100%">
-										<thead class="thead-light">
-										<tr>
-											<th>#</th>
-											<th>Kontes</th>
-										</tr>
-										</thead>
-										<tbody>
-										@foreach($contest as $k=>$detail)
-										@php(
-												$contestuser2 = $contestuser->where("user_id","=",auth('customer')->id())->where("contest_id","=",$detail->id)->first()
 
-										)
-											<tr>
-												<td valign="top">
-													{{$k+1}}
-												</td>
-												<td>
-												<!--
-												@if(!empty($contestuser2))
-													<h4><font color='blue'>Sudah Ikut Serta</font></h4>
-												@endif-->
-												ID : {{$detail->id}}<br/>
-												Name : {{ $detail->name }}<br/>
-												Tanggal Dibuat :{{ $detail->created_at }}<br/>
-												Tanggal Kontes Dimulai : {{ $detail->start_date }}<br/>
-												Tanggal Kontes Selesai :{{ $detail->end_date }}<br/><br/>
-												@if($detail['picture']!=null)
-												@foreach (json_decode($detail['picture']) as $image) 
-													<img src="{{asset('storage/app/public/contest/'.$image)}}" alt="Contest image" style="width:70%">
-												@endforeach
-												@endif
-												<div style="text-align:justify;">
-												{{ $detail->description }}
-												</div>
-												</td>
-											</tr>
-										@endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+					<!-- Content Row -->
+					<div class="row">
+						<div class="col-md-12">
+
+								<div class="card">
+									<div class="card-header">
+										<h4>Join Chatroom</h4>
+									</div>
+								</div>
+						</div>
+					</div>
+				</div
                 </div>
-				<!-- EOF CONTENT-->
             </div>
         </div>
-    </div>
-</div>
-</section>
+	</div>
+    </section>
 @endsection
 
 @push('script')
-    <!-- Page level plugins -->
-    <script src="{{asset('public/assets/back-end')}}/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="{{asset('public/assets/back-end')}}/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-    <script src="{{asset('public/assets/back-end')}}/js/tags-input.min.js"></script>
-    <script src="{{ asset('public/assets/select2/js/select2.min.js')}}"></script>
-    <script src="{{asset('public/assets/back-end/js/spartan-multi-image-picker.js')}}"></script>
-
-    <!-- Page level custom scripts -->
-    <script>
-        // Call the dataTables jQuery plugin
-        $(document).ready(function () {
-            $('#dataTable').DataTable();
-        });
-    </script>
-	@endpush
+@endpush

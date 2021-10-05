@@ -374,10 +374,10 @@
             <i class="w-icon-home"></i>
             <p>Home</p>
         </a>
-        <a href="/products?name=" class="sticky-link">
+<!--        <a href="/products?name=" class="sticky-link">
             <i class="w-icon-category"></i>
             <p>Shop</p>
-        </a>
+        </a>-->
         <a href="{{route('user-account')}}" class="sticky-link">
             <i class="w-icon-account"></i>
             <p>Account</p>
@@ -387,62 +387,6 @@
                 <i class="w-icon-cart"></i>
                 <p>Cart</p>
             </a>
-<!--            <div class="dropdown-box">
-                <div class="products">
-                    <div class="product product-cart">
-                        <div class="product-detail">
-                            <h3 class="product-name">
-                                <a href="product-default.html">Beige knitted elas<br>tic
-                                    runner shoes</a>
-                            </h3>
-                            <div class="price-box">
-                                <span class="product-quantity">1</span>
-                                <span class="product-price">$25.68</span>
-                            </div>
-                        </div>
-                        <figure class="product-media">
-                            <a href="product-default.html">
-                                <img src="assets/images/cart/product-1.jpg" alt="product" height="84" width="94" />
-                            </a>
-                        </figure>
-                        <button class="btn btn-link btn-close">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-
-                    <div class="product product-cart">
-                        <div class="product-detail">
-                            <h3 class="product-name">
-                                <a href="product-default.html">Blue utility pina<br>fore
-                                    denim dress</a>
-                            </h3>
-                            <div class="price-box">
-                                <span class="product-quantity">1</span>
-                                <span class="product-price">$32.99</span>
-                            </div>
-                        </div>
-                        <figure class="product-media">
-                            <a href="product-default.html">
-                                <img src="assets/images/cart/product-2.jpg" alt="product" width="84" height="94" />
-                            </a>
-                        </figure>
-                        <button class="btn btn-link btn-close">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="cart-total">
-                    <label>Subtotal:</label>
-                    <span class="price">$58.67</span>
-                </div>
-
-                <div class="cart-action">
-                    <a href="cart.html" class="btn btn-dark btn-outline btn-rounded">View Cart</a>
-                    <a href="checkout.html" class="btn btn-primary  btn-rounded">Checkout</a>
-                </div>
-            </div>
-            <!-- End of Dropdown Box -->
         </div>
 
         <div class="header-search hs-toggle dir-up">
@@ -500,17 +444,20 @@
                 <div class="tab-pane active" id="main-menu">
                     <ul class="mobile-menu">
                         <li><a href="{{route('home')}}">Home</a></li>
+						@if($collection!= null)
 						<li>
-							<a href="collection.html">Collection</a>
-
+							<a href="{{route('collection')}}">Collection</a>
 							<ul>
-								<li><a href="koleksi-amerika.html">Amerika</a></li>
-								<li><a href="koleksi-cina.html">Cina</a></li>
-								<li><a href="koleksi-persian.html">Persian</a></li> 
+							@foreach($collection as $key=>$value)
+
+								<li><a href="{{route('collectionid',[$value->slug])}}">{{$value->name}}</a></li>
+							@endforeach
 							</ul>
+
 						</li>
+						@endif
 						<li>
-							<a href="vendor-dokan-store.html">Contest</a>
+							<a href="{{route('contest3.listjoin')}}">Contest</a><!--
 							<ul>
 								<li><a href="contest-kingman-open.html">Kingman Open</a></li>
 								<li><a href="contest-damele-open.html">Damele Open</a></li>
@@ -525,21 +472,20 @@
 								<li><a href="contest-blue-turquoise-chinese.html">Blue Turquoise Chinese</a></li>
 								<li><a href="contest-multicolor-persian.html">Multicolour Persian</a></li>
 								<li><a href="contest-multicolour-chinese.html">Multicolour Chinese</a></li>    
-							</ul>
+							</ul>-->
 						</li>
 						<li>
-							<a href="exchange.html">exchange</a>
+							<a href="{{route('barter.listjoin')}}">Barter/Exchange</a>
 						</li>
 						<li>
-							<a href="auction.html">Auction</a>
+							<a href="{{route('auction.listjoin')}}">Auction</a>
 						</li>
 						<li>
-							<a href="chatroom.html">Chatroom</a>
+							<a href="{{route('chatroom.listjoin')}}">Chatroom</a>
 						</li>
 						<li>
-							<a href="education.html">Education</a>
+							<a href="{{route('educationcategory')}}">Education</a>
 						</li>
-
                     </ul>
                 </div>
                 <div class="tab-pane" id="categories">

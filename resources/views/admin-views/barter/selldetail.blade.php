@@ -1,4 +1,4 @@
-@extends('layouts.back-end.app-seller')
+@extends('layouts.back-end.app')
 @section('title','Order')
 
 @push('css_or_js')
@@ -120,15 +120,15 @@
     <div class="content container-fluid">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('seller.dashboard')}}">Dashboard</a></li>
-                <li class="breadcrumb-item" aria-current="page"><a href="{{route('seller.barter.listjoin')}}">Barter</a></li>
-                <li class="breadcrumb-item">Order</li>
+                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
+                <li class="breadcrumb-item" aria-current="page"><a href="{{route('admin.barter.orderlistbuy')}}">Order</a></li>
+                <li class="breadcrumb-item">Order Detail</li>
             </ol>
         </nav>
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
-            <h1 class="h3 mb-0 text-black-50">Order</h1>
+            <h1 class="h3 mb-0 text-black-50">Order Detail</h1>
         </div>
 
         <!-- Content Row -->
@@ -140,22 +140,32 @@
                             <h4>Order</h4>
                         </div>
                       <div class="card-body">
-					  @if(count($sa)>0)
+					  @if($sbo!=null)
 						<div  style="border:1px solid lightgray; border-radius:3px; padding:10px;">
 						<div class="row">
-						<input type="hidden" name="id" id="id" value="{{$b->id}}">
+							<div class="col-md-12">
+                            <div class="form-group">
+                                <label for="name"><h3>Order ID : </label>
+								<input type="hidden" name="order_id" id="order_id" value="{{$sbo->id}}"/>
+								{{$sbo->id}}<br></h3>
+                            </div>
+							</div>
+							@foreach($sbod as $key=>$detail)
+							@php(
+								$objb=$b->find($detail->barter_id)
+							)
+							@endforeach
 							<div class="col-md-6">
                             <div class="form-group">
                                 <label for="name"><h3>Barter ID : </label>
-								{{$b->id}}<br></h3>
-								<input type="hidden" name="barter_id" id="barter_id" value="{{$b->id}}"/>
+								{{$objb->id}}<br></h3>
                             </div>
 							</div>
 							<div class="col-md-6">
                             <div class="form-group">
                                 <label for="name">Barter Category : </label>
 								@foreach($category as $key=>$value)
-								@if($value->id==$b->category)
+								@if($value->id==$objb->category)
 								{{$value->name}}
 								@endif
 								@endforeach
@@ -165,7 +175,7 @@
 							<div class="col-md-12">
 							<h5>PRODUCT TO BARTER ##</h5>
 							@php(
-							$objbs=$bs->where('barter_id','=',$b->id)->get()
+							$objbs=$bs->where('barter_id','=',$objb->id)->get()
 							)
 							@foreach($objbs as $key=>$value)
 							</div>
@@ -211,7 +221,7 @@
 							<div class="col-md-12">
 							<h5>PRODUCT IN DEMAND ##</h5>
 							@php(
-							$objbb=$bb->where('barter_id','=',$b->id)->get()
+							$objbb=$bb->where('barter_id','=',$objb->id)->get()
 							)
 							@foreach($objbb as $key=>$value)
 							</div>
@@ -254,7 +264,7 @@
 							@endforeach
 
 
-							@php( $objbms=$bms->where('barter_id','=',$b->id)->get())
+							@php( $objbms=$bms->where('barter_id','=',$objb->id)->get())
 							@if(count($objbms)>0)
 							@foreach($objbms as $key=>$value)
 							<div class="col-md-6">
@@ -266,7 +276,7 @@
 							@endforeach
 							@endif
 
-							@php( $objbmb=$bmb->where('barter_id','=',$b->id)->get())
+							@php( $objbmb=$bmb->where('barter_id','=',$objb->id)->get())
 							@if(count($objbmb)>0)
 							@foreach($objbmb as $key=>$value)
 							<div class="col-md-6">
@@ -280,7 +290,7 @@
 							
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="name">My Delivery Address : <br></label>
+									<label for="name">My Delivery Address :</label><br>
 									@foreach($sa as $key=>$detail)
 									{{$detail->address}}<br>
 										{{$detail->zip_code}}<br/>
@@ -290,7 +300,7 @@
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="name">Seller Delivery Address : <br></label>
+									<label for="name">Seller Delivery Address :</label><br>
 									@foreach($sa2 as $key=>$detail)
 									{{$detail->address}}<br>
 										{{$detail->zip_code}}<br/>
@@ -298,29 +308,20 @@
 									
 								</div>
 							</div>
+							{{$sell_amount}}{{$status_pay}}
+					@if($status_pay==true && $sell_amount>0)
+							<div class="col-md-6">
+								<div class="form-group">
+									<a href="javascript:pay();" class="btn btn-primary">Pay</a><br><br>
+									
+								</div>
+							</div>
+					@endif
 							<br>
-							<div class="col-md-12">
-							<!--{{$status_pay}}{{$buy_amount}}-->
-							@if($status_pay==true && $buy_amount>0)
-							<a href="javascript:pay();" class="btn btn-primary">Pay</a><br><br>
-							@endif
-							@if($status_pay==false && $buy_amount<=0)
-							<a href="javascript:buy({{$b->id}});" class="btn btn-primary">Buy</a><br><br>
-							@endif
-							</div>
-							</div>
-						</div>
 						</div>
 						<br>
 					@endif
-					@if(count($sa)==0)
-        <div class="row" style="margin-top: 20px">
-			<div class="col-md-6">
-			Please add your primary address firstly, before you can add new barter!! Add <a href="{{route('seller.address.add')}}">Here</a>
-			</div>
-		</div>
-					@endif
-					@if($status_pay==true && $buy_amount>0)
+					@if($status_pay==true && $sell_amount>0)
 					<div id="payment_365" class="modal col-md-12">
 					<div class="row">
                         @php($data=json_decode($response,true))
@@ -330,7 +331,7 @@
 									<div class="card">
 										<div class="card-body" style="height: 100px">
 											<a class="btn btn-block"
-											   href="javascript:modalview('{{$data['data'][$i]['code']}}',{{$buy_amount}});">
+											   href="javascript:modalview('{{$data['data'][$i]['code']}}',{{$sell_amount}});">
 												{{$data['data'][$i]['name']}} <br/>Code : {{$data['data'][$i]['code']}}
 											</a>
 										</div>
@@ -412,8 +413,8 @@
 								if(msg.data.status=="PAID")
 								{
 									alert("Pembayaran berhasil!");
-									buy($("#barter_id").val());
-									window.location.href = "/seller/premium/success/?payment_method=tripay&amount="+ amount + "&days=" +days;
+									sell($("#order_id").val());
+//									window.location.href = "/admin/premium/success/?payment_method=tripay&amount="+ amount + "&days=" +days;
 								}
 								else
 								{
@@ -437,7 +438,7 @@
 					  </script>
 					@endif
 					<script type="text/javascript">
-				function buy(id)
+				function sell(id)
 				{
 					var formData = new FormData();
 					formData.append('id', id);
@@ -447,7 +448,7 @@
 							}
 						});
 						$.post({
-							url: '{{route('seller.barter.buy')}}',
+							url: '{{route('admin.barter.sell')}}',
 							data: formData,
 							contentType: false,
 							processData: false,
@@ -460,12 +461,12 @@
 										});
 									}
 								} else {
-									toastr.success('Sukses Order Barter!', {
+									toastr.success('Sukses Bayar Sell Barter!', {
 										CloseButton: true,
 										ProgressBar: true
 									});
 									setInterval(function () {
-										location.href = '{{route("seller.barter.orderlistbuy")}}';
+										location.href = '{{route("admin.barter.orderlistsell")}}';
 									}, 2000);
 								}
 							}
@@ -475,6 +476,85 @@
 
 				}
 					</script>
+				<h3>Seller Delivery Status</h3>
+                            <table id="datatable"
+                                   class="table table-hover table-borderless table-thead-bordered table-nowrap table-align-middle card-table"
+                                   style="width: 100%">
+                                <thead class="thead-light">
+                                <tr>
+                                    <th>#</th>
+                                    <th>ID</th>
+									<th>Status</th>
+                                    <th>Created Date</th>
+                                    <th>Updated Date</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($sbods as $k=>$detail)
+                                    <tr>
+                                        <td>
+                                            {{$k+1}}
+                                        </td>
+                                        <td>
+                                            {{$detail['id']}}
+                                        </td>
+                                        <td>{{ $detail->status }}</td>
+                                        <td>{{ $detail->created_at }}</td>
+                                        <td>{{ $detail->updated_at }}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+					
+                <form class="product-form" action="{{route('admin.barter.updateorderdeliverystatusseller')}}" method="post" enctype="multipart/form-data"
+                      id="product_form">
+                            <div class="form-group">
+								<input type="hidden" name="order_id" value="{{$sbo->id}}" id="order_id"/>
+                                <label for="name">Seller Delivery Status</label>
+								<select name="status">
+								<option value="Barter in Packing">Barter in Packing</option>
+								<option value="Barter Delivered">Barter Delivered</option>
+								<option value="Finished">Finished</option>
+								</select>
+                            </div>
+					        <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-12" style="padding-top: 20px">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+
+				</form>
+				<h3>Buyer Delivery Status</h3>
+                            <table id="datatable"
+                                   class="table table-hover table-borderless table-thead-bordered table-nowrap table-align-middle card-table"
+                                   style="width: 100%">
+                                <thead class="thead-light">
+                                <tr>
+                                    <th>#</th>
+                                    <th>ID</th>
+                                    <th>Status</th>
+                                    <th>Created Date</th>
+                                    <th>Updated Date</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($sbods2 as $k=>$detail)
+                                    <tr>
+                                        <td>
+                                            {{$k+1}}
+                                        </td>
+                                        <td>
+                                            {{$detail['id']}}
+                                        </td>
+                                        <td>{{ $detail->status }}</td>
+                                        <td>{{ $detail->created_at }}</td>
+                                        <td>{{ $detail->updated_at }}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
 				</div>
 			</div>
 		</div>
@@ -485,18 +565,20 @@
     <script src="{{asset('public/assets/back-end')}}/js/tags-input.min.js"></script>
     <script src="{{ asset('public/assets/select2/js/select2.min.js')}}"></script>
     <script src="{{asset('public/assets/back-end/js/spartan-multi-image-picker.js')}}"></script>
-	<script type="text/javascript">
-	function addtocart(id)
-	{
-		var formData = new FormData();
-		formData.append('id', id);
-           $.ajaxSetup({
+    <script>
+        $('#product_form').submit(function (e) {
+            e.preventDefault();
+            for ( instance in CKEDITOR.instances ) {
+                CKEDITOR.instances[instance].updateElement();
+            }
+            var formData = new FormData(this);
+            $.ajaxSetup({
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
             $.post({
-                url: '{{route('seller.barter.addtocart')}}',
+                url: '{{route('admin.barter.updateorderdeliverystatusseller')}}',
                 data: formData,
                 contentType: false,
                 processData: false,
@@ -509,19 +591,17 @@
                             });
                         }
                     } else {
-                        toastr.success('Barter added successfully to cart!', {
+                        toastr.success('Order Delivery Status Set successfully!', {
                             CloseButton: true,
                             ProgressBar: true
                         });
                         setInterval(function () {
-                            location.href = '{{route("seller.barter.listjoin")}}';
+                            location.href = '{{route("admin.barter.selldetail",[$sbo->id])}}';
                         }, 2000);
                     }
                 }
             });
-			e.stopImmediatePropagation();
-			return false;
+        });
+    </script>
 
-	}
-	</script>
 @endpush

@@ -840,13 +840,13 @@
                                         </ul>-->
                                     </li>
                                     <li>
-                                        <a href="exchange.html">exchange</a>
+                                        <a href="{{route('barter.listjoin')}}">Barter/Exchange</a>
                                     </li>
                                     <li>
-                                        <a href="auction.html">Auction</a>
+                                        <a href="{{route('auction.listjoin')}}">Auction</a>
                                     </li>
                                     <li>
-                                        <a href="chatroom.html">Chatroom</a>
+                                        <a href="{{route('chatroom.listjoin')}}">Chatroom</a>
                                     </li>
                                     <li>
                                         <a href="{{route('educationcategory')}}">Education</a>

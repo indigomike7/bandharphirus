@@ -14,6 +14,11 @@ use App\Model\BarterMoneySell;
 use App\Model\BarterMoneyBuy;
 use App\Model\Category;
 use App\Model\SellerAddress;
+use App\Model\SellerBarterCart;
+use App\Model\SellerBarterOrder;
+use App\Model\SellerBarterOrderDeliveryStatus;
+use App\Model\SellerBarterOrderDetail;
+use App\Model\PremiumSettings;
 use App\User;
 use App\Model\Seller;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -38,6 +43,318 @@ class BarterController extends Controller
 		$sa=SellerAddress::where(['seller_id' => 0])->where(['primary_address' => 1])->get();
 
 		return view('admin-views.barter.list', compact('b','sa'));
+    }
+    function addtocart(Request $request) 
+	{
+//		var_dump($request->id);
+//		var_dump($request['id']);
+//		die($_POST['id']);
+		
+		
+ 		$sa=SellerAddress::where(['seller_id' => 0])->where(['primary_address' => 1])->get();
+		if(count($sa)>0)
+		{
+			$sbc = SellerBarterCart::where('seller_id','=',0)->where('barter_id','=',$request->id)->first();
+			if($sbc)
+			{
+				$returnData = array("errors" => [array("code"=>"premium","message"=>"Barter sudah ada di cart!")]);
+				return response()->json($returnData);
+				exit();
+				
+			}
+			else
+			{
+				$sbc = new SellerBarterCart();
+				$sbc->seller_id = 0;
+				$sbc->barter_id=$request->id;
+				$sbc->save();
+			}
+		}
+		else
+		{
+			$returnData = array("errors" => [array("code"=>"premium","message"=>"Mohon tambahkan primary address, sebelum proses cart dan order!")]);
+			return response()->json($returnData);
+			exit();
+			
+		}
+		return response()->json([], 200);
+    }
+    function buydetail(Request $request) {
+		$sbo = SellerBarterOrder::find($request->id);
+		$sbods=SellerBarterOrderDeliveryStatus::where('order_id','=',$request->id)->where("seller_demand_id","=",0)->get();
+		$sbods2=SellerBarterOrderDeliveryStatus::where('order_id','=',$request->id)->where("seller_sell_id","=",$sbo->seller_id_sell)->get();
+		$sbod=SellerBarterOrderDetail::where('order_id','=',$sbo->id)->get();    
+		
+		$seller = Seller::find(0);
+		
+		$b=new Barter();
+		$bs=new BarterSell();
+		$bb=new BarterBuy();
+		$bms=new BarterMoneySell();
+		$bmb=new BarterMoneyBuy();
+		$category=Category::get();
+			
+		$sa=SellerAddress::where(['seller_id' => 0])->where(['primary_address' => 1])->get();
+		$sa2=SellerAddress::where(['seller_id' => $sbo->seller_id_sell])->where(['primary_address' => 1])->get();
+			return view('admin-views.barter.buydetail', compact('seller','category','b','bs','bb','bms','bmb','category','sbo','sbod','sa','sa2','sbods','sbods2'));
+    } 
+	 
+    function selldetail(Request $request) {
+			$status_pay = false;
+		$sbo = SellerBarterOrder::find($request->id);
+		
+		$sbods=SellerBarterOrderDeliveryStatus::where('order_id','=',$request->id)->where("seller_sell_id","=",0)->get();
+		$sbods2=SellerBarterOrderDeliveryStatus::where('order_id','=',$request->id)->where("seller_demand_id","=",$sbo->seller_id_demand)->get();
+		$sbod=SellerBarterOrderDetail::where('order_id','=',$sbo->id)->get();    
+		$seller = Seller::find(0);
+		if($sbo->status!="paid barter")
+		{
+			foreach($sbod as $key=>$detail)
+			{
+            $b = Barter::where('id' ,'=',$detail->barter_id)->first();
+			}
+			$bs=BarterSell::where('barter_id','=',$b->id)->get();
+//			var_dump($bs);
+			$bb=BarterBuy::where('barter_id','=',$b->id)->get();
+			$bms=BarterMoneySell::where('barter_id','=',$b->id)->first();
+			$bmb=BarterMoneyBuy::where('barter_id','=',$b->id)->first();
+			$category=Category::get();
+			$seller = Seller::find(0);
+			if($bms!= null && $bmb!= null)
+			{
+				$sell_amount=($bms->amount)-($bmb->amount);
+				if(($bms->amount)-($bmb->amount)>0)
+				{
+					$status_pay = true;
+				}
+			}
+			elseif($bms== null && $bmb!= null)
+			{
+				$sell_amount=0;
+					$status_pay = false;
+			}
+			elseif($bms!= null && $bmb== null)
+			{
+				$sell_amount=$bms->amount;
+					$status_pay = true;
+			}
+			else
+			{
+				$sell_amount =0;
+				$status_pay=false;
+			}
+		}
+		else
+		{
+			$status_pay=false;
+			$sell_amount=0;
+		}
+			if($status_pay==false)
+			{
+				$response=null;
+			}
+			else
+			{
+				
+            $ps = PremiumSettings::find(1);
+			$seller = Seller::find(0);
+		$config=\App\CPU\Helpers::get_business_settings('tripay');
+		$apiKey = $config["tripay_api"];
+					$curl = curl_init();
+
+					curl_setopt_array($curl, array(
+					  CURLOPT_FRESH_CONNECT     => true,
+					  CURLOPT_URL               => "https://tripay.co.id/api-sandbox/merchant/payment-channel",
+					  CURLOPT_RETURNTRANSFER    => true,
+					  CURLOPT_HEADER            => false,
+					  CURLOPT_HTTPHEADER        => array(
+						"Authorization: Bearer ".$apiKey
+					  ),
+					  CURLOPT_FAILONERROR       => false
+					));
+
+					$response = curl_exec($curl);
+					$err = curl_error($curl);
+
+					curl_close($curl);
+
+
+			}
+		
+		$b=new Barter();
+		$bs=new BarterSell();
+		$bb=new BarterBuy();
+		$bms=new BarterMoneySell();
+		$bmb=new BarterMoneyBuy();
+		$category=Category::get();
+			
+		$sa=SellerAddress::where(['seller_id' => 0])->where(['primary_address' => 1])->get();
+		$sa2=SellerAddress::where(['seller_id' => $sbo->seller_id_sell])->where(['primary_address' => 1])->get();
+			return view('admin-views.barter.selldetail', compact('seller','category','b','bs','bb','bms','bmb','category','sbo','sbod','sa','sa2','sbods','sbods2','sell_amount','status_pay'),['response'=>$response]);
+    } 
+    function updateorderdeliverystatusseller(Request $request) 
+	{
+			$sbods=new SellerBarterOrderDeliveryStatus();
+			$sbods->seller_sell_id = 0;
+			$sbods->order_id=$request->order_id;
+			$sbods->status=$request->status;
+			$sbods->save();
+			return response()->json([], 200);
+	
+    }
+    function updateorderdeliverystatus(Request $request) 
+	{
+			$sbods=new SellerBarterOrderDeliveryStatus();
+			$sbods->seller_demand_id = 0;
+			$sbods->order_id=$request->order_id;
+			$sbods->status=$request->status;
+			$sbods->save();
+			return response()->json([], 200);
+	
+    }
+	function orderlistbuy(Request $request)
+	{
+		$sbo=SellerBarterOrder::where('seller_id_demand','=',0)->get();
+		$seller = Seller::find(0);
+		$sa=SellerAddress::where(['seller_id' => 0])->where(['primary_address' => 1])->get();
+
+        return view('admin-views.barter.orderlistbuy', compact('seller','sbo','sa')); 
+	}
+	function orderlistsell(Request $request)
+	{
+		$sbo=SellerBarterOrder::where('seller_id_sell','=',0)->get();
+		$seller = Seller::find(0);
+		$sa=SellerAddress::where(['seller_id' => 0])->where(['primary_address' => 1])->get();
+
+        return view('admin-views.barter.orderlistsell', compact('seller','sbo','sa')); 
+	}
+	function buy(Request $request)
+	{
+            $b = Barter::where('id' ,'=',$request->id)->first();
+			$bs=BarterSell::where('barter_id','=',$b->id)->get();
+//			var_dump($bs);
+			$bb=BarterBuy::where('barter_id','=',$b->id)->get();
+			$bms=BarterMoneySell::where('barter_id','=',$b->id)->first();
+			$bmb=BarterMoneyBuy::where('barter_id','=',$b->id)->first();
+			$category=Category::get();
+			$seller = Seller::find(0);
+			/* ADD TO TABLE ORDER */
+			$sbo=new SellerBarterOrder();
+			$sbo->seller_id_sell = $b->seller_id;
+			$sbo->seller_id_demand = 0;
+			$sbo->status="order finished";
+			if($bms!= null)
+				$sbo->seller_sell_amount = $bms->amount;
+			if($bmb!= null)
+				$sbo->seller_demand_amount=$bmb->amount;
+			$sbo->save();
+	 		
+			$sbod = new SellerBarterOrderDetail();
+			$sbod->order_id = $sbo->id;
+			$sbod->barter_id = $b->id;
+			$sbod->save();
+			
+			Barter::where('id', $b->id)->update([
+				'status' => 1,
+			]);
+
+			return response()->json([], 200);
+	
+	}
+	function sell(Request $request)
+	{
+			$sbo=SellerBarterOrder::find($request->id);
+			$sbo->status="paid barter";
+			$sbo->save();
+	 		
+
+			return response()->json([], 200);
+	
+	}
+    function checkout(Request $request) {
+			$status_pay = false;
+            $b = Barter::where('id' ,'=',$request->id)->first();
+			$bs=BarterSell::where('barter_id','=',$b->id)->get();
+//			var_dump($bs);
+			$bb=BarterBuy::where('barter_id','=',$b->id)->get();
+			$bms=BarterMoneySell::where('barter_id','=',$b->id)->first();
+			$bmb=BarterMoneyBuy::where('barter_id','=',$b->id)->first();
+			$category=Category::get();
+			$seller = Seller::find(0);
+			if($bms!= null && $bmb!= null)
+			{
+				$buy_amount=($bmb->amount)-($bms->amount);
+				if(($bmb->amount)-($bms->amount)>0)
+				{
+					$status_pay = true;
+				}
+			}
+			elseif($bms!= null && $bmb== null)
+			{
+				$buy_amount=0;
+			}
+			elseif($bms== null && $bmb!= null)
+			{
+				$buy_amount=$bmb->amount;
+					$status_pay = true;
+			}
+			else
+			{
+				$buy_amount =0;
+			}
+			
+			if($status_pay==false)
+			{
+				$response=null;
+			}
+			else
+			{
+				
+            $ps = PremiumSettings::find(1);
+			$seller = Seller::find(0);
+		$config=\App\CPU\Helpers::get_business_settings('tripay');
+		$apiKey = $config["tripay_api"];
+					$curl = curl_init();
+
+					curl_setopt_array($curl, array(
+					  CURLOPT_FRESH_CONNECT     => true,
+					  CURLOPT_URL               => "https://tripay.co.id/api-sandbox/merchant/payment-channel",
+					  CURLOPT_RETURNTRANSFER    => true,
+					  CURLOPT_HEADER            => false,
+					  CURLOPT_HTTPHEADER        => array(
+						"Authorization: Bearer ".$apiKey
+					  ),
+					  CURLOPT_FAILONERROR       => false
+					));
+
+					$response = curl_exec($curl);
+					$err = curl_error($curl);
+
+					curl_close($curl);
+
+
+			}
+			$sa=SellerAddress::where(['seller_id' => 0])->where(['primary_address' => 1])->get();
+			$sa2=SellerAddress::where(['seller_id' => $b->seller_id])->where(['primary_address' => 1])->get();
+			$bs=new BarterSell();
+			$bb=new BarterBuy();
+			$bms=new BarterMoneySell();
+			$bmb=new BarterMoneyBuy();
+			
+			return view('admin-views.barter.buy', compact('b','seller','category','bs','bb','bms','bmb','category','sa','sa2','status_pay','buy_amount'),['response'=>$response]);
+    }
+    function order(Request $request) {
+            $b = Barter::where('id' ,'=',$request->id)->where('status','=',0)->first();
+			$bs=new BarterSell();
+			$bb=new BarterBuy();
+			$bms=new BarterMoneySell();
+			$bmb=new BarterMoneyBuy();
+			$category=Category::get();
+			$seller = Seller::find(0);
+			$category=Category::get();
+			$sa=SellerAddress::where(['seller_id' => 0])->where(['primary_address' => 1])->get();
+
+        return view('admin-views.barter.order', compact('b','seller','category','bs','bb','bms','bmb','category','sa'));
     }
     public function edit($id)
     {
@@ -109,14 +426,7 @@ class BarterController extends Controller
         Toastr::success('Barter image demand removed successfully!');
         return back();
     }
-    public function listjoin()
-    {
-            $contest = Contest::where('seller_id',"!=", auth('seller')->id())->orderBy('created_at', 'desc')->get();
-			$contestuser = new ContestUser();
-
-        return view('admin-views.contest.listjoin', compact('contest','contestuser'));
-    }
-    public function delete($id)
+   public function delete($id)
     {
         $b = Barter::find($id);
         $b->delete();
@@ -401,38 +711,6 @@ class BarterController extends Controller
     }
 
 
-    function join(Request $request) {
-        $validator = Validator::make($request->all(), [
-            'answer' => 'required'
-        ], [
-            'answer.required' => 'Answer is required!'
-        ]);
-
-        $contestuser = ContestUser::where("seller_id","=",auth('seller')->id())->where("contest_id","=",$request->id)->first();
-		if(!empty($contestuser))
-		{
-			$contestuser->answer = $request->answer;
-		}
-		else
-		{
-			$contestuser=new ContestUser();
-			$contestuser->seller_id = auth('seller')->id();
-			$contestuser->contest_id = $request->id;
-			$contestuser->answer = $request->answer;
-		}
- 
-
- 
-        if ($validator->errors()->count() > 0) {
-            return response()->json(['errors' => Helpers::error_processor($validator)]);
-        }
-
-        $contestuser->save();
-
-        return response()->json([], 200);
-        // Toastr::success('Product added successfully!');
-        // return redirect()->route('seller.product.list');
-    }
     function updateamountsell(Request $request) {
         $validator = Validator::make($request->all(), [
             'id' => 'required'
@@ -578,27 +856,16 @@ class BarterController extends Controller
         // Toastr::success('Product added successfully!');
         // return redirect()->route('seller.product.list');
     }
-    function categoryupdate(Request $request) {
-        $validator = Validator::make($request->all(), [
-            'category' => 'required',
-            'description' => 'required',
-        ], [
-            'category.required' => 'Contest Category is required!',
-            'description.required' => 'Description  is required!',
-        ]);
+    function listjoin() {
+            $b = Barter::where('seller_id' ,'!=',0)->where('status','=',0)->orderBy('created_at', 'desc')->get();
+			$bs=new BarterSell();
+			$bb=new BarterBuy();
+			$bms=new BarterMoneySell();
+			$bmb=new BarterMoneyBuy();
+			$category=Category::get();
+			$seller = Seller::find(auth('seller')->id());
+			$sa=SellerAddress::where(['seller_id' => 0])->where(['primary_address' => 1])->get();
 
-        $contest = ContestCategory::find($request->id);
-        $contest->category = $request->category;
-        $contest->description = $request->description;
- 
-        if ($validator->errors()->count() > 0) {
-            return response()->json(['errors' => Helpers::error_processor($validator)]);
-        }
-
-        $contest->save();
-
-        return response()->json([], 200);
-        // Toastr::success('Product added successfully!');
-        // return redirect()->route('seller.product.list');
+        return view('admin-views.barter.listjoin', compact('b','seller','category','bs','bb','bms','bmb','sa'));
     }
 }

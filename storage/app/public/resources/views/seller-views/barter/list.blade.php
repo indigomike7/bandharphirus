@@ -1,5 +1,5 @@
 @extends('layouts.back-end.app-seller')
-@section('title','My Barter Selling List')
+@section('title','My Barter List')
 
 @push('css_or_js')
     <!-- Custom styles for this page -->
@@ -13,19 +13,20 @@
         <div class="row align-items-center mb-3">
             <div class="col-sm">
                 <h1 class="page-header-title">Barter <span
-                        class="badge badge-soft-dark ml-2">{{\App\Model\SellerBarterOrder::where('seller_id_sell',auth('seller')->id())->count()}}</span>
+                        class="badge badge-soft-dark ml-2">{{\App\Model\Barter::where('seller_id',auth('seller')->id())->count()}}</span>
                 </h1>
 
             </div>
         </div>
+						@if(count($sa)>0)
 
         <div class="row" style="margin-top: 20px">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5>My Barter Sold Lists</h5>
+                        <h5>My Barter Lists</h5>
+						<p style="text-align:right;"><a href="{{route('seller.barter.selleradd')}}">Add New Barter</a></p>
                     </div>
-						@if(count($sa)>0)
                     <div class="card-body" style="padding: 0">
                         <div class="table-responsive">
                             <table id="datatable"
@@ -34,25 +35,23 @@
                                 <thead class="thead-light">
                                 <tr>
                                     <th>#</th>
-                                    <th>Order ID</th>
-                                    <th>Status</th>
+                                    <th>ID</th>
                                     <th>Created Date</th>
                                     <th>Updated Date</th>
                                     <th style="width: 30px">{{trans('messages.Action')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($sbo as $k=>$detail)
+                                @foreach($b as $k=>$detail)
                                     <tr>
                                         <td>
                                             {{$k+1}}
                                         </td>
                                         <td>
-                                            <a href="{{route('seller.barter.selldetail',$detail['id'])}}">{{$detail['id']}}</a>
+                                            <a href="{{route('seller.barter.edit',$detail['id'])}}">{{$detail['id']}}</a>
                                         </td>
                                         <td>{{ $detail->created_at }}</td>
                                         <td>{{ $detail->updated_at }}</td>
-                                        <td>{{ $detail->status }}</td>
                                         <td>
 
                                             <div class="dropdown">
@@ -64,7 +63,9 @@
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                     <a class="dropdown-item"
-                                                       href="{{route('seller.barter.selldetail',[$detail['id']])}}"> Manage</a>
+                                                       href="{{route('seller.barter.edit',[$detail['id']])}}"> Edit</a>
+                                                    <a class="dropdown-item"
+                                                       href="{{route('seller.barter.delete',[$detail['id']])}}"> Delete</a>
                                                 </div>
                                             </div>
                                         </td>
@@ -74,14 +75,14 @@
                             </table>
                         </div>
                     </div>
-					@endif
                 </div>
             </div>
         </div>
+		@endif
 				@if(count($sa)==0)
         <div class="row" style="margin-top: 20px">
 			<div class="col-md-6">
-			Please add your primary address firstly, before you can manage barter sold!! Add <a href="{{route('seller.address.add')}}">Here</a>
+			Please add your primary address firstly, before you can add new barter!! Add <a href="{{route('seller.address.add')}}">Here</a>
 			</div>
 		</div>
 		@endif

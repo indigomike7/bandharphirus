@@ -728,38 +728,6 @@ class BarterController extends Controller
     }
 
 
-    function join(Request $request) {
-        $validator = Validator::make($request->all(), [
-            'answer' => 'required'
-        ], [
-            'answer.required' => 'Answer is required!'
-        ]);
-
-        $contestuser = ContestUser::where("seller_id","=",auth('seller')->id())->where("contest_id","=",$request->id)->first();
-		if(!empty($contestuser))
-		{
-			$contestuser->answer = $request->answer;
-		}
-		else
-		{
-			$contestuser=new ContestUser();
-			$contestuser->seller_id = auth('seller')->id();
-			$contestuser->contest_id = $request->id;
-			$contestuser->answer = $request->answer;
-		}
- 
-
- 
-        if ($validator->errors()->count() > 0) {
-            return response()->json(['errors' => Helpers::error_processor($validator)]);
-        }
-
-        $contestuser->save();
-
-        return response()->json([], 200);
-        // Toastr::success('Product added successfully!');
-        // return redirect()->route('seller.product.list');
-    }
     function updateamountsell(Request $request) {
         $validator = Validator::make($request->all(), [
             'id' => 'required'
@@ -900,29 +868,6 @@ class BarterController extends Controller
         }
 
         $bb->save();
-
-        return response()->json([], 200);
-        // Toastr::success('Product added successfully!');
-        // return redirect()->route('seller.product.list');
-    }
-    function categoryupdate(Request $request) {
-        $validator = Validator::make($request->all(), [
-            'category' => 'required',
-            'description' => 'required',
-        ], [
-            'category.required' => 'Contest Category is required!',
-            'description.required' => 'Description  is required!',
-        ]);
-
-        $contest = ContestCategory::find($request->id);
-        $contest->category = $request->category;
-        $contest->description = $request->description;
- 
-        if ($validator->errors()->count() > 0) {
-            return response()->json(['errors' => Helpers::error_processor($validator)]);
-        }
-
-        $contest->save();
 
         return response()->json([], 200);
         // Toastr::success('Product added successfully!');

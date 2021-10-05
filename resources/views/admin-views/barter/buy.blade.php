@@ -1,4 +1,4 @@
-@extends('layouts.back-end.app-seller')
+@extends('layouts.back-end.app')
 @section('title','Order')
 
 @push('css_or_js')
@@ -120,8 +120,8 @@
     <div class="content container-fluid">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('seller.dashboard')}}">Dashboard</a></li>
-                <li class="breadcrumb-item" aria-current="page"><a href="{{route('seller.barter.listjoin')}}">Barter</a></li>
+                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
+                <li class="breadcrumb-item" aria-current="page"><a href="{{route('admin.barter.listjoin')}}">Barter</a></li>
                 <li class="breadcrumb-item">Order</li>
             </ol>
         </nav>
@@ -290,7 +290,7 @@
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="name">Seller Delivery Address : <br></label>
+									<label for="name">admin Delivery Address : <br></label>
 									@foreach($sa2 as $key=>$detail)
 									{{$detail->address}}<br>
 										{{$detail->zip_code}}<br/>
@@ -300,7 +300,6 @@
 							</div>
 							<br>
 							<div class="col-md-12">
-							<!--{{$status_pay}}{{$buy_amount}}-->
 							@if($status_pay==true && $buy_amount>0)
 							<a href="javascript:pay();" class="btn btn-primary">Pay</a><br><br>
 							@endif
@@ -316,7 +315,7 @@
 					@if(count($sa)==0)
         <div class="row" style="margin-top: 20px">
 			<div class="col-md-6">
-			Please add your primary address firstly, before you can add new barter!! Add <a href="{{route('seller.address.add')}}">Here</a>
+			Please add your primary address firstly, before you can add new barter!! Add <a href="{{route('admin.address.add')}}">Here</a>
 			</div>
 		</div>
 					@endif
@@ -413,7 +412,7 @@
 								{
 									alert("Pembayaran berhasil!");
 									buy($("#barter_id").val());
-									window.location.href = "/seller/premium/success/?payment_method=tripay&amount="+ amount + "&days=" +days;
+									window.location.href = "/admin/premium/success/?payment_method=tripay&amount="+ amount + "&days=" +days;
 								}
 								else
 								{
@@ -447,7 +446,7 @@
 							}
 						});
 						$.post({
-							url: '{{route('seller.barter.buy')}}',
+							url: '{{route('admin.barter.buy')}}',
 							data: formData,
 							contentType: false,
 							processData: false,
@@ -465,7 +464,7 @@
 										ProgressBar: true
 									});
 									setInterval(function () {
-										location.href = '{{route("seller.barter.orderlistbuy")}}';
+										location.href = '{{route("admin.barter.orderlistbuy")}}';
 									}, 2000);
 								}
 							}
@@ -496,7 +495,7 @@
                 }
             });
             $.post({
-                url: '{{route('seller.barter.addtocart')}}',
+                url: '{{route('admin.barter.addtocart')}}',
                 data: formData,
                 contentType: false,
                 processData: false,
@@ -514,7 +513,7 @@
                             ProgressBar: true
                         });
                         setInterval(function () {
-                            location.href = '{{route("seller.barter.listjoin")}}';
+                            location.href = '{{route("admin.barter.listjoin")}}';
                         }, 2000);
                     }
                 }

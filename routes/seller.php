@@ -92,7 +92,6 @@ Route::group(['namespace' => 'Seller', 'prefix' => 'seller', 'as' => 'seller.'],
             Route::get('listjoin', 'BarterController@listjoin')->name('listjoin');
             Route::get('selleradd', 'BarterController@selleradd')->name('selleradd');
             Route::post('addnew', 'BarterController@addnew')->name('addnew');
-            Route::get('detail/{id}', 'Contest2Controller@detail')->name('detail');
             Route::get('edit/{id}', 'BarterController@edit')->name('edit');
             Route::get('cart', 'BarterController@cart')->name('cart');
             Route::get('checkout/{id}', 'BarterController@checkout')->name('checkout');

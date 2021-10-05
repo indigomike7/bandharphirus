@@ -329,10 +329,22 @@
                   <span class="text-truncate">My Barter</span>
               </a>
           </li>
-          <li class="nav-item {{Request::is('admin/barter/join')?'active':''}}">
-              <a class="nav-link " href="{{route('admin.barter.join',['in_house'])}}" title="Join Barter">
+          <li class="nav-item {{Request::is('admin/barter/listjoin')?'active':''}}">
+              <a class="nav-link " href="{{route('admin.barter.listjoin',['all'])}}" title="Join Barter">
                   <span class="tio-circle nav-indicator-icon"></span>
                   <span class="text-truncate">Join Barter</span>
+              </a>
+          </li>
+          <li class="nav-item {{Request::is('admin/barter/orderlistsell')?'active':''}}">
+              <a class="nav-link " href="{{route('admin.barter.orderlistsell',['all'])}}" title="Join Barter">
+                  <span class="tio-circle nav-indicator-icon"></span>
+                  <span class="text-truncate">My Sold List</span>
+              </a>
+          </li>
+          <li class="nav-item {{Request::is('admin/barter/orderlistbuy')?'active':''}}">
+              <a class="nav-link " href="{{route('admin.barter.orderlistbuy',['all'])}}" title="Join Barter">
+                  <span class="tio-circle nav-indicator-icon"></span>
+                  <span class="text-truncate">My Buying List</span>
               </a>
           </li>
 

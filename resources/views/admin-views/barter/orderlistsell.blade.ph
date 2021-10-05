@@ -1,5 +1,5 @@
 @extends('layouts.back-end.app-seller')
-@section('title','My Barter Selling List')
+@section('title','My Barter Buying List')
 
 @push('css_or_js')
     <!-- Custom styles for this page -->
@@ -48,7 +48,7 @@
                                             {{$k+1}}
                                         </td>
                                         <td>
-                                            <a href="{{route('seller.barter.selldetail',$detail['id'])}}">{{$detail['id']}}</a>
+                                            <a href="{{route('seller.barter.buydetail',$detail['id'])}}">{{$detail['id']}}</a>
                                         </td>
                                         <td>{{ $detail->created_at }}</td>
                                         <td>{{ $detail->updated_at }}</td>

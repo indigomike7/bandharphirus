@@ -1,5 +1,5 @@
 @extends('layouts.back-end.app-seller')
-@section('title','My Barter Selling List')
+@section('title','My Barter Buying List')
 
 @push('css_or_js')
     <!-- Custom styles for this page -->
@@ -13,7 +13,7 @@
         <div class="row align-items-center mb-3">
             <div class="col-sm">
                 <h1 class="page-header-title">Barter <span
-                        class="badge badge-soft-dark ml-2">{{\App\Model\SellerBarterOrder::where('seller_id_sell',auth('seller')->id())->count()}}</span>
+                        class="badge badge-soft-dark ml-2">{{\App\Model\SellerBarterOrder::where('seller_id_demand',auth('seller')->id())->count()}}</span>
                 </h1>
 
             </div>
@@ -23,7 +23,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5>My Barter Sold Lists</h5>
+                        <h5>My Barter Buying Lists</h5>
                     </div>
 						@if(count($sa)>0)
                     <div class="card-body" style="padding: 0">
@@ -48,7 +48,7 @@
                                             {{$k+1}}
                                         </td>
                                         <td>
-                                            <a href="{{route('seller.barter.selldetail',$detail['id'])}}">{{$detail['id']}}</a>
+                                            <a href="{{route('seller.barter.buydetail',$detail['id'])}}">{{$detail['id']}}</a>
                                         </td>
                                         <td>{{ $detail->created_at }}</td>
                                         <td>{{ $detail->updated_at }}</td>
@@ -64,7 +64,7 @@
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                     <a class="dropdown-item"
-                                                       href="{{route('seller.barter.selldetail',[$detail['id']])}}"> Manage</a>
+                                                       href="{{route('seller.barter.buydetail',[$detail['id']])}}"> Manage</a>
                                                 </div>
                                             </div>
                                         </td>
@@ -81,7 +81,7 @@
 				@if(count($sa)==0)
         <div class="row" style="margin-top: 20px">
 			<div class="col-md-6">
-			Please add your primary address firstly, before you can manage barter sold!! Add <a href="{{route('seller.address.add')}}">Here</a>
+			Please add your primary address firstly, before you can manage barter buy!! Add <a href="{{route('seller.address.add')}}">Here</a>
 			</div>
 		</div>
 		@endif
