@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 03, 2021 at 07:37 AM
+-- Generation Time: Oct 05, 2021 at 06:03 AM
 -- Server version: 10.3.31-MariaDB-cll-lve
 -- PHP Version: 7.3.28
 
@@ -187,7 +187,22 @@ INSERT INTO `barter` (`id`, `seller_id`, `created_at`, `updated_at`, `category`,
 (28, 6, '2021-10-02 11:50:20', '2021-10-02 11:50:20', 1, 0),
 (29, 6, '2021-10-02 11:50:54', '2021-10-02 11:50:54', 1, 0),
 (30, 6, '2021-10-02 11:51:27', '2021-10-02 11:51:27', 1, 0),
-(31, 0, '2021-10-02 11:53:28', '2021-10-03 14:24:24', 3, 1);
+(31, 0, '2021-10-02 11:53:28', '2021-10-03 14:24:24', 3, 1),
+(34, 2, '2021-10-04 12:32:23', '2021-10-05 08:21:08', 1, 1),
+(35, 2, '2021-10-04 12:33:30', '2021-10-04 12:35:29', 1, 1),
+(36, 2, '2021-10-04 13:13:21', '2021-10-05 07:41:36', 1, 1),
+(37, 6, '2021-10-04 13:40:26', '2021-10-04 13:40:56', 1, 1),
+(38, 0, '2021-10-05 07:46:50', '2021-10-05 08:13:57', 1, 1),
+(39, 0, '2021-10-05 07:48:05', '2021-10-05 08:11:20', 1, 1),
+(40, 0, '2021-10-05 07:49:53', '2021-10-05 08:05:31', 1, 1),
+(41, 0, '2021-10-05 08:17:49', '2021-10-05 08:18:48', 1, 1),
+(42, 0, '2021-10-05 08:20:43', '2021-10-05 08:22:17', 3, 1),
+(43, 6, '2021-10-05 08:23:44', '2021-10-05 08:43:31', 1, 1),
+(44, 6, '2021-10-05 08:24:48', '2021-10-05 08:39:36', 1, 1),
+(45, 6, '2021-10-05 08:25:29', '2021-10-05 08:38:37', 1, 1),
+(46, 6, '2021-10-05 08:26:38', '2021-10-05 08:35:16', 1, 1),
+(47, 6, '2021-10-05 08:27:52', '2021-10-05 08:28:51', 1, 1),
+(48, 6, '2021-10-05 08:27:52', '2021-10-05 08:32:54', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -225,7 +240,23 @@ INSERT INTO `barter_buy` (`id`, `barter_id`, `product_name`, `picture`, `quantit
 (17, 30, 'Batu Phirus Korengan', '[\"2021-10-03-615929229cc20.png\"]', 1, 'Test ting', '2021-10-03 09:53:06', '2021-10-03 09:53:06'),
 (19, 25, 'Batu Phirus Hongkong', '[\"2021-10-03-61592c4404aaa.png\"]', 1, 'Test ting', '2021-10-03 10:06:28', '2021-10-03 10:06:28'),
 (20, 31, 'Batu Phirus Kalimantan', '[\"2021-10-03-6159687161af6.png\"]', 1, 'Test ting', '2021-10-03 14:23:13', '2021-10-03 14:23:13'),
-(21, 23, 'Batu Phirus Korea', '[\"2021-10-03-615969411161c.png\"]', 1, 'Testing', '2021-10-03 14:26:41', '2021-10-03 14:26:41');
+(21, 23, 'Batu Phirus Korea', '[\"2021-10-03-615969411161c.png\"]', 1, 'Testing', '2021-10-03 14:26:41', '2021-10-03 14:26:41'),
+(22, 33, 'Batu Phirus Korea', '[\"2021-10-04-615a9f88ef23b.png\"]', 1, 'Batu phirus ini berasal dari Korea', '2021-10-04 12:30:32', '2021-10-04 12:30:32'),
+(23, 34, 'Batu Phirus Cina', '[\"2021-10-04-615a9ff77fb7a.png\"]', 2, 'Testing', '2021-10-04 12:32:23', '2021-10-04 12:32:23'),
+(24, 35, 'Batu Phirus Cina', '[\"2021-10-04-615aa03adbd7e.png\"]', 1, 'Test ting', '2021-10-04 12:33:30', '2021-10-04 12:33:30'),
+(25, 36, 'Batu Phirus Cina', '[\"2021-10-04-615aa99152897.png\"]', 1, 'Testing', '2021-10-04 13:13:21', '2021-10-04 13:13:21'),
+(26, 37, 'Batu Phirus Kalimantan', '[\"2021-10-04-615aafea2416f.png\"]', 1, 'Testing', '2021-10-04 13:40:26', '2021-10-04 13:40:26'),
+(27, 38, 'Batu Phirus Karo', '[\"2021-10-05-615bae8a1fb24.png\"]', 1, 'Test ting', '2021-10-05 07:46:50', '2021-10-05 07:46:50'),
+(28, 39, 'Batu Phirus China', '[\"2021-10-05-615baed51274d.png\"]', 1, 'Testing', '2021-10-05 07:48:05', '2021-10-05 07:48:05'),
+(29, 40, 'Batu Phirus Sweeden', '[\"2021-10-05-615baf41dea6e.png\"]', 1, 'Test ting', '2021-10-05 07:49:53', '2021-10-05 07:49:53'),
+(30, 41, 'Batu Phirus Kalimantan', '[\"2021-10-05-615bb5cd7c29c.png\"]', 1, 'Test ting', '2021-10-05 08:17:49', '2021-10-05 08:17:49'),
+(31, 42, 'Batu Phirus Bandung', '[\"2021-10-05-615bb67b18202.png\"]', 1, 'Test ting', '2021-10-05 08:20:43', '2021-10-05 08:20:43'),
+(32, 43, 'Batu phirus Bogor', '[\"2021-10-05-615bb73002e7b.png\"]', 1, 'Testing', '2021-10-05 08:23:44', '2021-10-05 08:23:44'),
+(33, 44, 'Batu Phirus Korea', '[\"2021-10-05-615bb770678ea.png\"]', 1, 'Testing', '2021-10-05 08:24:48', '2021-10-05 08:24:48'),
+(34, 45, 'Batu phirus Bogor', '', 1, 'Testing', '2021-10-05 08:25:29', '2021-10-05 08:25:29'),
+(35, 46, 'Batu Phirus Bogor', '[\"2021-10-05-615bb7decd1bb.png\"]', 1, 'Testing', '2021-10-05 08:26:38', '2021-10-05 08:26:38'),
+(36, 47, 'Batu Phirus Bogor', '', 1, 'Test ting', '2021-10-05 08:27:52', '2021-10-05 08:27:52'),
+(37, 48, 'Batu Phirus Bogor', '', 1, 'Test ting', '2021-10-05 08:27:52', '2021-10-05 08:27:52');
 
 -- --------------------------------------------------------
 
@@ -250,7 +281,15 @@ INSERT INTO `barter_money_buy` (`id`, `barter_id`, `amount`, `created_at`, `upda
 (3, 21, 200000.00, '2021-09-30 10:58:37', '2021-09-30 10:58:37'),
 (7, 25, 50000000.00, '2021-10-03 10:07:04', '2021-10-03 10:07:04'),
 (8, 31, 500000.00, '2021-10-03 14:23:37', '2021-10-03 14:23:37'),
-(9, 23, 500000.00, '2021-10-03 14:27:07', '2021-10-03 14:27:07');
+(9, 23, 500000.00, '2021-10-03 14:27:07', '2021-10-03 14:27:07'),
+(10, 36, 500000.00, '2021-10-04 13:13:21', '2021-10-04 13:13:21'),
+(11, 39, 500000.00, '2021-10-05 07:48:05', '2021-10-05 07:48:05'),
+(12, 40, 500000.00, '2021-10-05 07:49:53', '2021-10-05 07:49:53'),
+(13, 41, 500000.00, '2021-10-05 08:17:49', '2021-10-05 08:17:49'),
+(14, 45, 1000000.00, '2021-10-05 08:25:29', '2021-10-05 08:25:29'),
+(15, 46, 500000.00, '2021-10-05 08:26:38', '2021-10-05 08:26:38'),
+(16, 47, 20000000.00, '2021-10-05 08:27:52', '2021-10-05 08:27:52'),
+(17, 48, 20000000.00, '2021-10-05 08:27:52', '2021-10-05 08:27:52');
 
 -- --------------------------------------------------------
 
@@ -274,7 +313,16 @@ INSERT INTO `barter_money_sell` (`id`, `barter_id`, `amount`, `created_at`, `upd
 (1, 22, 90000.00, '2021-09-28 14:58:03', '2021-09-28 17:05:21'),
 (3, 21, 50000.00, '2021-09-30 10:58:18', '2021-09-30 10:58:18'),
 (7, 30, 300000.00, '2021-10-03 09:56:43', '2021-10-03 09:56:43'),
-(8, 25, 5000000.00, '2021-10-03 10:07:04', '2021-10-03 10:07:04');
+(8, 25, 5000000.00, '2021-10-03 10:07:04', '2021-10-03 10:07:04'),
+(9, 35, 500000.00, '2021-10-04 12:33:30', '2021-10-04 12:33:30'),
+(10, 37, 5000000.00, '2021-10-04 13:40:26', '2021-10-04 13:40:26'),
+(11, 38, 10000000.00, '2021-10-05 07:46:50', '2021-10-05 07:46:50'),
+(12, 39, 1000000.00, '2021-10-05 07:48:05', '2021-10-05 07:48:05'),
+(13, 40, 1000000.00, '2021-10-05 07:49:53', '2021-10-05 07:49:53'),
+(14, 44, 50000000.00, '2021-10-05 08:24:48', '2021-10-05 08:24:48'),
+(15, 46, 1000000.00, '2021-10-05 08:26:38', '2021-10-05 08:26:38'),
+(16, 47, 1000000.00, '2021-10-05 08:27:52', '2021-10-05 08:27:52'),
+(17, 48, 1000000.00, '2021-10-05 08:27:52', '2021-10-05 08:27:52');
 
 -- --------------------------------------------------------
 
@@ -318,7 +366,23 @@ INSERT INTO `barter_sell` (`id`, `barter_id`, `product_name`, `picture`, `quanti
 (24, 27, 'Batu Phirus Medan', '[\"2021-09-30-61554d4b3cfc3.png\"]', 1, 'Testing', '2021-09-30 11:38:19', '2021-09-30 11:38:19'),
 (31, 30, 'Batu Phirus Kue', '[\"2021-10-03-615929fbdefc6.png\"]', 1, 'Test ting', '2021-10-03 09:56:43', '2021-10-03 09:56:43'),
 (33, 31, 'Batu Phirus Kue', '[\"2021-10-03-615968715b47e.png\"]', 1, 'Test ting', '2021-10-03 14:23:13', '2021-10-03 14:23:13'),
-(34, 23, 'Batu Phirus Madagascar', '[\"2021-10-03-61596941109f2.png\"]', 1, 'Testing', '2021-10-03 14:26:41', '2021-10-03 14:26:41');
+(34, 23, 'Batu Phirus Madagascar', '[\"2021-10-03-61596941109f2.png\"]', 1, 'Testing', '2021-10-03 14:26:41', '2021-10-03 14:26:41'),
+(35, 33, 'Batu Phirus Sorong', '[\"2021-10-04-615a9f88e86ec.png\"]', 1, 'Batu Phirus ini berasal dari sorong', '2021-10-04 12:30:32', '2021-10-04 12:30:32'),
+(36, 34, 'Batu Phirus Sorong', '[\"2021-10-04-615a9ff77ef06.png\"]', 1, 'Testing', '2021-10-04 12:32:23', '2021-10-04 12:32:23'),
+(37, 35, 'Batu Phirus Sorong', '[\"2021-10-04-615aa03adb31d.png\"]', 1, 'Test ting', '2021-10-04 12:33:30', '2021-10-04 12:33:30'),
+(38, 36, 'Batu Phirus Sorong', '[\"2021-10-04-615aa9913fa5d.png\"]', 1, 'Testing', '2021-10-04 13:13:21', '2021-10-04 13:13:21'),
+(39, 37, 'Batu Phirus Asoy', '[\"2021-10-04-615aafea22081.png\"]', 1, 'Test ting', '2021-10-04 13:40:26', '2021-10-04 13:40:26'),
+(40, 38, 'Batu Phirus Hongkong', '[\"2021-10-05-615bae8a1af48.png\"]', 1, 'Test ting', '2021-10-05 07:46:50', '2021-10-05 07:46:50'),
+(41, 39, 'Batu Phirus Papua', '[\"2021-10-05-615baed511c77.png\"]', 1, 'Test ting', '2021-10-05 07:48:05', '2021-10-05 07:48:05'),
+(42, 40, 'Batu Phirus Borneo', '[\"2021-10-05-615baf41dcd58.png\"]', 1, 'Test ting', '2021-10-05 07:49:53', '2021-10-05 07:49:53'),
+(43, 41, 'Batu Phirus Kue', '[\"2021-10-05-615bb5cd7a08e.png\"]', 1, 'Test ting', '2021-10-05 08:17:49', '2021-10-05 08:17:49'),
+(44, 42, 'Batu Phirus Bogor', '[\"2021-10-05-615bb67b1778f.png\"]', 1, 'Test ting', '2021-10-05 08:20:43', '2021-10-05 08:20:43'),
+(45, 43, 'Batu Phirus Pabatu', '[\"2021-10-05-615bb73002166.png\"]', 1, 'Test ting', '2021-10-05 08:23:44', '2021-10-05 08:23:44'),
+(46, 44, 'Batu Phirus Pabatu', '[\"2021-10-05-615bb77066dd2.png\"]', 1, 'Testing', '2021-10-05 08:24:48', '2021-10-05 08:24:48'),
+(47, 45, 'Batu Phirus Pabatu', '[\"2021-10-05-615bb79987ae0.png\"]', 1, 'Test ting', '2021-10-05 08:25:29', '2021-10-05 08:25:29'),
+(48, 46, 'Batu Phirus Pabatu', '[\"2021-10-05-615bb7decc716.png\"]', 1, 'Testing', '2021-10-05 08:26:38', '2021-10-05 08:26:38'),
+(49, 47, 'Batu Phirus Pabatu', '[\"2021-10-05-615bb828356f7.png\"]', 1, 'Testing', '2021-10-05 08:27:52', '2021-10-05 08:27:52'),
+(50, 48, 'Batu Phirus Pabatu', '[\"2021-10-05-615bb8285f84e.png\"]', 1, 'Testing', '2021-10-05 08:27:52', '2021-10-05 08:27:52');
 
 -- --------------------------------------------------------
 
@@ -1635,11 +1699,13 @@ CREATE TABLE `sellers` (
 --
 
 INSERT INTO `sellers` (`id`, `f_name`, `l_name`, `phone`, `image`, `email`, `password`, `status`, `remember_token`, `created_at`, `updated_at`, `bank_name`, `branch`, `account_no`, `holder_name`, `auth_token`, `premium_until`, `saldo`) VALUES
+(0, 'Admin', 'Bandharphirus.com', '4769746974', 'def.png', 'admin@bandharphirus.com', '$2y$10$0YkFu8/lus0jDJLHZmsahOB84l1PHehFFFYfjsyyVIAUeVibteUb.', 'pending', '$2y$10$0YkFu8/lus0jDJLHZmsahOB84l1PHehFFFYfjsyyVIAUeVibteUb.', '2021-09-25 19:35:00', '2021-09-25 19:35:00', NULL, NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', 0.00),
 (1, 'nyoba', 'nyoba', '0998888888', 'def.png', 'nyoba@gmail.com', '$2y$10$0YkFu8/lus0jDJLHZmsahOB84l1PHehFFFYfjsyyVIAUeVibteUb.', 'pending', NULL, '2021-09-11 17:35:41', '2021-09-11 17:35:41', NULL, NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', 0.00),
 (2, 'Michael', 'Butar butar', '+6281218445901', '2021-09-15-6141d1ec67a6d.png', 'indigomikezone@gmail.com', '$2y$10$6qXizvRS/92dK0VIlFPiZ.B5vP0bVgAcR25/XiY4jmM2e/KOqmlfS', 'approved', 'nGgQbvpAMgdzw1J3fMx5ySqrowcC2PZS6TyHXKXjTMug6Od827PoMQB7z2Ac', '2021-09-15 20:58:52', '2021-09-25 22:37:54', NULL, NULL, NULL, NULL, NULL, '2024-12-23 00:00:00', 0.00),
 (3, 'Michael', 'Butar butar', '+6281218445901', '2021-09-25-614ee6b8edc49.png', 'indigomikezone2@gmail.com', '$2y$10$/FKEpRg/dSScpyV6QQFSTOH4MP1.ckaADjI8iTr.NkebdM5GE25LC', 'approved', 'vGIwS42hqM545WWcRFC7Hds4dJVPZDhiALuzj21jq2K2y420H9RkQ7gAXuCU', '2021-09-25 19:07:05', '2021-09-26 02:17:22', NULL, NULL, NULL, NULL, NULL, '2023-05-02 00:00:00', 0.00),
 (5, 'Michael', 'Butar butar', '+6281218445901', '2021-09-25-614f4e50463cb.png', 'indigomikezone22@gmail.com', '$2y$10$Ux.98gSjSdakQ4NNkReJzOe6q7OQImZmQtke5Wj5H1dnAAJ2Ucjbq', 'approved', 'w6QIbkVNon1m6Qi1fLNbPUOtVOewUx8VYTKeDM1LqqCl2TZW6eKUolhTuYdp', '2021-09-26 02:29:04', '2021-09-26 23:14:33', NULL, NULL, NULL, NULL, NULL, '2022-03-24 22:30:46', 1170000.00),
-(6, 'Michael', 'Butar butar', '+6281218445901', '2021-09-26-6150730e4bfe8.png', 'indigomikezone33@gmail.com', '$2y$10$LQ4QFhAVsY4jFEouVruO9ORfBkR1jhsgi0JkOgOfC/YdAKn33Av0q', 'approved', 'nZ3BC1aNV3BMVaPDTDVY3GDFvSGAhu17rc84SOQtF4lpA3yFBEw0XwDKCivI', '2021-09-26 23:18:06', '2021-09-26 23:18:34', NULL, NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', 0.00);
+(6, 'Michael', 'Butar butar', '+6281218445901', '2021-09-26-6150730e4bfe8.png', 'indigomikezone33@gmail.com', '$2y$10$LQ4QFhAVsY4jFEouVruO9ORfBkR1jhsgi0JkOgOfC/YdAKn33Av0q', 'approved', 'nZ3BC1aNV3BMVaPDTDVY3GDFvSGAhu17rc84SOQtF4lpA3yFBEw0XwDKCivI', '2021-09-26 23:18:06', '2021-09-26 23:18:34', NULL, NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', 0.00),
+(7, 'Admin', 'Bandharphirus.com', NULL, 'def.png', '', NULL, 'pending', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', 0.00);
 
 -- --------------------------------------------------------
 
@@ -1664,7 +1730,8 @@ CREATE TABLE `seller_address` (
 INSERT INTO `seller_address` (`id`, `seller_id`, `address`, `zip_code`, `created_at`, `updated_at`, `primary_address`) VALUES
 (4, 0, 'Taman Koboy Dakochan', '11523', '2021-10-01 16:57:46', '2021-10-01 16:58:31', 1),
 (5, 0, 'Taman XXX', '12345', '2021-10-02 10:40:34', '2021-10-02 10:40:34', 0),
-(8, 6, 'Jalan Tolidong', '11234', '2021-10-03 08:49:39', '2021-10-03 08:49:46', 1);
+(8, 6, 'Jalan Tolidong', '11234', '2021-10-03 08:49:39', '2021-10-03 08:49:46', 1),
+(9, 2, 'Jalan Sorong Papua', '12341', '2021-10-04 12:28:48', '2021-10-04 12:28:56', 1);
 
 -- --------------------------------------------------------
 
@@ -1712,7 +1779,22 @@ CREATE TABLE `seller_barter_order` (
 INSERT INTO `seller_barter_order` (`id`, `seller_id_sell`, `seller_id_demand`, `created_at`, `updated_at`, `status`, `seller_sell_amount`, `seller_demand_amount`) VALUES
 (17, 0, 6, '2021-10-03 13:18:39', '2021-10-03 13:18:39', 'order finished', 0.00, 0.00),
 (18, 0, 6, '2021-10-03 14:24:24', '2021-10-03 14:24:24', 'order finished', 0.00, 500000.00),
-(19, 0, 6, '2021-10-03 14:32:43', '2021-10-03 14:32:43', 'order finished', 0.00, 500000.00);
+(19, 0, 6, '2021-10-03 14:32:43', '2021-10-03 14:32:43', 'order finished', 0.00, 500000.00),
+(20, 2, 6, '2021-10-04 12:35:29', '2021-10-04 13:37:11', 'paid barter', 500000.00, 0.00),
+(21, 6, 2, '2021-10-04 13:40:56', '2021-10-04 13:42:05', 'paid barter', 5000000.00, 0.00),
+(22, 2, 0, '2021-10-05 07:41:36', '2021-10-05 07:41:36', 'order finished', 0.00, 500000.00),
+(23, 0, 6, '2021-10-05 08:05:31', '2021-10-05 08:07:14', 'paid barter', 1000000.00, 500000.00),
+(24, 0, 6, '2021-10-05 08:11:20', '2021-10-05 08:12:35', 'paid barter', 1000000.00, 500000.00),
+(25, 0, 6, '2021-10-05 08:13:57', '2021-10-05 08:14:50', 'paid barter', 10000000.00, 0.00),
+(26, 0, 6, '2021-10-05 08:18:48', '2021-10-05 08:18:48', 'order finished', 0.00, 500000.00),
+(27, 2, 6, '2021-10-05 08:21:08', '2021-10-05 08:21:08', 'order finished', 0.00, 0.00),
+(28, 0, 6, '2021-10-05 08:22:17', '2021-10-05 08:22:17', 'order finished', 0.00, 0.00),
+(29, 6, 0, '2021-10-05 08:28:51', '2021-10-05 08:28:51', 'order finished', 1000000.00, 20000000.00),
+(30, 6, 0, '2021-10-05 08:32:54', '2021-10-05 08:32:54', 'order finished', 1000000.00, 20000000.00),
+(31, 6, 0, '2021-10-05 08:35:16', '2021-10-05 08:36:22', 'paid barter', 1000000.00, 500000.00),
+(32, 6, 0, '2021-10-05 08:38:37', '2021-10-05 08:38:37', 'order finished', 0.00, 1000000.00),
+(33, 6, 0, '2021-10-05 08:39:36', '2021-10-05 08:40:34', 'paid barter', 50000000.00, 0.00),
+(34, 6, 0, '2021-10-05 08:43:31', '2021-10-05 08:43:31', 'order finished', 0.00, 0.00);
 
 -- --------------------------------------------------------
 
@@ -1736,7 +1818,41 @@ CREATE TABLE `seller_barter_order_delivery_status` (
 
 INSERT INTO `seller_barter_order_delivery_status` (`id`, `order_id`, `seller_sell_id`, `seller_demand_id`, `status`, `created_at`, `updated_at`) VALUES
 (1, 0, NULL, 6, 'Demand in Packing', '2021-10-03 17:21:52', '2021-10-03 17:21:52'),
-(2, 17, NULL, 6, 'Demand in Packing', '2021-10-03 17:28:47', '2021-10-03 17:28:47');
+(2, 17, NULL, 6, 'Demand in Packing', '2021-10-03 17:28:47', '2021-10-03 17:28:47'),
+(3, 21, NULL, 6, 'Demand in Packing', '2021-10-04 13:47:15', '2021-10-04 13:47:15'),
+(4, 20, NULL, 2, 'Demand in Packing', '2021-10-04 13:49:41', '2021-10-04 13:49:41'),
+(5, 21, NULL, 6, 'Demand in Packing', '2021-10-04 13:50:44', '2021-10-04 13:50:44'),
+(6, 21, 6, NULL, 'Barter in Packing', '2021-10-04 13:55:19', '2021-10-04 13:55:19'),
+(7, 20, 2, NULL, 'Barter in Packing', '2021-10-04 13:57:22', '2021-10-04 13:57:22'),
+(8, 20, NULL, 6, 'Demand in Packing', '2021-10-04 13:59:39', '2021-10-04 13:59:39'),
+(9, 20, 2, NULL, 'Barter Delivered', '2021-10-04 14:00:01', '2021-10-04 14:00:01'),
+(10, 20, NULL, 6, 'Demand Delivered', '2021-10-04 14:00:26', '2021-10-04 14:00:26'),
+(11, 20, 2, NULL, 'Finished', '2021-10-04 14:00:54', '2021-10-04 14:00:54'),
+(12, 20, NULL, 6, 'Bought Barter Accepted', '2021-10-04 14:01:23', '2021-10-04 14:01:23'),
+(13, 22, NULL, 0, 'Demand in Packing', '2021-10-05 07:45:18', '2021-10-05 07:45:18'),
+(14, 23, NULL, 6, 'Demand in Packing', '2021-10-05 08:07:43', '2021-10-05 08:07:43'),
+(15, 23, 0, NULL, 'Barter in Packing', '2021-10-05 08:10:40', '2021-10-05 08:10:40'),
+(16, 24, NULL, 6, 'Demand in Packing', '2021-10-05 08:13:03', '2021-10-05 08:13:03'),
+(17, 24, 0, NULL, 'Barter in Packing', '2021-10-05 08:13:22', '2021-10-05 08:13:22'),
+(18, 26, 0, NULL, 'Barter in Packing', '2021-10-05 08:19:09', '2021-10-05 08:19:09'),
+(19, 26, NULL, 6, 'Demand Delivered', '2021-10-05 08:19:43', '2021-10-05 08:19:43'),
+(20, 28, 0, NULL, 'Barter in Packing', '2021-10-05 08:22:39', '2021-10-05 08:22:39'),
+(21, 28, NULL, 6, 'Demand in Packing', '2021-10-05 08:22:50', '2021-10-05 08:22:50'),
+(22, 29, NULL, 0, 'Demand in Packing', '2021-10-05 08:29:08', '2021-10-05 08:29:08'),
+(23, 29, 6, NULL, 'Barter in Packing', '2021-10-05 08:29:27', '2021-10-05 08:29:27'),
+(24, 30, 6, NULL, 'Barter in Packing', '2021-10-05 08:33:48', '2021-10-05 08:33:48'),
+(25, 30, NULL, 0, 'Demand in Packing', '2021-10-05 08:34:01', '2021-10-05 08:34:01'),
+(26, 31, NULL, 0, 'Demand in Packing', '2021-10-05 08:36:50', '2021-10-05 08:36:50'),
+(27, 31, NULL, 6, 'Demand in Packing', '2021-10-05 08:36:58', '2021-10-05 08:36:58'),
+(28, 31, NULL, 0, 'Demand in Packing', '2021-10-05 08:37:08', '2021-10-05 08:37:08'),
+(29, 31, 6, NULL, 'Barter in Packing', '2021-10-05 08:37:41', '2021-10-05 08:37:41'),
+(30, 32, 6, NULL, 'Barter in Packing', '2021-10-05 08:38:57', '2021-10-05 08:38:57'),
+(31, 32, NULL, 0, 'Demand in Packing', '2021-10-05 08:39:06', '2021-10-05 08:39:06'),
+(32, 33, NULL, 0, 'Demand in Packing', '2021-10-05 08:40:52', '2021-10-05 08:40:52'),
+(33, 33, NULL, 6, 'Demand in Packing', '2021-10-05 08:40:57', '2021-10-05 08:40:57'),
+(34, 33, 6, NULL, 'Barter in Packing', '2021-10-05 08:42:53', '2021-10-05 08:42:53'),
+(35, 34, 6, NULL, 'Barter in Packing', '2021-10-05 08:43:49', '2021-10-05 08:43:49'),
+(36, 34, NULL, 0, 'Demand in Packing', '2021-10-05 08:44:03', '2021-10-05 08:44:03');
 
 -- --------------------------------------------------------
 
@@ -1759,7 +1875,22 @@ CREATE TABLE `seller_barter_order_detail` (
 INSERT INTO `seller_barter_order_detail` (`id`, `order_id`, `created_at`, `updated_at`, `barter_id`) VALUES
 (15, 17, '2021-10-03 13:18:39', '2021-10-03 13:18:39', 24),
 (16, 18, '2021-10-03 14:24:24', '2021-10-03 14:24:24', 31),
-(17, 19, '2021-10-03 14:32:43', '2021-10-03 14:32:43', 23);
+(17, 19, '2021-10-03 14:32:43', '2021-10-03 14:32:43', 23),
+(18, 20, '2021-10-04 12:35:29', '2021-10-04 12:35:29', 35),
+(19, 21, '2021-10-04 13:40:56', '2021-10-04 13:40:56', 37),
+(20, 22, '2021-10-05 07:41:36', '2021-10-05 07:41:36', 36),
+(21, 23, '2021-10-05 08:05:31', '2021-10-05 08:05:31', 40),
+(22, 24, '2021-10-05 08:11:20', '2021-10-05 08:11:20', 39),
+(23, 25, '2021-10-05 08:13:57', '2021-10-05 08:13:57', 38),
+(24, 26, '2021-10-05 08:18:48', '2021-10-05 08:18:48', 41),
+(25, 27, '2021-10-05 08:21:08', '2021-10-05 08:21:08', 34),
+(26, 28, '2021-10-05 08:22:17', '2021-10-05 08:22:17', 42),
+(27, 29, '2021-10-05 08:28:51', '2021-10-05 08:28:51', 47),
+(28, 30, '2021-10-05 08:32:54', '2021-10-05 08:32:54', 48),
+(29, 31, '2021-10-05 08:35:16', '2021-10-05 08:35:16', 46),
+(30, 32, '2021-10-05 08:38:37', '2021-10-05 08:38:37', 45),
+(31, 33, '2021-10-05 08:39:36', '2021-10-05 08:39:36', 44),
+(32, 34, '2021-10-05 08:43:31', '2021-10-05 08:43:31', 43);
 
 -- --------------------------------------------------------
 
@@ -2518,31 +2649,31 @@ ALTER TABLE `banners`
 -- AUTO_INCREMENT for table `barter`
 --
 ALTER TABLE `barter`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `barter_buy`
 --
 ALTER TABLE `barter_buy`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `barter_money_buy`
 --
 ALTER TABLE `barter_money_buy`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `barter_money_sell`
 --
 ALTER TABLE `barter_money_sell`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `barter_sell`
 --
 ALTER TABLE `barter_sell`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `brands`
@@ -2764,13 +2895,13 @@ ALTER TABLE `search_functions`
 -- AUTO_INCREMENT for table `sellers`
 --
 ALTER TABLE `sellers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `seller_address`
 --
 ALTER TABLE `seller_address`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `seller_barter_cart`
@@ -2782,19 +2913,19 @@ ALTER TABLE `seller_barter_cart`
 -- AUTO_INCREMENT for table `seller_barter_order`
 --
 ALTER TABLE `seller_barter_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `seller_barter_order_delivery_status`
 --
 ALTER TABLE `seller_barter_order_delivery_status`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `seller_barter_order_detail`
 --
 ALTER TABLE `seller_barter_order_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `seller_wallets`
